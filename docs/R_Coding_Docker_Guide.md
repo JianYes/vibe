@@ -15,9 +15,7 @@ Ever tried to share your R code with a colleague, only to spend hours debugging 
 
 - [VS Code](https://code.visualstudio.com/) already installed
 - Completed the [R Coding in VS Code tutorial](./R_Coding_VS_Code_Guide.md) (recommended but not required)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (we'll install this)
 - [GitHub Desktop](https://desktop.github.com/) already installed
-- Internet connection to download the container image (~2GB)
 - 20-25 minutes
 
 ## Step 1: Install Docker Desktop
