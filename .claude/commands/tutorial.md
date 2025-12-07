@@ -42,7 +42,7 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
    - Use bullet list format for compact spacing: `- **Term** - explanation`
    - One sentence per concept
 
-5. **What You'll Need** - Prerequisites (3-5 items)
+5. **What You'll Need** - Prerequisites (3-5 items, including an estimated time requirements.)
 
 6. **Step-by-Step Instructions**
    - Format: `## Step N: Action Verb + What`
@@ -92,7 +92,7 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
 - Link tool names to official sites on first mention
 - No separate "Sources" section
 
-**Add estimated time to completion and creation date** at the very end: "Estimated complation time: 20 minutes. Created by [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) on [date]."
+**Add creation date** at the very end: "Created by [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) on [date]."
 
 ## Output
 
