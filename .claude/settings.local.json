@@ -14,7 +14,8 @@
       "Bash(pip install:*)",
       "Bash(pip3 install:*)",
       "SlashCommand(/tutorial installing Claude Code on Windows)",
-      "WebFetch(domain:docs.claude.com)"
+      "WebFetch(domain:docs.claude.com)",
+      "SlashCommand(/tutorial)"
     ],
     "deny": [],
     "ask": []

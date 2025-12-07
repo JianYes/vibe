@@ -76,14 +76,20 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
 **Be concise:**
 - Short paragraphs (2-3 sentences max)
 - Bullet points over prose
-- One short sentence only when essential to talk about why each step is important
+- Remove introductory and ending sentences from steps unless essential
 - No "What You've Learned" sections
 
+**Code examples:**
+- Keep code simple - use built-in datasets or minimal examples
+- Avoid complex concepts (regression, advanced statistics, etc.) unless that's the tutorial's focus
+- Focus on demonstrating the tool/workflow, not teaching programming concepts
+
 **Be explicit for beginners:**
-- Describe exactly what to click
+- Describe exactly what to click (e.g., "Click the **gear icon** in the lower left corner, then select **Settings**")
+- Use menu-based instructions instead of keyboard shortcuts (e.g., "Click **File > Save**" not "Press Ctrl+S")
 - Tell them what they'll see (briefly)
 - Never assume prior knowledge
-- Avoid jargons
+- Avoid jargon
 
 **Format for scanning:**
 - Headers to break up sections
