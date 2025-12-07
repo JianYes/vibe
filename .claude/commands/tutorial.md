@@ -42,22 +42,20 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
    - Use bullet list format for compact spacing: `- **Term** - explanation`
    - One sentence per concept
 
-5. **What You'll Do** - Bullet list of main steps (5-10 items)
+5. **What You'll Need** - Prerequisites (3-5 items)
 
-6. **What You'll Need** - Prerequisites (3-5 items)
-
-7. **Step-by-Step Instructions**
+6. **Step-by-Step Instructions**
    - Format: `## Step N: Action Verb + What`
    - Use **bullet points** for sub-steps (not numbered lists) to avoid confusion with step numbers
    - Exact actions: "Click **Button Name**" or "Type `command`"
    - Code blocks for commands
    - Keep explanations minimal - one short sentence when needed
 
-8. **Next Steps** - What to try next using this setup to learn on your own(2-3 examples)
+7. **Next Steps** - What to try next using this setup to learn on your own(2-3 examples)
 
-9. **Troubleshooting** - Use bullet list format, 2-3 most common issues with one-line solutions
+8. **Troubleshooting** - Use bullet list format, 2-3 most common issues with one-line solutions
 
-10. **Workflow overview** - Summary of the workflow / tech stack (optional). 3-5 bullet points. 
+9. **Workflow overview** - Summary of the workflow / tech stack (optional). 3-5 bullet points. 
 
 
 
