@@ -118,7 +118,92 @@ The container has R pre-installed with common packages. Let's run a simple data 
 - When you run the `hist()` commands, histogram plots will open in separate windows
 - You can also select multiple lines and run them together with `Ctrl+Enter` or `Cmd+Enter`
 
-## Step 8: Permanently Install R Packages in the Docker Image
+## Step 8: Install Shiny Extension and Run the App
+
+The project includes a demo Shiny app that creates an interactive histogram.
+
+- Click the **Extensions** icon in the left sidebar
+- Search for `Posit.shiny`
+- Click **Install** on the **Shiny** extension by Posit (if you completed the VS Code R tutorial, this is already installed)
+- In VS Code Explorer, navigate to `R/app.R`
+- Click to open the file
+- You'll see code for a Shiny web application
+- Look at the top right of the editor window for a **▶** button
+- Click the dropdown arrow next to it and select **Run Shiny App**
+- The app will start and VS Code will automatically forward port 3838
+- A notification appears: **Open in Browser**
+- Click **Open in Browser**
+- The Shiny app opens in your web browser
+- Move the slider to change the histogram bins - the chart updates in real-time
+
+## Step 9: Make a Simple Change
+
+Let's modify the app to see how development works.
+
+- Keep the app running
+- In VS Code, edit `R/app.R`
+- Find line 16: `titlePanel("Old Faithful Geyser Data")`
+- Change it to:
+
+```r
+titlePanel("My First R Docker App")
+```
+
+- Save the file (**File > Save**)
+- The Shiny extension will automatically reload the app
+- Refresh your browser (or it may refresh automatically)
+- The title now shows your custom text
+
+## Step 10: Understanding the Dockerfile
+
+The Dockerfile is the blueprint that defines your entire R development environment. Let's examine it.
+
+- In VS Code Explorer, navigate to `.devcontainer/Dockerfile`
+- Click to open the file
+- You'll see the complete configuration:
+
+```dockerfile
+# choose a Dockerhub base image
+FROM rocker/shiny-verse:latest
+
+# 1. System deps commonly needed by R packages
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev libssl-dev libxml2-dev git curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# 2. R packages for VS Code integration: language server + debugger
+RUN R -q -e 'install.packages(c("rstudioapi", "languageserver"), repos="https://cloud.r-project.org")'
+
+# 3. Install Node.js LTS from NodeSource
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm@latest
+    
+# 4. Install Claude Code globally
+RUN npm install -g @anthropic-ai/claude-code
+
+# 5. Expose Shiny server port
+EXPOSE 3838
+```
+
+**Key parts explained:**
+
+- `FROM rocker/shiny-verse:latest` - The base image from [Docker Hub](https://hub.docker.com/). This includes R, Shiny, and tidyverse pre-installed
+- `RUN apt-get install` - Installs Linux system libraries needed by R packages
+- `RUN R -q -e 'install.packages(...)'` - Installs R packages permanently
+- `RUN curl...` - Installs Node.js and Claude Code
+- `EXPOSE 3838` - Opens port 3838 for Shiny apps
+
+**Using different Docker images:** You can replace `rocker/shiny-verse:latest` with any image from [Docker Hub](https://hub.docker.com/). For R development, the [Rocker Project](https://rocker-project.org/) offers many options:
+
+- `rocker/r-ver:4.5.3` - Just R (specific version)
+- `rocker/rstudio:latest` - R with RStudio Server
+- `rocker/tidyverse:latest` - R with tidyverse packages
+- `rocker/shiny-verse:latest` - R with Shiny and tidyverse (what we're using)
+
+After changing the base image, rebuild the container to apply changes.
+
+## Step 11: Permanently Install R Packages in the Docker Image
 
 **Understanding the difference:** Think of the Dockerfile as a blueprint for building a house, and the running container as the house itself. If you install packages from the R console (`install.packages("package")`), you're adding temporary furniture to the house—it disappears when you rebuild from the blueprint. If you add packages to the Dockerfile, you're updating the blueprint itself—every time you build, the package is included automatically.
 
@@ -153,42 +238,6 @@ library(ggplot2)
 ```
 
 If it loads without errors, the package is installed permanently.
-
-## Step 9: Install Shiny Extension and Run the App
-
-The project includes a demo Shiny app that creates an interactive histogram.
-
-- Click the **Extensions** icon in the left sidebar
-- Search for `Posit.shiny`
-- Click **Install** on the **Shiny** extension by Posit (if you completed the VS Code R tutorial, this is already installed)
-- In VS Code Explorer, navigate to `R/app.R`
-- Click to open the file
-- You'll see code for a Shiny web application
-- Look at the top right of the editor window for a **▶** button
-- Click the dropdown arrow next to it and select **Run Shiny App**
-- The app will start and VS Code will automatically forward port 3838
-- A notification appears: **Open in Browser**
-- Click **Open in Browser**
-- The Shiny app opens in your web browser
-- Move the slider to change the histogram bins - the chart updates in real-time
-
-## Step 10: Make a Simple Change
-
-Let's modify the app to see how development works.
-
-- Keep the app running
-- In VS Code, edit `R/app.R`
-- Find line 16: `titlePanel("Old Faithful Geyser Data")`
-- Change it to:
-
-```r
-titlePanel("My First R Docker App")
-```
-
-- Save the file (**File > Save**)
-- The Shiny extension will automatically reload the app
-- Refresh your browser (or it may refresh automatically)
-- The title now shows your custom text
 
 ## Next Steps
 
