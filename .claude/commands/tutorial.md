@@ -42,7 +42,7 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
    - Use bullet list format for compact spacing: `- **Term** - explanation`
    - One sentence per concept
 
-5. **What You'll Need** - Prerequisites and estimated time (3-5 items)
+5. **What You'll Need** - Prerequisites (3-5 items), the last item is the required time such as 15-20 minutes.
 
 6. **Step-by-Step Instructions**
    - Format: `## Step N: Action Verb + What`
