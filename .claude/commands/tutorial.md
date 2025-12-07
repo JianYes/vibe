@@ -1,14 +1,32 @@
 # Create a Beginner Tutorial
 
 Create a beginner-friendly tutorial for: $ARGUMENTS
+It needs to be focused, hands-on, and succint. Design a minimal set of hands-on activities so that users can follow just to get the main idea. It is not a comprehensive tutorial. It is a introduction to a topic for completely new users. 
 
-## Before Writing
+## Phase 1: Research
 
 **Search the web first** to get the most current information:
 - Latest version numbers and download links
 - Current best practices and recommended approaches
 - Up-to-date installation methods
 - Any recent changes to tools or interfaces
+
+## Phase 2: Get User Input
+
+**Before writing the tutorial, present a brief plan to the user:**
+
+1. Summarize what you learned from research (2-3 bullet points)
+2. If multiple installation approaches exist, recommend ONE simplest option for beginners
+   - Explain why it's the best choice for beginners
+   - Mention alternatives exist but won't be covered in detail
+3. List the major steps you plan to include (5-8 items)
+4. Ask: "Does this approach work for you, or would you prefer a different option?"
+
+**Wait for user approval before proceeding to Phase 3.**
+
+## Phase 3: Write the Tutorial
+
+Follow this structure:
 
 ## Tutorial Structure
 
@@ -62,32 +80,29 @@ Each step should be a major phase (Step 1, Step 2, etc.):
 - **Notes:** Call out important info with `**Note:**`
 - **Wait times:** Tell users how long things take ("This may take 5-10 minutes")
 
-**For steps with multiple options:**
-```
-### Option A: First approach
-[instructions]
-
-### Option B: Alternative approach
-[instructions]
-```
+**When multiple approaches exist:**
+- Choose the ONE simplest approach for beginners (decided in Phase 2)
+- Mention alternatives briefly in a note, but don't detail them
+- Example: "**Note:** Advanced users may prefer [Alternative Method](link). This tutorial covers the beginner-friendly approach."
 
 ### 7. How to Return/Reopen
 - Show users how to get back to the tool after closing
 - Step-by-step instructions to reopen
 
-### 8. Troubleshooting
+### 8. Troubleshooting & Help
 - Use exact error messages as headers (in quotes)
 - Provide specific solutions
+- End with 2-3 links to official docs and community resources
 - Format:
   ```
   ### "Error message here"
   - What this means
   - How to fix it
-  ```
 
-### 9. Need Help?
-- Links to official documentation
-- Links to community resources or GitHub issues
+  ### Need Help?
+  - [Official Documentation](link)
+  - [Community Forum or GitHub Issues](link)
+  ```
 
 ## Writing Rules
 
@@ -107,6 +122,12 @@ Each step should be a major phase (Step 1, Step 2, etc.):
 - Use current download links
 - Note if something recently changed
 
+**Add links throughout (without increasing word count):**
+- Link tool names to their official sites on first mention
+- Link error messages to relevant docs when helpful
+- Example: "Install [Node.js](https://nodejs.org/)" instead of "Install Node.js"
+- Don't add separate "Sources" section—links should be inline
+
 **Format for scanning:**
 - Short paragraphs (2-3 sentences max)
 - Bullet points over prose
@@ -119,6 +140,10 @@ Each step should be a major phase (Step 1, Step 2, etc.):
 - "This process may take 5-15 minutes"
 - "Wait 2-5 minutes for the window to appear"
 - "Your computer will restart - this takes about 1-2 minutes"
+
+**Add time of creation**
+- Place it at the very end. 
+- Something like: 'Create on March 3, 2025 with hellp of Claude Code.'
 
 ## Output
 
