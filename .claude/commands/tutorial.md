@@ -34,7 +34,7 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
 
 2. **Title** - Clear, descriptive (e.g., "Installing Claude Code on Windows Using WSL")
 
-3. **Hook** (one paragraph, 2-3 sentences)
+3. **Hook** (one paragraph, 2-4 sentences)
    - Combine: problem scenario + simple analogy + why this matters
    - Keep it compact, not multiple paragraphs
 
@@ -42,7 +42,7 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
    - Use bullet list format for compact spacing: `- **Term** - explanation`
    - One sentence per concept
 
-5. **What You'll Need** - Prerequisites (3-5 items, including an estimated time requirements.)
+5. **What You'll Need** - Prerequisites and estimated time (3-5 items)
 
 6. **Step-by-Step Instructions**
    - Format: `## Step N: Action Verb + What`
