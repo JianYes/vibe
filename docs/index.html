@@ -445,13 +445,15 @@
                 return {
                     background: '#484f58',
                     border: '#6e7681',
-                    hover: { background: '#6e7681', border: '#8b949e' }
+                    hover: { background: '#6e7681', border: '#8b949e' },
+                    highlight: { background: '#6e7681', border: '#8b949e' }
                 };
             }
             const base = levelColors[level];
             return {
                 ...base,
-                hover: { background: base.border, border: base.border }
+                hover: { background: base.border, border: base.border },
+                highlight: { background: base.border, border: base.border }
             };
         }
 
@@ -606,6 +608,7 @@
 
                 // Celebrate when marking complete (not when unmarking)
                 if (!wasCompleted && this.checked) {
+                    modal.classList.remove('active');
                     celebrate();
                 }
             }
@@ -615,6 +618,11 @@
         modalClose.addEventListener('click', () => modal.classList.remove('active'));
         modal.addEventListener('click', (e) => {
             if (e.target === modal) modal.classList.remove('active');
+        });
+
+        // Prevent checkbox click from closing modal
+        document.querySelector('.complete-toggle').addEventListener('click', (e) => {
+            e.stopPropagation();
         });
     </script>
 </body>
