@@ -32,14 +32,13 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
 
 1. **Title** - Clear, descriptive (e.g., "Installing Claude Code on Windows Using WSL")
 
-2. **Hook** (4-6 sentences max)
-   - One relatable problem scenario
-   - One simple analogy
-   - Why this matters
+2. **Hook** (one paragraph, 2-3 sentences)
+   - Combine: problem scenario + simple analogy + why this matters
+   - Keep it compact, not multiple paragraphs
 
 3. **Key Concepts** (3-4 terms max)
+   - Use bullet list format for compact spacing: `- **Term** - explanation`
    - One sentence per concept
-   - Bold the term, then explain simply
 
 4. **What You'll Do** - Bullet list of main steps (5-10 items)
 
@@ -47,36 +46,41 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
 
 6. **Step-by-Step Instructions**
    - Format: `## Step N: Action Verb + What`
-   - Numbered sub-steps (1, 2, 3...)
+   - Use **bullet points** for sub-steps (not numbered lists) to avoid confusion with step numbers
    - Exact actions: "Click **Button Name**" or "Type `command`"
    - Code blocks for commands
-   - **If/Then guidance** for variations
    - Keep explanations minimal - one short sentence when needed
 
-7. **How to Reopen** - Brief instructions to get back to the tool
+7. **Next Steps** - What to try next using this setup to learn on your own(2-3 examples)
 
-8. **Troubleshooting** - Only 2-3 most common issues, one-line solutions, help links
+8. **Troubleshooting** - Use bullet list format, 2-3 most common issues with one-line solutions
 
-9. **The Complete Workflow** - Summary of the cycle (optional)
+9. **Workflow overview** - Summary of the workflow / tech stack (optional). 3-5 bullet points. 
 
-10. **Next Steps** - What to try next using this setup to learn on your own(2-3 examples)
 
-### Writing Rules
+
+### Formatting Rules
+
+**Use bullet lists for compact spacing:**
+- Key Concepts, Troubleshooting, and similar sections should use bullet lists
+- This keeps related items visually grouped without excessive blank lines
+
+**Avoid numbered list confusion:**
+- Steps use numbers in headings: Step 1, Step 2, Step 3...
+- Sub-steps within each step use bullets (-) not numbers
+- This creates clear visual hierarchy
 
 **Be concise:**
-- Short paragraphs (3-5 sentences max)
+- Short paragraphs (2-3 sentences max)
 - Bullet points over prose
-- Remove "Why this matters", "Why this is powerful" etc. - one short sentence only when essential
+- One short sentence only when essential to talk about why each step is important
 - No "What You've Learned" sections
 
 **Be explicit for beginners:**
 - Describe exactly what to click
 - Tell them what they'll see (briefly)
 - Never assume prior knowledge
-
-**Be actionable:**
-- Every step produces a visible result
-- Tell them exactly what to click/type
+- Avoid jargons
 
 **Format for scanning:**
 - Headers to break up sections
@@ -88,8 +92,9 @@ It needs to be focused, hands-on, and succinct. Design a minimal set of hands-on
 - Link tool names to official sites on first mention
 - No separate "Sources" section
 
-**Add creation date** at the very end: "Created on [date] with help from Claude Code."
+**Add estimated time to completion and creation date** at the very end: "Estimated complation time: 20 minutes. Created by [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) on [date]."
 
+**Add link to GitHub repo** at the very end like this '[Other tutorials](https://github.com/gexijin/vibe)'
 ## Output
 
 Save the tutorial in the `doc/` folder with a descriptive filename:

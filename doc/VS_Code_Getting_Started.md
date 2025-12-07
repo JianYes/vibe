@@ -29,13 +29,13 @@ You want to write code, but Notepad or TextEdit feels limiting. You need somethi
 
 ## Step 1: Download and Install VS Code
 
-1. Go to [code.visualstudio.com](https://code.visualstudio.com)
-2. Click the **Download** button (it detects your OS)
-3. Run the installer:
+- Go to [code.visualstudio.com](https://code.visualstudio.com)
+- Click the **Download** button (it detects your OS)
+- Run the installer:
    - **Windows:** Double-click the `.exe`, click **Next** through the prompts
    - **Mac:** Open the `.dmg`, drag VS Code to **Applications**
    - **Linux:** Follow instructions for your package manager
-4. Launch VS Code
+- Launch VS Code
 
 You'll see a Welcome tab with getting started options.
 
@@ -43,29 +43,29 @@ You'll see a Welcome tab with getting started options.
 
 VS Code has five main areas:
 
-1. **Activity Bar** (left edge) - Icons for Explorer, Search, Git, Extensions, etc.
-2. **Side Bar** - Shows content for selected activity (files, search results)
-3. **Editor** (center) - Where you write code
-4. **Panel** (bottom) - Terminal, Problems, Output
-5. **Status Bar** (bottom edge) - Info about your file and project
+- **Activity Bar** (left edge) - Icons for Explorer, Search, Git, Extensions, etc.
+- **Side Bar** - Shows content for selected activity (files, search results)
+- **Editor** (center) - Where you write code
+- **Panel** (bottom) - Terminal, Problems, Output
+- **Status Bar** (bottom edge) - Info about your file and project
 
 Click the **Explorer** icon (top of Activity Bar) to see the file browser.
 
 ## Step 3: Open a Project Folder
 
-1. Click **File** → **Open Folder**
-2. Navigate to any existing folder on your computer (e.g., Documents or a project you've downloaded)
-3. Select it and click **Open**
-4. If prompted "Do you trust the authors?", click **Yes, I trust the authors**
-5. In the Explorer sidebar, click on a folder to expand it
-6. Click on any file to open it in the editor
-7. Click the **Search** icon in the Activity Bar (magnifying glass) to search across all files in your folder - type a word and see results from multiple files
+- Click **File** → **Open Folder**
+- Navigate to any existing folder on your computer (e.g., Documents or a project you've downloaded)
+- Select it and click **Open**
+- If prompted "Do you trust the authors?", click **Yes, I trust the authors**
+- In the Explorer sidebar, click on a folder to expand it
+- Click on any file to open it in the editor
+- Click the **Search** icon in the Activity Bar (magnifying glass) to search across all files in your folder - type a word and see results from multiple files
 
 ## Step 4: Create a Markdown File
 
-1. In Explorer, click the **New File** icon (page with +)
-2. Name it `README.md`
-3. Add this content:
+- In Explorer, click the **New File** icon (page with +)
+- Name it `README.md`
+- Add this content:
    ```markdown
    # My Project
 
@@ -81,21 +81,21 @@ Click the **Explorer** icon (top of Activity Bar) to see the file browser.
    2. Try other file types
    3. Explore extensions
    ```
-4. Press `Ctrl+S` (Windows/Linux) or `Cmd+S` (Mac) to save
+- Press `Ctrl+S` (Windows/Linux) or `Cmd+S` (Mac) to save
 
 Markdown is a simple text format that uses symbols like `#` for headings, `**` for bold, and `-` for lists. It's widely used for documentation, README files, and notes. Markdown is also the native format for communicating with LLMs like ChatGPT and Claude - learning it helps you write better prompts and read AI responses.
 
 ## Step 5: Install Markdown Preview Extension
 
-1. Click the **Extensions** icon in Activity Bar (or `Ctrl+Shift+X`)
-2. Type `Markdown Preview Enhanced` in the search box
-3. Find **Markdown Preview Enhanced**
-4. Click **Install**
+- Click the **Extensions** icon in Activity Bar (or `Ctrl+Shift+X`)
+- Type `Markdown Preview Enhanced` in the search box
+- Find **Markdown Preview Enhanced**
+- Click **Install**
 
 ## Step 6: Preview Your Markdown File
 
-1. Open `README.md` if not already open
-2. Press `Ctrl+Shift+V` (Windows/Linux) or `Cmd+Shift+V` (Mac)
+- Open `README.md` if not already open
+- Press `Ctrl+Shift+V` (Windows/Linux) or `Cmd+Shift+V` (Mac)
 
 A preview panel opens showing your formatted Markdown!
 
@@ -103,8 +103,8 @@ A preview panel opens showing your formatted Markdown!
 
 ## Step 7: Use the Integrated Terminal
 
-1. Press `` Ctrl+` `` (backtick) to open the terminal
-2. Try these commands:
+- Press `` Ctrl+` `` (backtick) to open the terminal
+- Try these commands:
 
 **List files:**
 ```
@@ -123,7 +123,7 @@ pwd
 mkdir notes
 ```
 
-3. Check Explorer - the `notes` folder appears!
+- Check Explorer - the `notes` folder appears!
 
 The terminal runs in your project folder, so commands affect your project directly.
 
