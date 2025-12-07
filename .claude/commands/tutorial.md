@@ -1,7 +1,7 @@
 # Create a Beginner Tutorial
 
 Create a beginner-friendly tutorial for: $ARGUMENTS
-It needs to be focused, hands-on, and succint. Design a minimal set of hands-on activities so that users can follow just to get the main idea. It is not a comprehensive tutorial. It is a introduction to a topic for completely new users. 
+It needs to be focused, hands-on, and succint. Design a minimal set of hands-on activities through a demo project so that users can follow just to get the main idea. It is not a comprehensive tutorial. It is a introduction to a topic for completely new users. 
 
 ## Phase 1: Research
 
