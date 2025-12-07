@@ -2,7 +2,7 @@
 
 # R Coding in VS Code via Docker Container
 
-Ever tried to share your R code with a colleague, only to spend hours debugging "but it works on my machine" issues? Docker containers are like shipping containers for code—they package your R environment, libraries, and dependencies into a sealed box that works the same everywhere. This tutorial shows you how to run R in an isolated, reproducible environment using VS Code and Docker Desktop.
+Ever tried to share your R code with a colleague, only to spend hours debugging "but it works on my machine" issues? Docker containers are like shipping containers for code—they package your R environment, libraries, and dependencies into a sealed box that works the same everywhere. Plus, you get access to tens of thousands of pre-built images on [Docker Hub](https://hub.docker.com/), where software developers publish ready-to-use environments, skipping the pain of manual software installation. This tutorial shows you how to run R in an isolated, reproducible environment using VS Code and Docker Desktop.
 
 ## Key Concepts
 
@@ -55,8 +55,6 @@ Ever tried to share your R code with a colleague, only to spend hours debugging 
 - You'll see the project files in the Explorer sidebar
 
 ## Step 5: Reopen in Container
-
-When you open the folder, VS Code detects the `.devcontainer` configuration.
 
 - Look for a notification in the bottom right: **Folder contains a Dev Container configuration file**
 - Click **Reopen in Container**
@@ -156,8 +154,6 @@ titlePanel("My First R Docker App")
 
 ## Step 10: Understanding the Dockerfile
 
-The Dockerfile is the blueprint that defines your entire R development environment. Let's examine it.
-
 - In VS Code Explorer, navigate to `.devcontainer/Dockerfile`
 - Click to open the file
 - You'll see the complete configuration:
@@ -186,15 +182,16 @@ RUN npm install -g @anthropic-ai/claude-code
 EXPOSE 3838
 ```
 
-**Key parts explained:**
+**Key parts:**
 
-- `FROM rocker/shiny-verse:latest` - The base image from [Docker Hub](https://hub.docker.com/). This includes R, Shiny, and tidyverse pre-installed
-- `RUN apt-get install` - Installs Linux system libraries needed by R packages
-- `RUN R -q -e 'install.packages(...)'` - Installs R packages permanently
-- `RUN curl...` - Installs Node.js and Claude Code
+- `FROM rocker/shiny-verse:latest` - Base image with R, Shiny, and tidyverse pre-installed
+- `RUN apt-get install` - Linux system libraries for R packages
+- `RUN R -q -e 'install.packages(...)'` - Permanently installs R packages
+- `RUN curl... && apt-get install -y nodejs` - Installs Node.js, required to run Claude Code
+- `RUN npm install -g @anthropic-ai/claude-code` - Installs Claude Code globally for AI assistance
 - `EXPOSE 3838` - Opens port 3838 for Shiny apps
 
-**Using different Docker images:** You can replace `rocker/shiny-verse:latest` with any image from [Docker Hub](https://hub.docker.com/). For R development, the [Rocker Project](https://rocker-project.org/) offers many options:
+**Other Rocker images you can use:**
 
 - `rocker/r-ver:4.5.3` - Just R (specific version)
 - `rocker/rstudio:latest` - R with RStudio Server
@@ -205,36 +202,25 @@ After changing the base image, rebuild the container to apply changes.
 
 ## Step 11: Permanently Install R Packages in the Docker Image
 
-**Understanding the difference:** Think of the Dockerfile as a blueprint for building a house, and the running container as the house itself. If you install packages from the R console (`install.packages("package")`), you're adding temporary furniture to the house—it disappears when you rebuild from the blueprint. If you add packages to the Dockerfile, you're updating the blueprint itself—every time you build, the package is included automatically.
-
-**Why this matters:** When you rebuild the container (to add system dependencies, update R version, or change configuration), anything installed in the R console is lost. Packages in the Dockerfile persist across all rebuilds.
+Packages installed via the R console (`install.packages()`) are temporary and disappear when you rebuild the container. To make packages permanent, add them to the Dockerfile.
 
 - In VS Code Explorer, navigate to `.devcontainer/Dockerfile`
 - Click to open the file
-- Find line 12 where `tidyverse` is installed
-- Add a new line below it to install the `ggplot2` package:
+- Find line 11: `RUN R -q -e 'install.packages(c("rstudioapi", "languageserver"), ...)'`
+- Add a new line below it to install the `data.table` package:
 
 ```dockerfile
-RUN R -q -e 'install.packages("ggplot2", repos="https://cloud.r-project.org")'
-```
-
-Your Dockerfile should now have these lines:
-
-```dockerfile
-RUN R -q -e 'install.packages("languageserver", repos="https://cloud.r-project.org")'
-RUN R -q -e 'install.packages("tidyverse", repos="https://cloud.r-project.org")'
-RUN R -q -e 'install.packages("ggplot2", repos="https://cloud.r-project.org")'
+RUN R -q -e 'install.packages("data.table", repos="https://cloud.r-project.org")'
 ```
 
 - Save the file (**File > Save**)
 - Click the green icon in the bottom-left corner
 - Select **Rebuild Container** from the menu
 - VS Code will rebuild the container with your new package (this takes 2-5 minutes)
-- When complete, the package will be permanently available in your R environment
 - To verify, open an R terminal and type:
 
 ```r
-library(ggplot2)
+library(data.table)
 ```
 
 If it loads without errors, the package is installed permanently.
@@ -270,8 +256,7 @@ Once everything is set up, here's your daily routine:
 3. **Reopen in Container** - If not already in the container, click the green icon (bottom-left) and select **Reopen in Container**
 4. **Write and run code** - Edit `.R` files, run line-by-line with `Ctrl+Enter`/`Cmd+Enter`, or run Shiny apps with the **▶ Run Shiny App** button
 5. **Save your work** - Your code files (`.R`, `.Rmd`) are saved to your computer and persist across sessions
-6. **Add new packages** - Edit `.devcontainer/Dockerfile` to add packages, then rebuild the container (packages installed via R console are temporary)
-7. **Close when done** - Simply close VS Code; your code changes are saved automatically, Docker container stops automatically
+6. **Commit and push** - Use GitHub Desktop to commit your changes and push to the repository
 
 ---
 
