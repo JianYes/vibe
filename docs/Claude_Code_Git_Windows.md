@@ -2,7 +2,7 @@
 
 # Claude Code with local version control for Windows
 
-You're coding with AI assistance. It makes changes to your files. Sometimes the changes work perfectly. Sometimes they don't. **Version control is like an undo button for your entire project.** Every time you save a snapshot (called a "commit"), you create a restore point you can always go back to. Best of all, you can do this entirely on your computer—no account, no cloud, just local safety nets.
+You're coding with AI assistance. It makes changes to your files. Sometimes the changes work perfectly. Sometimes they don't. **Version control is like an undo button for your entire project.** Every time you save a snapshot (called a "commit"), you create a restore point you can always go back to. Best of all, you can do this entirely on your computer and Claude Code does it for you.
 
 ## Key Concepts
 
