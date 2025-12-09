@@ -290,8 +290,6 @@ Now that you have the `/research-paper` slash command, try writing more papers:
 
 The slash command will guide you through the entire workflow automatically!
 
-Remember: Research → Brainstorm → Focused Research → Plan → Draft → Revise Manually → Polish with AI → Add Abstract → Proofread with AI → Save as Slash Command. Commit after each phase.
-
 ## Troubleshooting
 
 - **"not a git repository" error:** Make sure you're in your project folder (`cd ~/Documents/ai-workplace-research`)
