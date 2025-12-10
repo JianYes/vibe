@@ -23,7 +23,7 @@ This minimal setup enables both Claude Code and OpenAI's Codex to run inside a D
 
 8. Start VS Code. File --> Open Folder--> (C:\work\myproject). When prompted, click "Reopen in Container". VS Code will ask you to choose between **amd64** or **arm64**. Most people will select amd64.
 
-   **Note for ARM64 users:** The first build will take 5-10 minutes as some packages compile from source. Subsequent opens use the cached image and are fast. 
+   **Note for ARM64 users:** The first build takes ~17 minutes (1050 seconds) as packages compile from source. Subsequent opens use the cached image and are fast. 
 
 9. Open a terminal in VS Code, and type in ```claude``` to start Claude Code. Login through the browser. I recommend create a Claude.me file first.
 
