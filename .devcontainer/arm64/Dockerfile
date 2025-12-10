@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libgit2-dev \
     libsodium-dev \
+    libcairo2-dev \
     cmake \
     git \
     curl \
