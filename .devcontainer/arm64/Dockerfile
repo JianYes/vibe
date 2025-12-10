@@ -26,10 +26,15 @@ RUN apt-get update && apt-get install -y \
     cmake \
     git \
     curl \
+    pkg-config \
     protobuf-compiler \
     libprotobuf-dev \
-    libprotoc-dev \
+    libgrpc++-dev \
+    libabsl-dev \
  && rm -rf /var/lib/apt/lists/*
+
+# Set environment to help CMake find protobuf
+ENV CMAKE_PREFIX_PATH="/usr"
 
 # 3. Install tidyverse and shiny (uses PPM prebuilt binaries)
 RUN R -e "options(warn = 2); install.packages(c('tidyverse', 'shiny'), dependencies = TRUE)"
