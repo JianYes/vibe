@@ -26,18 +26,10 @@ RUN apt-get update && apt-get install -y \
     cmake \
     git \
     curl \
-    pkg-config \
-    protobuf-compiler \
-    libprotobuf-dev \
-    libgrpc++-dev \
-    libabsl-dev \
  && rm -rf /var/lib/apt/lists/*
 
-# Set environment to help CMake find protobuf
-ENV CMAKE_PREFIX_PATH="/usr"
-
-# 3. Install tidyverse and shiny (uses PPM prebuilt binaries)
-RUN R -e "options(warn = 2); install.packages(c('tidyverse', 'shiny'), dependencies = TRUE)"
+# 3. Install tidyverse and shiny (dependencies=NA skips optional "Suggests" like otelsdk)
+RUN R -e "options(warn = 2); install.packages(c('tidyverse', 'shiny'), dependencies = NA)"
 
 # 4. R packages for VS Code integration: language server + debugger
 RUN R -e "options(warn = 2); install.packages(c('rstudioapi', 'languageserver'))"
