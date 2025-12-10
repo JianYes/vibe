@@ -2,21 +2,19 @@
 
 # Writing a Research Paper with Claude Code
 
-Write research papers using Claude Code as an assistant for research, brainstorming, planning, drafting and polishing. Use Git to track every version. 
+Write research papers using Claude Code as an assistant for research, brainstorming, planning, drafting, and editing. Use Git to track every version. See an [example paper](./example_paper.md) created using this workflow.
 
 ## Key Concepts
-
-- **Use AI as an assistant** for research, brainstorming, drafting, editing
-- **Research Paper Workflow** - Research → Brainstorm → Focused Research → Plan → Draft → Revise manually → Polish with AI → Add Abstract → Improve Title → Proofread with AI  
-- **Claude Code** - AI assistant that searches the web, organizes research, drafts content, and handles version control through simple requests
+- **AI assistant** Human makes key decisions while AI does the tedious work
+- **Research Paper Workflow** - Research → Brainstorm → Focused Research → Outline → Draft → Revise manually → Polish with AI → Add Abstract → Improve Title → Check references → Proofread with AI  
+- **Claude Code** - Agentic AI system that searches the web, organizes research, drafts content, and handles version control through simple requests
 - **Git** - Tracks every change to your files, creating restore points (commits) you can return to anytime
-
 
 ## What You'll Need
 
 - Claude Code installed ([installation guide](https://code.claude.com/docs/en/installation))
 - Git installed (comes with Mac/Linux, [Windows guide](https://git-scm.com/download/win))
-- Text editor (VS Code, TextEdit, Notepad, or any editor)
+- Text editor (VS Code)
 - Terminal access
 - 35-45 minutes
 
@@ -82,13 +80,13 @@ commit these changes
 
 **First save point created!** 
 
-## Step 3: Read the sources.
-Read through the research document by openning it in a text Editor such as **Visual Studio Code**.  It includes a built-in markdown preview feature.
-- Install VS Code 
-- Go to File and then select **Open Foler**
+## Step 3: Read the Sources
+Read through the research document by opening it in **Visual Studio Code**, which includes a built-in markdown preview feature.
+- Install VS Code
+- Go to File → **Open Folder**
 - Navigate to the ai_research folder and click to open
-- Click to open the general_research.md file from the EXPLORER on the top left. 
-- Ctrl + Shift + V to preview
+- Click to open the general_research.md file from the EXPLORER on the left
+- Preview: **Ctrl + Shift + V** (Windows/Linux) or **Cmd + Shift + V** (Mac)
 
 ## Step 4: Brainstorm Your Angle
 
@@ -98,7 +96,7 @@ Ask Claude to help brainstorm:
 Based on this research, suggest 3-4 angles I could take for this paper.
 ```
 
-Review the angles and pick the one that interests you most. 
+Review the angles and pick the one that interests you most.
 
 ## Step 5: Focused Research
 
@@ -122,10 +120,9 @@ commit these changes
 Ask Claude to create an outline based on your chosen angle:
 
 ```
-Give me 3 options for an brief outline for my paper based on the focused
-research and my chosen angle.  Use bullet points for the narrative flow.
+Give me 3 options for a brief outline for my paper based on the focused
+research and my chosen angle. Use bullet points for the narrative flow.
 Save as outlines.md
-
 ```
 
 Review the outline and **prompt to adjust** as needed. Then commit:
@@ -134,14 +131,14 @@ Review the outline and **prompt to adjust** as needed. Then commit:
 commit these changes
 ```
 
-**Third save point created!** If we don't like the paper in the end, we can revert to this point to start over with a different option. 
+**Third save point created!** If you don't like the paper in the end, you can revert to this point to start over with a different outline. 
 
 ## Step 7: Draft the Paper
 
 Select your outline and ask Claude to write the full draft:
 
 ```
-I like outline [ #2, your chosen option ]. 
+I like outline #2 [your chosen option].
 
 Write a ~1,000 word research paper based on the outline and research.
 
@@ -180,7 +177,7 @@ Open `paper.md` in your text editor. Read through carefully and make your own re
 - Fix any awkward phrasing
 - Ensure citations are accurate
 
-Save your changes after editing each paragraph, then commit:
+Save your changes, then commit:
 
 ```
 commit these changes
@@ -207,6 +204,8 @@ Review Claude's changes. If satisfied, commit:
 commit these changes
 ```
 
+**Sixth save point created!**
+
 ## Step 10: Add an Abstract
 
 Ask Claude to add a short executive summary at the beginning:
@@ -222,7 +221,7 @@ Claude will add the abstract. Review and edit to ensure it accurately captures y
 commit these changes
 ```
 
-
+**Seventh save point created!**
 
 ## Step 11: Improve Title
 
@@ -235,18 +234,20 @@ Give me a few options for the title. Make it more appealing.
 Select a title. Add your own touch. Edit the paper and commit:
 
 ```
-I like option #XXX. Edit the file and commit.
+I like option #2 [your choice]. Edit the file and commit.
 ```
 
-## Step 12: Check references (Optional)
-Ask Claude to check and verify all references.
+**Eighth save point created!**
+
+## Step 12: Check References (Optional)
+Ask Claude to check and verify all references:
 ```
 Check all references. For each listed reference:
-- Read it again using the link 
+- Read it again using the link
 - Make sure citation information is correct
-- The cited data, example, and other information are in the source
-- Make sure all the listed references are cited.
-- Make sure all the citation numbers ([1], [2], etc.) in the paper has a corresponding reference
+- Verify the cited data and examples appear in the source
+- Make sure all listed references are cited in the paper
+- Make sure all citation numbers ([1], [2], etc.) have a corresponding reference
 ```
 
 ## Step 13: Proofread with AI
@@ -266,7 +267,11 @@ Review Claude's changes, then commit the final version:
 commit these changes
 ```
 
-In VS Code, you can preview the Markdown file by Ctrl + Shift + V. In the preview mode, you can select the entire paper, and copy. Then paste to Microsoft Word. The format will be retained. 
+**Final version saved!**
+
+To view your complete writing journey, type: `show my commit history`
+
+In VS Code, preview the Markdown file with **Ctrl + Shift + V** (Windows/Linux) or **Cmd + Shift + V** (Mac). From the preview, select all, copy, and paste into Microsoft Word—the formatting will be retained.
 
 ## Step 14: Create a Slash Command for Future Papers
 
@@ -282,17 +287,20 @@ Claude will create a custom slash command in your `.claude/commands/` folder. No
 ## The Complete Workflow
 
 1. **Research** - Claude searches for general information on your topic
-2. **Brainstorm** - Review findings and pick your angle/perspective
-3. **Focused Research** - Claude finds targeted data for your chosen angle
-4. **Plan** - Claude creates a detailed outline based on your perspective
-5. **Draft** - Claude writes the full paper with references
-6. **Revise Manually** - You add your voice and make changes
-7. **Polish with AI** - Claude improves specific sections
-8. **Add Abstract** - Claude creates executive summary
-9. **Improve Title** - Claude suggests title options, you customize
-10. **Proofread with AI** - Claude fixes errors and verifies references
-11. **Create Slash Command** - Save the workflow for future papers
-12. **Commit** - Save at each phase to create restore points
+2. **Read Sources** - Review the research in VS Code
+3. **Brainstorm** - Pick your angle/perspective
+4. **Focused Research** - Claude finds targeted data for your chosen angle
+5. **Plan** - Claude creates outline options based on your perspective
+6. **Draft** - Claude writes the full paper with references
+7. **Revise Manually** - You add your voice and make changes
+8. **Polish with AI** - Claude improves specific sections
+9. **Add Abstract** - Claude creates executive summary
+10. **Improve Title** - Claude suggests title options, you customize
+11. **Check References** - (Optional) Claude verifies all citations
+12. **Proofread with AI** - Claude fixes errors and improves flow
+13. **Create Slash Command** - Save the workflow for future papers
+
+Commit at each phase to create restore points.
 
 Version control means you can experiment fearlessly—return to any previous version anytime.
 
@@ -309,9 +317,9 @@ The slash command will guide you through the entire workflow automatically!
 
 ## Troubleshooting
 
-- **"not a git repository" error:** Make sure you're in your project folder (`cd ~/Documents/ai-workplace-research`)
+- **"not a git repository" error:** Make sure you're in your project folder (`cd ~/Documents/ai_research` or equivalent)
 - **Claude search results seem outdated:** Specify "search for 2024-2025 data on [topic]"
-- **Draft is too long/short:** Tell Claude: "Make this 2 pages, approximately 1400 words"
+- **Draft is too long/short:** Tell Claude: "Make this approximately 1,000 words"
 - **Can't find files:** In terminal, type `ls` to list all files in current folder
 - **Want to see what changed:** In Claude Code, type `show me what changed since last commit`
 
@@ -321,8 +329,6 @@ The slash command will guide you through the entire workflow automatically!
 - `summarize the key arguments in this paper` - Get overview
 - `make the conclusion more persuasive` - Improve specific sections
 - `cite all sources in APA format` - Format references
-- `what files have I changed?` - See uncommitted work
-- `show me the diff` - See exactly what code changed
 - `go back to the previous commit` - Undo all changes since last commit
 
 Claude handles research, writing, and Git operations through natural language—no commands to memorize!
