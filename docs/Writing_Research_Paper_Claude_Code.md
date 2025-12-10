@@ -275,6 +275,37 @@ To view your complete writing journey, type: `show my commit history`
 
 **Export to Word:** In VS Code, open the markdown preview with **Ctrl + Shift + V** (Windows/Linux) or **Cmd + Shift + V** (Mac). Click inside the preview pane, press **Ctrl + A** (or **Cmd + A** on Mac) to select all, then **Ctrl + C** (or **Cmd + C**) to copy. Paste into Microsoft Word—the formatting will be retained.
 
+## Step 14: Create a Slash Command for Future Papers
+
+Save this workflow as a reusable slash command for your next research paper:
+
+```
+Create a slash command called /research-paper that guides me through
+this entire workflow. Save it so I can use it for future research papers.
+```
+
+Claude will create a custom slash command in your `.claude/commands/` folder. Now you can start your next research paper by simply typing `/research-paper [your topic]`!
+
+## Step 15: Get Fresh Feedback
+
+Clear Claude's memory to get unbiased feedback on your paper. Type:
+
+```
+/clear
+```
+
+This removes all conversation history, so Claude will read your paper with fresh eyes. Now ask for feedback:
+
+```
+Read paper.md and give me honest feedback. 
+```
+
+Claude will critique your paper without being influenced by having written it. Make any final revisions based on the feedback, then commit:
+
+```
+commit these changes
+```
+
 ## The Complete Workflow
 
 1. **Research** - Claude searches for general information on your topic
@@ -289,28 +320,21 @@ To view your complete writing journey, type: `show my commit history`
 10. **Improve Title** - Claude suggests title options, you customize
 11. **Check References** - (Optional) Claude verifies all citations
 12. **Proofread with AI** - Claude fixes errors and improves flow
+13. **Create Slash Command** - Save the workflow for future papers
+14. **Get Fresh Feedback** - Clear memory for unbiased critique
 
 Commit at each phase to create restore points. Version control means you can experiment fearlessly—return to any previous version anytime.
 
 ## Next Steps
 
-Try writing more papers on different topics:
+Now that you have the `/research-paper` slash command, try writing more papers:
 
-- **Technology:** "Impact of social media on teen mental health"
-- **Business:** "Remote work productivity"
-- **Science:** "CRISPR gene editing ethics"
+- **Technology:** `/research-paper "Impact of social media on teen mental health"`
+- **Business:** `/research-paper "Remote work productivity"`
+- **Science:** `/research-paper "CRISPR gene editing ethics"`
 - **Longer papers:** Tell Claude to create a 5-page paper with more detailed sections
 
-## Advanced: Create a Slash Command (Optional)
-
-Once you're comfortable with the workflow, you can save it as a reusable command:
-
-```
-Create a slash command called /research-paper that guides me through
-this entire workflow. Save it so I can use it for future research papers.
-```
-
-Claude will create a custom slash command in your `.claude/commands/` folder. Then start future papers by typing `/research-paper [your topic]`.
+The slash command will guide you through the entire workflow automatically!
 
 ## Troubleshooting
 
