@@ -18,24 +18,11 @@ You've installed WSL and Claude Code on your Windows machine - now you want a vi
 - Internet connection
 - 10-15 minutes
 
-## Step 1: Download VS Code
+## Step 1: Start VS Code
 
-- Go to [code.visualstudio.com](https://code.visualstudio.com/)
-- Click the large **Download for Windows** button
-- Wait for the installer to download (about 100 MB)
+- Windows Start button and search for VS Code
 
-## Step 2: Install VS Code
-
-- Open the downloaded file (usually in your Downloads folder)
-- Click **Yes** if Windows asks for permission
-- Accept the license agreement and click **Next**
-- On the "Select Additional Tasks" screen:
-  - Check **Add to PATH** (important!)
-  - Check **Add "Open with Code" to context menu** (optional but helpful)
-- Click **Next**, then **Install**
-- When finished, check **Launch Visual Studio Code** and click **Finish**
-
-## Step 3: Install the WSL Extension
+## Step 2: Install the WSL Extension
 
 - In VS Code, click the **Extensions** icon in the left sidebar (it looks like four squares)
 - Type `WSL` in the search box
@@ -43,24 +30,14 @@ You've installed WSL and Claude Code on your Windows machine - now you want a vi
 - Click the blue **Install** button
 - Wait for installation to complete (a few seconds)
 
-## Step 4: Connect VS Code to WSL
-
-- Look at the bottom-left corner of VS Code - you'll see a blue or green icon
-- Click this icon (or press `F1` and type "WSL")
-- Select **Connect to WSL** from the menu
-- VS Code will reload and connect to your Ubuntu installation
-- The bottom-left corner should now show **WSL: Ubuntu**
-
-The first time you connect, VS Code installs a small server in WSL. This takes about 30 seconds.
-
-## Step 5: Create a Project Folder
+## Step 3: Create a Project Folder
 
 - Open **File Explorer** (click the folder icon in your taskbar)
 - Navigate to **Documents**
 - Right-click in the empty space, select **New > Folder**
 - Name the folder `test_claude`
 
-## Step 6: Open the Folder in VS Code
+## Step 4: Open the Folder in VS Code
 
 - In VS Code (still connected to WSL), click **Terminal** in the menu bar, then **New Terminal**
 - A terminal panel opens at the bottom of VS Code
@@ -73,8 +50,9 @@ The first time you connect, VS Code installs a small server in WSL. This takes a
   ```
   code .
   ```
-- VS Code reloads with your `test_claude` folder open
+- VS Code reloads in another VS Code Window with your `test_claude` folder 
 - If prompted "Do you trust the authors?", click **Yes, I trust the authors**
+- Close the original VS Code window
 
 ## Step 7: Start Claude Code
 
