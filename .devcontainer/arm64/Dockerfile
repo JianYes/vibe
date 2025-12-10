@@ -28,7 +28,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     protobuf-compiler \
     libprotobuf-dev \
- && rm -rf /var/lib/lists/*
+    libprotoc-dev \
+ && rm -rf /var/lib/apt/lists/*
 
 # 3. Install tidyverse and shiny (uses PPM prebuilt binaries)
 RUN R -e "options(warn = 2); install.packages(c('tidyverse', 'shiny'), dependencies = TRUE)"
