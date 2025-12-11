@@ -50,7 +50,7 @@ WSL経由のWindowsの場合：
 - 上部中央に**フォルダーを開く**ドロップダウンが表示されます
 - 以下を入力してフォルダを見つけます：
   ```
-  /mnt/c/Users/YOUR_USERNAME/Documents/test_claude
+  /mnt/c/Users/YOUR_USERNAME/Documents/ai_research
   ```
   `YOUR_USERNAME`をWindowsのユーザー名に置き換えてください（例：`John.Smith`）
 - **OK**をクリック。VS Codeが`test_claude`フォルダでリロードされます

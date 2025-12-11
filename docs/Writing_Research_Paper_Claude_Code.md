@@ -50,7 +50,7 @@ For Windows via WSL:
 - A **Open Folder** dropdown appears in the top center. 
 - Find your folder by typing:
   ```
-  /mnt/c/Users/YOUR_USERNAME/Documents/test_claude
+  /mnt/c/Users/YOUR_USERNAME/Documents/ai_research
   ```
   Replace `YOUR_USERNAME` with your Windows username (e.g., `John.Smith`)
 - Click **OK**. VS Code reloads with your `test_claude` folder 
