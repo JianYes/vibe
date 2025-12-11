@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibe Working for Beginners</title>
+    <title>初心者のためのVibe Working</title>
     <style>
         :root {
             --bg: #0d1117;
@@ -38,29 +38,6 @@
         header {
             text-align: center;
             margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .lang-switch {
-            position: absolute;
-            top: 0;
-            right: 0;
-            font-size: 0.9rem;
-        }
-
-        .lang-switch a {
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 0.25rem 0.5rem;
-        }
-
-        .lang-switch a:hover {
-            color: var(--accent);
-        }
-
-        .lang-switch a.active {
-            color: var(--accent);
-            font-weight: 600;
         }
 
         h1 {
@@ -71,6 +48,33 @@
         .subtitle {
             color: var(--text-muted);
             font-size: 1.1rem;
+        }
+
+        .lang-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-switch a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .lang-switch a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .lang-switch a.active {
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
         .section {
@@ -372,55 +376,56 @@
     <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 </head>
 <body>
+    <div class="lang-switch">
+        <a href="../">English</a>
+        <a href="./" class="active">日本語</a>
+    </div>
     <div class="container">
         <header>
-            <div class="lang-switch">
-                <a href="./" class="active">English</a> | <a href="ja/">日本語</a>
-            </div>
-            <h1>Vibe Working for Beginners</h1>
-            <p class="subtitle">15-minute tutorials for Claude Code, a powerful AI for coding, research, & more</p>
+            <h1>初心者のためのVibe Working</h1>
+            <p class="subtitle">Claude Code（コーディング、研究などに使える強力なAI）の15分チュートリアル</p>
         </header>
 
         <div class="graph-container">
             <div class="filter-controls">
-                <button class="filter-btn active" id="filter-windows" data-platform="windows" data-tooltip="Show Windows tutorials">🪟 Windows</button>
-                <button class="filter-btn" id="filter-mac" data-platform="mac" data-tooltip="Show Mac tutorials">🍎 Mac</button>
+                <button class="filter-btn active" id="filter-windows" data-platform="windows" data-tooltip="Windowsチュートリアルを表示">🪟 Windows</button>
+                <button class="filter-btn" id="filter-mac" data-platform="mac" data-tooltip="Macチュートリアルを表示">🍎 Mac</button>
             </div>
             <div class="filter-controls-right">
-                <button class="filter-btn active" id="filter-basics" data-type="basics" data-tooltip="Research and Writing. Start here.">Basic</button>
-                <button class="filter-btn" id="filter-r" data-language="r" data-tooltip="R coding tutorials">📊 R</button>
-                <button class="filter-btn" id="filter-python" data-language="python" data-tooltip="Python coding tutorials">🐍 Python</button>
+                <button class="filter-btn active" id="filter-basics" data-type="basics" data-tooltip="研究と執筆。ここから始めましょう。">基本</button>
+                <button class="filter-btn" id="filter-r" data-language="r" data-tooltip="Rコーディングチュートリアル">📊 R</button>
+                <button class="filter-btn" id="filter-python" data-language="python" data-tooltip="Pythonコーディングチュートリアル">🐍 Python</button>
             </div>
             <div id="network-graph"></div>
             <p class="progress-counter" id="progress-counter"></p>
-            <p class="learning-path-hint" id="learning-path-hint"> Click a topic to begin. Pick Windows or Mac.<br>Start with Basic, then choose R or Python.</p>
+            <p class="learning-path-hint" id="learning-path-hint">トピックをクリックして開始。WindowsかMacを選択。<br>まず基本から、次にRかPythonを選択。</p>
         </div>
 
         <section class="section">
-        <p>Hands-on tutorials to run Claude Code on your laptop using VS Code, Git, GitHub Desktop, WSL, and Docker.</p>
+        <p>VS Code、Git、GitHub Desktop、WSL、Dockerを使って、ラップトップでClaude Codeを実行するハンズオンチュートリアル。</p>
         <br>
             <ol class="tutorial-list">
-                <li><a href="Install_CLAUDE_Code_Win">Install Claude Code on Windows</a></li>
-                <li><a href="Claude_Code_in_VS_Code_Win">Set Up VS Code for Claude Code on Windows</a></li>
-                <li><a href="Claude_Code_Git_Windows">Claude Code with local version control for Windows</a></li>
-                <li><a href="Install_Claude_Code_MacOS">Install Claude Code on Mac</a></li>
-                <li><a href="Claude_Code_in_VS_Code_Mac">Use Claude Code from VS Code on Mac</a></li>
-                <li><a href="Claude_Code_Git_Mac">Claude Code with local version control for Mac</a></li>
-                <li><a href="VS_Code_Getting_Started">Get Started with VS Code</a></li>
-                <li><a href="Github_desktop">Get Started with Version Control</a></li>
-                <li><a href="R_Coding_VS_Code_Guide">Run R in VS Code</a></li>
-                <li><a href="Python_Coding_VS_Code_Guide">Run Python in VS Code</a></li>
-                <li><a href="R_Coding_Docker_Guide">R Coding in VS Code via Docker</a></li>
-                <li><a href="Python_Coding_Docker_Guide">Python Coding in VS Code via Docker</a></li>
-                <li><a href="GitHub_Desktop_Claude_Code_Workflow">Use GitHub Desktop with Claude Code</a></li>
-                <li><a href="Vibe_Coding_R_Docker_Guide">Vibe Coding in R with Claude Code</a></li>
-                <li><a href="Vibe_Coding_Python_Docker_Guide">Vibe Coding in Python with Claude Code</a></li>
-                <li><a href="Writing_Research_Paper_Claude_Code">Write a Research Paper with Claude Code</a></li>
+                <li><a href="Install_CLAUDE_Code_Win">WindowsにClaude Codeをインストール</a></li>
+                <li><a href="Claude_Code_in_VS_Code_Win">WindowsでClaude Code用にVS Codeをセットアップ</a></li>
+                <li><a href="Claude_Code_Git_Windows">Windows版Claude Codeでローカルバージョン管理</a></li>
+                <li><a href="Install_Claude_Code_MacOS">MacにClaude Codeをインストール</a></li>
+                <li><a href="Claude_Code_in_VS_Code_Mac">MacでVS CodeからClaude Codeを使用</a></li>
+                <li><a href="Claude_Code_Git_Mac">Mac版Claude Codeでローカルバージョン管理</a></li>
+                <li><a href="VS_Code_Getting_Started">VS Codeを始めよう</a></li>
+                <li><a href="Github_desktop">バージョン管理を始めよう</a></li>
+                <li><a href="R_Coding_VS_Code_Guide">VS CodeでRを実行</a></li>
+                <li><a href="Python_Coding_VS_Code_Guide">VS CodeでPythonを実行</a></li>
+                <li><a href="R_Coding_Docker_Guide">Docker経由でVS CodeでRコーディング</a></li>
+                <li><a href="Python_Coding_Docker_Guide">Docker経由でVS CodeでPythonコーディング</a></li>
+                <li><a href="GitHub_Desktop_Claude_Code_Workflow">GitHub DesktopとClaude Codeを使用</a></li>
+                <li><a href="Vibe_Coding_R_Docker_Guide">Claude CodeでRのVibe Coding</a></li>
+                <li><a href="Vibe_Coding_Python_Docker_Guide">Claude CodeでPythonのVibe Coding</a></li>
+                <li><a href="Writing_Research_Paper_Claude_Code">Claude Codeで研究論文を書く</a></li>
             </ol>
         </section>
 
         <footer>
-            <p>Vibe-created by <a href="https://www.linkedin.com/in/steven-ge-ab016947/">Steven Ge</a>, <a href="https://orditus.com">Orditus LLC</a>.  Feedback & Source on <a href="https://github.com/gexijin/vibe">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/steven-ge-ab016947/">Steven Ge</a>、<a href="https://orditus.com">Orditus LLC</a>がVibe制作。フィードバックとソースは<a href="https://github.com/gexijin/vibe">GitHub</a>で</p>
         </footer>
     </div>
 
@@ -434,8 +439,8 @@
             <h3 id="modal-title"></h3>
             <p id="modal-desc"></p>
             <div class="modal-buttons">
-                <a id="modal-link" class="modal-btn">Start</a>
-                <button id="modal-complete" class="modal-btn-secondary">Mark Complete</button>
+                <a id="modal-link" class="modal-btn">開始</a>
+                <button id="modal-complete" class="modal-btn-secondary">完了にする</button>
             </div>
         </div>
     </div>
@@ -536,24 +541,24 @@
             drawConfetti();
         }
 
-        // Tutorial data
+        // Tutorial data (Japanese)
         const tutorials = {
-            1: { label: 'Install Claude Code\n(Win)', url: 'Install_CLAUDE_Code_Win', desc: 'Step-by-step guide to install Claude Code on Windows using WSL, Ubuntu, and Node.js', level: 0 },
-            14: { label: 'Claude Code\nin VS Code (Win)', url: 'Claude_Code_in_VS_Code_Win', desc: 'Set up VS Code to work with Claude Code on Windows WSL—edit files visually while running AI in the terminal', level: 1 },
-            11: { label: 'Claude Code\n+ Git (Win)', url: 'Claude_Code_Git_Windows', desc: 'Learn version control basics using Git locally with Claude Code—no GitHub account needed', level: 1 },
-            2: { label: 'Install Claude Code\n(Mac)', url: 'Install_Claude_Code_MacOS', desc: 'Quick setup guide for Claude Code on macOS with Node.js and npm', level: 0 },
-            15: { label: 'Claude Code\nin VS Code (Mac)', url: 'Claude_Code_in_VS_Code_Mac', desc: 'Set up VS Code to work with Claude Code on Mac—edit files visually while running AI in the terminal', level: 1 },
-            12: { label: 'Claude Code\n+ Git (Mac)', url: 'Claude_Code_Git_Mac', desc: 'Learn version control basics using Git locally with Claude Code on Mac—no GitHub account needed', level: 1 },
-            3: { label: 'VS Code\nBasics', url: 'VS_Code_Getting_Started', desc: 'Learn the fundamentals of Visual Studio Code—installation, interface navigation, extensions, and AI-powered coding with GitHub Copilot', level: 0 },
-            4: { label: 'Version\nControl', url: 'Github_desktop', desc: 'Introduction to Git and GitHub Desktop for managing your code', level: 0 },
-            5: { label: 'R in\nVS Code', url: 'R_Coding_VS_Code_Guide', desc: 'Set up R with code completion, plots, and Shiny app support in VS Code', level: 1 },
-            6: { label: 'Python in\nVS Code', url: 'Python_Coding_VS_Code_Guide', desc: 'Set up Python with code completion, debugging, and Streamlit web apps', level: 1 },
-            7: { label: 'R via\nDocker', url: 'R_Coding_Docker_Guide', desc: 'Run R in isolated, reproducible containers with pre-built Docker images', level: 2 },
-            8: { label: 'Python via\nDocker', url: 'Python_Coding_Docker_Guide', desc: 'Run Python in isolated, reproducible containers with pre-built Docker images', level: 2 },
-            9: { label: 'Claude Code\n+ GitHub Desktop', url: 'GitHub_Desktop_Claude_Code_Workflow', desc: 'Combine AI-assisted coding with professional version control workflows', level: 2 },
-            10: { label: 'Vibe Coding\nin R', url: 'Vibe_Coding_R_Docker_Guide', desc: 'Build a real NBA stats dashboard using natural language requests—the complete vibe coding experience', level: 3 },
-            13: { label: 'Research Paper\nwith Claude', url: 'Writing_Research_Paper_Claude_Code', desc: 'Write research papers faster using Claude Code for research and drafting while Git tracks every version', level: 2 },
-            16: { label: 'Vibe Coding\nin Python', url: 'Vibe_Coding_Python_Docker_Guide', desc: 'Analyze the Iris dataset using natural language requests—describe visualizations and watch them appear', level: 3 }
+            1: { label: 'Claude Codeを\nインストール(Win)', url: 'Install_CLAUDE_Code_Win', desc: 'WSL、Ubuntu、Node.jsを使ってWindowsにClaude Codeをインストールするステップバイステップガイド', level: 0 },
+            14: { label: 'VS CodeでClaude\nCode (Win)', url: 'Claude_Code_in_VS_Code_Win', desc: 'Windows WSLでVS CodeとClaude Codeをセットアップ - ターミナルでAIを実行しながらファイルを視覚的に編集', level: 1 },
+            11: { label: 'Claude Code\n+ Git (Win)', url: 'Claude_Code_Git_Windows', desc: 'Claude CodeでGitを使ったバージョン管理の基本を学ぶ - GitHubアカウント不要', level: 1 },
+            2: { label: 'Claude Codeを\nインストール(Mac)', url: 'Install_Claude_Code_MacOS', desc: 'Node.jsとnpmを使ったmacOSでのClaude Codeクイックセットアップガイド', level: 0 },
+            15: { label: 'VS CodeでClaude\nCode (Mac)', url: 'Claude_Code_in_VS_Code_Mac', desc: 'MacでVS CodeとClaude Codeをセットアップ - ターミナルでAIを実行しながらファイルを視覚的に編集', level: 1 },
+            12: { label: 'Claude Code\n+ Git (Mac)', url: 'Claude_Code_Git_Mac', desc: 'MacでClaude CodeとGitを使ったバージョン管理の基本を学ぶ - GitHubアカウント不要', level: 1 },
+            3: { label: 'VS Code\n基本', url: 'VS_Code_Getting_Started', desc: 'Visual Studio Codeの基礎を学ぶ - インストール、インターフェース操作、拡張機能、GitHub CopilotでのAIコーディング', level: 0 },
+            4: { label: 'バージョン\n管理', url: 'Github_desktop', desc: 'GitとGitHub Desktopによるコード管理入門', level: 0 },
+            5: { label: 'VS Codeで\nR', url: 'R_Coding_VS_Code_Guide', desc: 'VS CodeでRをセットアップ - コード補完、プロット、Shinyアプリサポート', level: 1 },
+            6: { label: 'VS Codeで\nPython', url: 'Python_Coding_VS_Code_Guide', desc: 'Pythonをセットアップ - コード補完、デバッグ、Streamlitウェブアプリ', level: 1 },
+            7: { label: 'Docker経由で\nR', url: 'R_Coding_Docker_Guide', desc: 'ビルド済みDockerイメージで隔離された再現可能なコンテナでRを実行', level: 2 },
+            8: { label: 'Docker経由で\nPython', url: 'Python_Coding_Docker_Guide', desc: 'ビルド済みDockerイメージで隔離された再現可能なコンテナでPythonを実行', level: 2 },
+            9: { label: 'Claude Code\n+ GitHub Desktop', url: 'GitHub_Desktop_Claude_Code_Workflow', desc: 'AIアシストコーディングとプロフェッショナルなバージョン管理ワークフローの組み合わせ', level: 2 },
+            10: { label: 'RでVibe\nCoding', url: 'Vibe_Coding_R_Docker_Guide', desc: '自然言語リクエストで実際のNBA統計ダッシュボードを構築 - 完全なVibe Coding体験', level: 3 },
+            13: { label: 'Claudeで\n研究論文', url: 'Writing_Research_Paper_Claude_Code', desc: 'Claude Codeを使って研究論文を素早く作成 - Gitで全バージョンを追跡しながら研究とドラフト作成', level: 2 },
+            16: { label: 'Pythonで\nVibe Coding', url: 'Vibe_Coding_Python_Docker_Guide', desc: '自然言語リクエストでIrisデータセットを分析 - 可視化を説明するとそれが現れる', level: 3 }
         };
 
         // Color scheme by level
@@ -616,7 +621,7 @@
             Object.entries(tutorials).map(([id, t]) => ({
                 id: parseInt(id),
                 label: getNodeLabel(parseInt(id), t.label),
-                title: 'Click to start learning',
+                title: 'クリックして学習を開始',
                 color: getNodeColor(parseInt(id), t.level),
                 font: { color: isCompleted(parseInt(id)) ? '#e6edf3' : '#0d1117', size: 12, face: 'system-ui' },
                 shape: 'box',
@@ -643,9 +648,9 @@
             ).length;
 
             if (visibleCompleted > 0) {
-                counter.textContent = `${visibleCompleted}/${visibleTotal} completed`;
+                counter.textContent = `${visibleCompleted}/${visibleTotal} 完了`;
             } else if (visibleTotal < Object.keys(tutorials).length) {
-                counter.textContent = `0/${visibleTotal} completed`;
+                counter.textContent = `0/${visibleTotal} 完了`;
             } else {
                 counter.textContent = '';
             }
@@ -658,7 +663,7 @@
             nodes.update({
                 id: id,
                 label: getNodeLabel(id, tutorial.label),
-                title: 'Click to start learning',
+                title: 'クリックして学習を開始',
                 color: getNodeColor(id, tutorial.level),
                 font: { color: completed ? '#e6edf3' : '#0d1117', size: 12, face: 'system-ui' }
             });
@@ -805,7 +810,7 @@
                         id: id,
                         hidden: false,
                         physics: false,
-                        title: 'Click to start learning'
+                        title: 'クリックして学習を開始'
                     });
                 } else {
                     // Hide node
@@ -926,7 +931,7 @@
         // Update complete button state
         function updateCompleteButton() {
             const completed = isCompleted(currentNodeId);
-            modalComplete.textContent = completed ? '✓ Completed' : 'Mark Complete';
+            modalComplete.textContent = completed ? '✓ 完了' : '完了にする';
             modalComplete.classList.toggle('completed', completed);
         }
 
