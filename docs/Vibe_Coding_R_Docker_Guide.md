@@ -1,12 +1,10 @@
 [Home](./)
 
 # Vibe Coding in R with Claude Code and Docker
-
-You've written R code by typing every line yourself. But what if you could describe what you want in plain English and watch the code appear? Vibe coding is like having a conversation with your computer—you describe the outcome, Claude Code builds it, you test and refine. It's not magic; it's a new way to work where you guide the vision and AI handles the implementation. This tutorial shows you how to build a real NBA stats dashboard using nothing but natural language requests.
+ Vibe coding is like having a conversation with your computer—you describe the outcome, Claude Code builds it, you test and refine. It's not magic; it's a new way to work where you guide the vision and AI handles the implementation. This tutorial shows you how to build a real NBA stats dashboard using nothing but natural language requests.
 
 ## Key Concepts
 
-- **[Vibe Coding](https://www.ibm.com/think/topics/vibe-coding)** - Programming by describing what you want in natural language, then iterating based on results rather than writing code line-by-line
 - **[Claude Code](https://code.claude.com/)** - AI coding assistant that writes, debugs, and refactors code based on your natural language requests
 - **[hoopR](https://hoopr.sportsdataverse.org/)** - R package that provides easy access to NBA player statistics and game data
 - **Iterative refinement** - The core vibe coding pattern: describe → test → refine → commit working versions
@@ -15,6 +13,7 @@ You've written R code by typing every line yourself. But what if you could descr
 
 - Finished [R Coding in VS Code via Docker](./R_Coding_Docker_Guide)
 - Finished [Using GitHub Desktop with Claude Code](./GitHub_Desktop_Claude_Code_Workflow)
+- Docker Deskop installed and started
 - 25-30 minutes
 
 ## Step 1: Create New GitHub Repository
@@ -35,9 +34,10 @@ You now have a local Git repository and a backup on GitHub.
 
 ## Step 2: Copy Docker Configuration
 
-You need the `.devcontainer` folder from the vibe project to set up your Docker environment.
-
+- Go to https://github.com/gexijin/vibe. For laptops with ARM64 CPU, https://github.com/gexijin/vibe/tree/ARM64
+- Click **Code** and Download Zip
 - Open File Explorer (Windows) or Finder (Mac)
+- Unzip the file in Download folder
 - Navigate to your vibe project folder (e.g., `Documents/vibe`)
 - Find the `.devcontainer` folder
 - Copy the entire folder (it contains `Dockerfile` and `devcontainer.json`)
@@ -51,6 +51,7 @@ Your `nba-dashboard` folder should now contain:
 
 ## Step 3: Open Project in Container
 
+- Start **Docker Desktop** app from Windows or Mac. Let it run in the background
 - Open VS Code
 - Click **File > Open Folder**
 - Navigate to `nba-dashboard` folder
@@ -148,6 +149,7 @@ Test your dashboard to see if it works.
 - The NBA dashboard opens in your web browser
 - Try moving the points slider—the table filters in real-time
 - Scroll through the player data
+- Commit changes if the app work.
 
 If something doesn't work, copy any error messages and paste them to Claude to fix.
 
