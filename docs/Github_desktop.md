@@ -1,6 +1,6 @@
 [Home](./)
 
-# Getting Started with Version Control
+# Version Control with GitHub Desktop
 
 You're working on a project and make changes that break everything. You can't remember what you changed, and you wish you could go back to when it worked. Version control is like save points in a video game—every time you "commit" your work, you create a restore point you can always return to. [GitHub](https://github.com) stores your save points in the cloud, so your code is safely backed up and accessible from any computer.
 

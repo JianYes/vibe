@@ -344,9 +344,9 @@
                 <button class="filter-btn" id="filter-mac" data-platform="mac" data-tooltip="Show Mac tutorials">🍎 Mac</button>
             </div>
             <div class="filter-controls-right">
-                <button class="filter-btn active" id="filter-r" data-language="r" data-tooltip="Show R tutorials">📊 R</button>
+                <button class="filter-btn" id="filter-r" data-language="r" data-tooltip="Show R tutorials">📊 R</button>
                 <button class="filter-btn" id="filter-python" data-language="python" data-tooltip="Show Python tutorials">🐍 Python</button>
-                <button class="filter-btn" id="filter-basics" data-type="basics" data-tooltip="Not coding related. Installation and Git basics.">Docs</button>
+                <button class="filter-btn active" id="filter-basics" data-type="basics" data-tooltip="Not coding related. Installation and Git basics.">Docs</button>
             </div>
             <div id="network-graph"></div>
             <p class="progress-counter" id="progress-counter"></p>
@@ -522,11 +522,11 @@
             // Level 0 - Basic (left column)
             1: { x: 0, y: -90 },    // Install Claude Code Win
             2: { x: 0, y: 0 },      // Install Claude Code Mac
-            4: { x: 0, y: 90 },     // Version Control
+            4: { x: 0, y: 105 },    // Version Control
             // Level 1 - Intermediate (first branch point)
             11: { x: 160, y: -120 }, // Claude Code + Git (Win)
             12: { x: 160, y: -60 },  // Claude Code + Git (Mac)
-            3: { x: 160, y: 30 },    // VS Code Basics
+            3: { x: 160, y: 20 },    // VS Code Basics
             5: { x: 160, y: 120 },   // R in VS Code
             6: { x: 160, y: 180 },   // Python in VS Code
             // Level 2 - Advanced
@@ -701,7 +701,7 @@
 
         // Filter state
         let currentPlatform = 'windows';
-        let currentLanguage = 'r'; // null = all, 'r', 'python', 'basics'
+        let currentLanguage = 'basics'; // null = all, 'r', 'python', 'basics'
 
         // Tutorial categorization
         const tutorialCategories = {
@@ -723,18 +723,18 @@
                 // Basics mode: show VS Code Basics + install/git/VS Code for selected platform + research paper
                 visibleNodes = [...tutorialCategories[currentPlatform], 3, 13];
             } else if (currentLanguage === 'r') {
-                // R mode: show platform basics + R tutorials + shared tutorials
+                // R mode: show platform install + R tutorials + coding shared (no git, no research paper)
                 visibleNodes = [
-                    ...tutorialCategories[currentPlatform],
+                    tutorialCategories[currentPlatform][0], // Install only (first item)
                     ...tutorialCategories.r,
-                    ...tutorialCategories.shared
+                    3, 4, 9 // VS Code Basics, Version Control, GitHub Desktop (exclude Research Paper 13)
                 ];
             } else if (currentLanguage === 'python') {
-                // Python mode: show platform basics + Python tutorials + shared tutorials
+                // Python mode: show platform install + Python tutorials + coding shared (no git, no research paper)
                 visibleNodes = [
-                    ...tutorialCategories[currentPlatform],
+                    tutorialCategories[currentPlatform][0], // Install only (first item)
                     ...tutorialCategories.python,
-                    ...tutorialCategories.shared
+                    3, 4, 9 // VS Code Basics, Version Control, GitHub Desktop (exclude Research Paper 13)
                 ];
             } else {
                 // All mode: show platform-specific basics + all coding tutorials
