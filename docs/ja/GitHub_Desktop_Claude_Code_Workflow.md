@@ -1,234 +1,169 @@
 [ホーム](./)
 
-# GitHub DesktopとClaude Codeを使用
+# GitHub DesktopとClaude Codeを組み合わせて使う
 
-AIの支援を受けてコーディングしています。AIがファイルを変更します。変更がうまくいくこともあれば、そうでないこともあります。**バージョン管理はプロジェクト全体の「元に戻す」ボタンのようなものです。** スナップショット（「コミット」と呼ばれる）を保存するたびに、復元ポイントを作成します。いつでも戻ることができます。
+AIが自動でファイルを書き換えると、ときには完璧に動き、ときには思わぬ不具合が出ます。そこで役立つのがGit。**Gitはプロジェクト全体に対する「取り消しボタン」**です。コミット（スナップショット）を重ねれば、いつでも安全な状態に戻せます。
 
-[GitHub Desktop](https://desktop.github.com)と[Claude Code](https://claude.com/claude-code)を組み合わせると、プロフェッショナルなバージョン管理でAI速度の開発ができます。
+このガイドでは、[GitHub Desktop](https://desktop.github.com) の視覚的なGit操作と [Claude Code](https://claude.com/claude-code) のAIコーディングを組み合わせ、シンプルなタイマーアプリを作りながらバージョン管理の流れを体験します。
 
-## 主要な概念
+## キーコンセプト
 
-**Git**はコンピュータ上のファイルへのすべての変更を追跡します。
+- **Git**：ローカルPCでファイルの全変更履歴を記録
+- **GitHub**：クラウド上のバックアップ兼共有先
+- **GitHub Desktop**：GitをGUIで操作できる公式アプリ
+- **Claude Code**：コード作成・修正・コミットまで自然言語でこなすAIアシスタント
 
-**GitHub**はコードをクラウドにバックアップとして保存します。
+## このチュートリアルで行うこと
 
-**GitHub Desktop**はGitをビジュアル化 - コマンドを入力する代わりにボタンをクリック。
+1. GitHub Desktopでリポジトリを作成し、GitHubに公開
+2. Claude Codeにタイマーアプリを作成させてテスト
+3. GitHub Desktopで差分を確認し、コミットとプッシュ
+4. 失敗した変更を破棄してやり直し
+5. Claudeにコミットや要約を任せる練習
 
-**Claude Code**はコードを書き、バグを修正し、コミットを作成するAIコーディングアシスタント。
+## 前提条件
 
-## 何をするか
+- [Windows](./Install_CLAUDE_Code_Win) もしくは [Mac](./Install_Claude_Code_MacOS) でClaude Codeをインストール済み
+- [バージョン管理を始めよう](./Github_desktop) を読み、GitHub Desktopの基本操作を理解している
+- 作業時間の目安：20分
 
-Claude Codeでシンプルなタイマーアプリを作り、GitHub Desktopですべての変更を追跡します：
-- プロジェクトとタイマーアプリを作成
-- エラーをテストして修正
-- 変更をコミットしてプッシュ
-- 悪い変更を破棄して再試行
-- Claudeにコミットを自動化させる
+---
 
-## 必要なもの
+## ステップ1：リポジトリを作成しGitHubへ公開
 
-- [WindowsへのClaude Codeのインストール](./Install_CLAUDE_Code_Win)または[MacへのClaude Codeのインストール](./Install_Claude_Code_MacOS)を完了
-- [バージョン管理を始めよう](./Github_desktop)を完了
-- 20分
+1. **GitHub Desktop** を起動
+2. **File > New Repository…**
+3. 入力例：
+   - **Name**: `simple-timer`
+   - **Description**: `A timer app built with Claude Code`
+   - **Local Path**: 書類/ドキュメントフォルダ
+   - **Initialize this repository with a README** にチェック
+4. **Create Repository** → 画面上部の **Publish repository** → そのまま **Publish Repository**
 
-## ステップ1：プロジェクトを作成
+ローカルリポジトリとGitHub上のバックアップが同時に作成されます。
 
-- **GitHub Desktop**を開く
-- **File** → **New Repository**をクリック
-- 記入：
-  - **Name：** `simple-timer`
-  - **Description：** `Claude Codeで作ったタイマーアプリ`
-  - **Local Path：** 書類フォルダ
-  - **Initialize this repository with a README**にチェック
-- **Create Repository**をクリック
-- 上部の**Publish repository**をクリック
-- **Publish Repository**をクリック
+## ステップ2：Claudeにタイマーアプリを作らせる
 
-ローカルプロジェクトとGitHubのクラウドバックアップができました。
+```bash
+cd ~/Documents/simple-timer
+claude
+```
+Claudeが起動したら次のプロンプトを送ります：
+```
+Create a simple countdown timer app in a single file called timer.html.
+It should have:
+- An input field to set minutes
+- Start and Stop buttons
+- Display showing time remaining in MM:SS format
+- When timer reaches zero, display "Time's up!"
+Keep it simple with inline CSS and JavaScript.
+```
+約10〜30秒で `timer.html` が生成されます。
 
-## ステップ2：Claudeにタイマーアプリを作成させる
+## ステップ3：ブラウザで動作確認
 
-- **ターミナル**を開く
-- プロジェクトに移動：
-  ```
-  cd ~/Documents/simple-timer
-  ```
-- Claude Codeを起動：
-  ```
-  claude
-  ```
-- このリクエストを入力：
-  ```
-  シンプルなカウントダウンタイマーアプリをtimer.htmlという単一ファイルで作成してください。
-  必要な機能：
-  - 分を設定する入力フィールド
-  - 開始と停止ボタン
-  - MM:SS形式で残り時間を表示
-  - タイマーがゼロになったら「時間です！」と表示
-  インラインCSSとJavaScriptでシンプルに。
-  ```
+1. GitHub Desktopの **Repository > Show in Finder/Explorer** を開く
+2. `timer.html` をダブルクリックしてブラウザで起動
+3. 入力欄に `1` を入力し **Start** をクリック → カウントダウンを確認
 
-Claudeが`timer.html`ファイルを作成します（10〜30秒かかります）。
+動けば次へ。エラーが出る場合はステップ4へ進みます。
 
-## ステップ3：タイマーをテスト
+## ステップ4：エラーの修正（必要に応じて）
 
-- GitHub Desktopで**Repository** → **Show in Finder/Explorer**をクリック
-- `timer.html`を**ダブルクリック**してブラウザで開く
-- タイマーを試す：
-  - 入力フィールドに`1`と入力
-  - **開始**をクリック
-  - カウントダウンを見る
+1. ブラウザで **F12** → **Console** タブを開き、赤いエラーをコピー
+2. Claude Codeのターミナルに戻り、
+   ```
+   I'm seeing this error: [エラー本文]. Can you fix it?
+   ```
+3. 修正後にブラウザを更新して再テスト
 
-**動作する場合：** ステップ5に進む。
-**何か壊れている場合：** ステップ4に続く。
+## ステップ5：GitHub Desktopで差分確認
 
-## ステップ4：エラーを修正（必要な場合）
+- 左ペイン：変更ファイル（`timer.html`）
+- 右ペイン：追加・変更箇所（緑＝追加）
 
-- ブラウザコンソールを開く（`F12` → **コンソール**タブ）
-- 赤いエラーメッセージをコピー
-- ターミナルのClaude Codeに戻る
-- エラーを貼り付け：
-  ```
-  このエラーが出ています：[エラーを貼り付け]。修正できますか？
-  ```
-- ブラウザを更新（`F5`）して再度テスト
-
-## ステップ5：変更を確認
-
-- **GitHub Desktop**に切り替え
-- **左パネル：** 変更されたファイルを表示（`timer.html`）
-- **右パネル：** コードを表示（緑 = 追加）
-- Claudeが作成したものを理解するために読み通す
-
-コミット前に必ずAI生成コードを確認してください。
+AIが作ったコードはコミット前に必ずチェックしましょう。
 
 ## ステップ6：手動でコミット
 
-- 左下の**Summary field**に入力：
-  ```
-  開始/停止機能付きの初期タイマーアプリを作成
-  ```
-- **Commit to main**をクリック
+1. 左下 **Summary** に分かりやすいメッセージを入力
+   ```
+   Create initial timer app with start/stop functionality
+   ```
+2. **Commit to main** をクリック
 
-セーブポイントを作成しました！
+### 良いメッセージ例
+- `Create initial timer app`
+- `Fix start button bug`
 
-**良いメッセージ：** 「初期タイマーアプリを作成」、「開始ボタンを修正」
-**悪いメッセージ：** 「変更」、「更新」、「asdf」
+### NG例
+- `changes`
+- `update`
+- `asdf`
 
-## ステップ7：GitHubにプッシュ
+## ステップ7：GitHubへプッシュ
 
-- 上部の**Push origin**ボタンをクリック
-- 確認：**Repository** → **View on GitHub**でオンラインのコードを確認
+- 上部の **Push origin** をクリック
+- **Repository > View on GitHub** でブラウザを開き、アップロードできているか確認
 
-コードがクラウドにバックアップされました。
+## ステップ8：サウンド通知を追加（わざと失敗）
 
-## ステップ8：サウンド通知を追加
+Claudeに依頼：
+```
+Add a sound notification when the timer reaches zero. Use the browser's built-in beep sound or create a simple audio alert.
+```
+0.1分（約6秒）でテストし、「うまくいかない」という設定にします。
 
-- Claude Codeターミナルで：
-  ```
-  タイマーがゼロになったときにサウンド通知を追加してください。ブラウザ内蔵のビープ音または
-  シンプルなオーディオアラートを使用してください。
-  ```
-- テスト：ブラウザを更新、タイマーを0.1分に設定、開始をクリック
+## ステップ9：GitHub Desktopで破棄
 
-**このチュートリアルでは：** サウンドがうまく動作しないふりをしてください。まだコミットしないで！
+1. GitHub Desktop上部の **Branch > Discard All Changes**
+2. 確認ダイアログで **Discard Changes** を選択
+3. ブラウザを更新するとサウンド変更前の状態に戻ります
 
-## ステップ9：悪い変更を破棄
+## ステップ10：改めて実装
 
-  AIが間違った方向に導いて、最後のコミット（セーブポイント）からやり直す必要がある場合があります。
+Claudeにリクエスト：
+```
+Add a sound notification when the timer reaches zero. This time, use an HTML5 audio element with a simple beep sound generated by the Web Audio API. Make sure it handles browser autoplay restrictions gracefully.
+```
+再度テストし、動作したら次へ。
 
-- **GitHub Desktop**を開く
-- **Branch**メニュー → **Discard All Changes**をクリック
-- **Discard Changes**をクリックして確認
-- ブラウザを更新 - タイマーがサウンドなしで動作！
+## ステップ11：Claudeにコミットとプッシュを任せる
 
-壊れたコードを捨てて、最後のセーブポイントに戻りました。
+```
+commit and push my changes
+```
+Claudeが差分確認→メッセージ作成→コミット→プッシュまで自動で行います。
 
-## ステップ10：ゼロからやり直す
+- **手動コミット**：練習中やメッセージを自分で管理したいとき
+- **Claudeコミット**：素早く進めたい・良いメッセージを自動生成したいとき
 
-- Claude Codeで：
-  ```
-  タイマーがゼロになったときにサウンド通知を追加してください。今回はWeb Audio APIで生成した
-  シンプルなビープ音を使ったHTML5オーディオ要素を使用してください。ブラウザの自動再生制限に
-  適切に対応してください。
-  ```
-- すぐにテスト（ブラウザを更新、0.1分に設定、開始）
+## ステップ12：変更内容を要約してもらう
 
-**動作する場合：** ステップ11に進む。
-**動作しない場合：** エラーをClaudeに貼り付けるか、再試行。
+```
+what files have I changed?
+```
+`explain what the audio code does` や `show me the last 5 commits` といった質問も有効です。
 
-## ステップ11：Claudeにコミットとプッシュをさせる
+## ステップ13：履歴を確認
 
-- Claude Codeで：
-  ```
-  変更をコミットしてプッシュして
-  ```
+GitHub Desktopの **History** タブには以下のように並びます：
+- 初期READMEコミット
+- タイマーアプリ作成
+- 改善されたサウンド通知
 
-Claudeが変更を確認し、コミットメッセージを書き、コミットしてプッシュします（10〜20秒）。
+失敗したサウンド実装は破棄したため履歴に残りません。動作するコードだけが履歴として保存されることがわかります。
 
-**いつ使うか：**
-- 手動コミット：学習中またはコントロールしたいとき
-- Claudeコミット：速く作業して良いメッセージが欲しいとき
+---
 
-## ステップ12：Claudeに変更を要約させる
+## 発展課題
 
-- Claude Codeで：
-  ```
-  どのファイルを変更した？
-  ```
+- **カスタムサウンド**： [freesound.org](https://freesound.org) からMP3をダウンロードし、Claudeにその音源を使わせる
+- **複数タイマー**：`Allow users to create and run multiple timers simultaneously`
+- **プログレスバー**：`Add a progress bar that visually shows how much time remains`
 
-Claudeが変更を平易な日本語で説明します。
+> 各機能の後で必ずテスト → 成功ならコミット → 失敗なら即破棄、というリズムを守りましょう。
 
-**試してみて：** `オーディオコードが何をするか説明して`または`最後の5つのコミットを表示して`
+---
 
-## ステップ13：履歴を表示
-
-- **GitHub Desktop**で**History**タブをクリック
-
-以下が見えます：
-- 初期コミット（README）
-- 初期タイマーアプリを作成
-- 改善されたサウンド通知を追加
-
-最初の失敗したサウンドの試みがないことに注目 - 破棄しました！動作するコードだけがコミットに入りました。
-
-## チャレンジ
-- カスタムサウンド：[freesound.org](https://freesound.org)から無料の.mp3をダウンロードし、プロジェクトフォルダに入れ、それを使うようClaudeに依頼
-- 複数タイマー：`複数のタイマーを同時に作成して実行できるようにして`
-- プログレスバー：`残り時間を視覚的に表示するプログレスバーを追加して`
-
-**覚えておいて：** 各機能の後にテストし、成功したらコミットし、失敗したら破棄。
-
-**GitHub.comでプロジェクトを表示：** GitHub Desktopで**Repository** → **View on GitHub**をクリックして、完全なコミット履歴とコードをオンラインで確認。
-
-## トラブルシューティング
-
-**「Authentication failed」：** GitHub Desktop → File/Preferences → Accounts → サインアウトして再度サインイン
-
-**Claudeが「not a git repository」と言う：** 正しいフォルダにいることを確認（`cd ~/Documents/simple-timer`）
-
-**タイマーが動作しない：** ブラウザコンソールを開き（`F12`）、エラーをコピーしてClaudeに貼り付け
-
-**助けが必要？** [GitHub Desktopドキュメント](https://docs.github.com/en/desktop) • [Claude Codeドキュメント](https://code.claude.com/docs)
-
-## 完全なワークフロー
-
-- Claudeに変更を依頼
-- ブラウザでテスト
-- 動作したら → 確認してコミット
-- 失敗したら → 破棄して再試行
-- GitHubにプッシュ
-- 繰り返す
-
-コントロールしたいときは手動コミット。速度が欲しいときはClaudeコミット。恐れずに破棄 - 動作するコードだけをコミット！
-
-## 次のステップ
-
-タイマーに機能を追加してみましょう：
-
-**クイックウィン：**
-- 5、10、15分のプリセットボタン：`「5分」「10分」「15分」の3つのプリセットボタンを追加`
-- 一時停止ボタン：`タイマーの状態を切り替える一時停止/再開ボタンを追加`
-- より良いスタイル：`モダンな配色でビジュアルデザインを改善`
-
-[Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/)が2025年12月7日に作成。
+[Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) 作成（2025年12月）
