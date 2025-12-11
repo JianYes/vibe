@@ -205,6 +205,23 @@
             margin: 0;
         }
 
+        .learning-path-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-align: right;
+            line-height: 1.4;
+        }
+
+        .learning-path-hint.visible {
+            opacity: 1;
+        }
+
         /* Confetti canvas */
         #confetti-canvas {
             position: fixed;
@@ -350,6 +367,7 @@
             </div>
             <div id="network-graph"></div>
             <p class="progress-counter" id="progress-counter"></p>
+            <p class="learning-path-hint" id="learning-path-hint"><strong>Learning path:</strong> Pick Windows or Mac.<br>Start with Basic, then choose R or Python.</p>
         </div>
 
         <section class="section">
@@ -375,7 +393,7 @@
         </section>
 
         <footer>
-            <p>Vibe-created by <a href="https://www.linkedin.com/in/steven-ge-ab016947/">Steven Ge</a>, <a href="https://orditus.com">Orditus LLC</a>. <a href="https://github.com/gexijin/vibe">GitHub</a></p>
+            <p>Vibe-created by <a href="https://www.linkedin.com/in/steven-ge-ab016947/">Steven Ge</a>, <a href="https://orditus.com">Orditus LLC</a>.  Feedback & Source on <a href="https://github.com/gexijin/vibe">GitHub</a></p>
         </footer>
     </div>
 
@@ -855,6 +873,18 @@
 
         // Apply initial filters
         applyFilters();
+
+        // Learning path hint on graph hover
+        const learningPathHint = document.getElementById('learning-path-hint');
+        const networkGraph = document.getElementById('network-graph');
+
+        networkGraph.addEventListener('mouseenter', function() {
+            learningPathHint.classList.add('visible');
+        });
+
+        networkGraph.addEventListener('mouseleave', function() {
+            learningPathHint.classList.remove('visible');
+        });
 
         // Modal elements
         const modal = document.getElementById('tutorial-modal');
