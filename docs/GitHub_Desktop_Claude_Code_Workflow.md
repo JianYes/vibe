@@ -1,6 +1,6 @@
 [Home](./)
 
-# Using GitHub Desktop with Claude Code
+# Use GitHub Desktop with Claude Code
 
 You're coding with AI assistance. It makes changes to your files. Sometimes the changes work perfectly. Sometimes they don't. **Version control is like an undo button for your entire project.** Every time you save a snapshot (called a "commit"), you create a restore point. You can always go back.
 

@@ -1,6 +1,6 @@
 [Home](./)
 
-# Getting Started with VS Code
+# Get Started with VS Code
 
 You want to write code, but Notepad or TextEdit feels limiting. You need something that helps you code faster - with syntax highlighting, autocomplete, and built-in tools. **VS Code is like a smart notebook for code** - it understands what you're writing and helps you along the way. [Visual Studio Code](https://code.visualstudio.com) is free, runs on any OS, and is used by millions of developers.
 

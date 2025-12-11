@@ -1,6 +1,6 @@
 [Home](./)
 
-# Writing a Research Paper with Claude Code
+# Write a Research Paper with Claude Code
 
 Write research papers using Claude Code as an assistant for research, brainstorming, planning, drafting, and editing. Then automate this process by creating a template slash command. See an [example paper](./example_paper.md) created using this workflow.
 

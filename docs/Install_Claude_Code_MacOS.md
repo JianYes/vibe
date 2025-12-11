@@ -1,6 +1,6 @@
 [Home](./)
 
-# Installing Claude Code on Mac
+# Install Claude Code on Mac
 
 This guide will walk you through installing Claude Code on your Mac. Each step includes detailed instructions for beginners.
 

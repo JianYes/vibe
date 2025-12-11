@@ -1,6 +1,6 @@
 [Home](./)
 
-# Installing Claude Code on Windows Using WSL
+# Install Claude Code on Windows Using WSL
 
 This guide will walk you through installing Claude Code on Windows using Windows Subsystem for Linux (WSL). WSL enables a virtual machine running Linux operating system (OS) on your Windows machine. Although you can install Claude Code natively on Windows, it works much more efficiently under Linux due to the access of many command.
 

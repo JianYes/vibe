@@ -1,6 +1,6 @@
 [Home](./)
 
-# Setting Up VS Code for Claude Code on WSL
+# Set Up VS Code for Claude Code on WSL
 
 You've installed WSL and Claude Code on your Windows machine - now you want a visual editor to work with your code. VS Code bridges the gap between Windows and your Linux environment, letting you edit files visually while running Claude Code in the integrated terminal. Think of VS Code as a window into your Linux world.
 
