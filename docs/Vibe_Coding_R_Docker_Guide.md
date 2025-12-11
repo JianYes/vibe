@@ -80,7 +80,6 @@ claude
 
 Claude Code is now running and ready for your requests.
 
-
 ## Step 5: First Vibe - Get NBA Data
 
 Now the fun begins. Instead of looking up documentation, just describe what you want.
