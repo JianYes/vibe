@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # 2. R packages for VS Code integration: language server + debugger
-RUN R -q -e 'install.packages(c("rstudioapi", "languageserver"), repos="https://cloud.r-project.org")'
+RUN R -q -e 'install.packages(c("rstudioapi", "languageserver", "httpgd"), repos=c("https://manuelhentschel.r-universe.dev", "https://cloud.r-project.org", "https://community.r-multiverse.org"))' && \
+    R -q -e 'install.packages("vscDebugger", repos="https://cloud.r-project.org")'
 
 # 3. Install Node.js LTS from NodeSource
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \

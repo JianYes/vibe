@@ -12,7 +12,10 @@
       ],
       "settings": {
         "r.rterm.linux": "/usr/bin/R",
-        "r.alwaysUseActiveTerminal": true
+        "r.alwaysUseActiveTerminal": true,
+        // NEW: show plots in VS Code using httpgd
+        "r.plot.useHttpgd": true,
+        "r.plot.theme": "light"        // optional, pick "dark" if you like
       }
     }
   },
