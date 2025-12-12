@@ -18,9 +18,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
 # 4. Install Claude Code globally
 RUN npm install -g @anthropic-ai/claude-code
 
-# 5. Additional R packages can be installed through a packages.R file
-#COPY ./packages.R /tmp/packages.R
-#RUN Rscript /tmp/packages.R
+# 5. Give shiny passwordless sudo for updating Claude Code from VS Code
+RUN echo 'shiny ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    rm -rf /var/lib/apt/lists/*
 
 # Expose Shiny server port
 EXPOSE 3838
