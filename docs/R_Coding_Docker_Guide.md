@@ -222,7 +222,7 @@ If it loads without errors, the package is installed permanently.
 ## Next Steps
 
 - **Create a new R script** - Make a new `.R` file in the `R/` folder, write data analysis code using built-in datasets like `mtcars` or `iris`
-- **Install R packages** - Add packages you need by editing the Dockerfile (line 12) and rebuilding the container
+- **Install R packages** - Add packages you need by editing the Dockerfile and rebuilding the container
 - **Explore tidyverse** - Try data manipulation with `dplyr` and visualization with `ggplot2` using example datasets
 
 ## Troubleshooting
