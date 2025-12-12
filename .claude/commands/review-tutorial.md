@@ -33,6 +33,7 @@ Review and polish the tutorial file: $ARGUMENTS
 - [ ] No assumed prior knowledge
 - [ ] Jargon explained or avoided
 - [ ] Links to tools on first mention
+- [ ] Prerequisite tutorials are all listed
 
 ### Technical Accuracy
 - [ ] Commands are correct and complete
