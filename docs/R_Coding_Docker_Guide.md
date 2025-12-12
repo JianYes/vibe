@@ -60,6 +60,8 @@ Ever tried to share your R code with a colleague, only to spend hours debugging 
 - You'll see a progress notification showing the build steps
 - When complete, the green icon will show **Dev Container: R in Docker**
 
+**Note:** The container automatically includes the R extension and languageserver package—you don't need to reinstall them from the previous tutorial. The Dockerfile and devcontainer.json handle this for you.
+
 ## Step 6: Understand the Container Environment
 
 Now you're coding inside a Linux container. Let's explore what this means.
