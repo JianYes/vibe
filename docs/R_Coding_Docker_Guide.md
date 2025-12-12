@@ -14,6 +14,7 @@ Ever tried to share your R code with a colleague, only to spend hours debugging 
 ## What You'll Need
 
 - Finished [R Coding in VS Code](./R_Coding_VS_Code_Guide)
+- Finished [GitHub Desktop Basics](./Github_desktop)
 - 20-25 minutes
 
 ## Step 1: Install Docker Desktop
@@ -60,7 +61,7 @@ Ever tried to share your R code with a colleague, only to spend hours debugging 
 - You'll see a progress notification showing the build steps
 - When complete, the green icon will show **Dev Container: R in Docker**
 
-**Note:** The container automatically includes the R extension and languageserver package—you don't need to reinstall them from the previous tutorial. The Dockerfile and devcontainer.json handle this for you.
+**Note:** The container automatically includes the R extension and languageserver package. The Dockerfile and devcontainer.json handle this for you.
 
 ## Step 6: Understand the Container Environment
 
@@ -114,13 +115,10 @@ The container has R pre-installed with common packages. Let's run a simple data 
 - When you run the `hist()` commands, histogram plots will open in separate windows
 - You can also select multiple lines and run them together with `Ctrl+Enter` or `Cmd+Enter`
 
-## Step 8: Install Shiny Extension and Run the App
+## Step 8: Run the App
 
 The project includes a demo Shiny app that creates an interactive histogram.
 
-- Click the **Extensions** icon in the left sidebar
-- Search for `Posit.shiny`
-- Click **Install** on the **Shiny** extension by Posit (if you completed the VS Code R tutorial, this is already installed)
 - In VS Code Explorer, navigate to `R/app.R`
 - Click to open the file
 - You'll see code for a Shiny web application
@@ -204,9 +202,7 @@ Packages installed via the R console (`install.packages()`) are temporary and di
 
 - In VS Code Explorer, navigate to `.devcontainer/Dockerfile`
 - Click to open the file
-- Find line 11: `RUN R -q -e 'install.packages(c("rstudioapi", "languageserver"), ...)'`
-- Add a new line below it to install the `data.table` package:
-
+- Add a new line below other 'install.packages' lines to install the `data.table` package:
 ```dockerfile
 RUN R -q -e 'install.packages("data.table", repos="https://cloud.r-project.org")'
 ```
@@ -233,7 +229,7 @@ If it loads without errors, the package is installed permanently.
 
 - **Docker Desktop not running** - Open Docker Desktop and wait for the green status indicator before reopening the container
 - **Container build fails** - Check your internet connection; the first build downloads ~2GB. Click **Rebuild Container** to retry
-- **Port 3838 already in use** - Stop other apps using that port, or change the port in `.devcontainer/devcontainer.json` line 21
+- **Port 3838 already in use** - Stop other apps using that port, or change the port in `.devcontainer/devcontainer.json` 
 
 ## Workflow Overview
 
