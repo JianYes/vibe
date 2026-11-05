@@ -1,0 +1,322 @@
+---
+title: "在 Windows 上安装 Claude Code"
+lang: "zh"
+---
+[首页](./)
+
+# 在 Windows 上安装 Claude Code
+
+Claude Code 是一款运行在终端里的 AI 助手，能帮你编写、调试和理解代码。按照本指南，几分钟就能在 Windows 上完成原生安装并上手。如果想要更进阶的环境，指南末尾还介绍了可选的 WSL2 安装方法。
+
+## 核心概念
+
+- **PowerShell** - Windows 自带的命令行工具，本指南用它来安装和运行 Claude Code
+- **Git for Windows** - 一款免费工具，自带 Claude Code 执行命令时使用的 shell **Git Bash**
+- **WSL（Windows Subsystem for Linux）** - Windows 的一项可选功能，能在 Windows 里运行真正的 Linux 系统；指南末尾的进阶设置会用到
+
+## 准备内容
+
+- 一台 Windows 10 或 Windows 11 电脑
+- Claude Pro/Max 订阅，或一个 API 密钥
+- 5 - 10 分钟
+
+## 步骤 1：安装 Git for Windows（可选，推荐）
+
+Git for Windows **推荐但并非必需**，它会提供 Claude Code 执行命令时使用的 shell **Git Bash**。如果跳过，Claude Code 会改用 PowerShell，因此你也可以直接进入步骤 2，以后再装 Git。
+
+- 访问 [git-scm.com/download/win](https://git-scm.com/download/win)
+- 点击页面顶部的 **Click here to download**，下载完成后打开安装程序
+- 一路点击 **Next**，保持默认选项
+- 点击 **Install**，最后点击 **Finish**
+
+装好之后，Claude Code 启动时会自动识别 Git Bash。
+
+## 步骤 2：安装 Claude Code
+
+- 点击 **Windows 开始按钮**，输入 `PowerShell`，点击 **Windows PowerShell**
+- 在 PowerShell 窗口里输入：
+   ```
+   irm https://claude.ai/install.ps1 | iex
+   ```
+- 等待安装完成（下载期间窗口可能会有一分钟左右没有任何显示——这是正常的）
+- 关闭并重新打开 PowerShell，输入以下命令验证：
+   ```
+   claude --version
+   ```
+- 此时应该会显示 Claude Code 的版本号
+- 如果看到的是 `'claude' is not recognized`，请在 PowerShell 中运行下面两行，然后关闭并重新打开 PowerShell，再试一次 `claude --version`：
+   ```
+   $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
+   [Environment]::SetEnvironmentVariable('PATH', "$currentPath;$env:USERPROFILE\.local\bin", 'User')
+   ```
+
+## 步骤 3：（可选）在 VS Code 中打开 Claude Code
+
+如果你还没有 VS Code，可以跳过这一步——以后可以通过 [VS Code 入门指南](VS_Code_Getting_Started.md) 安装，再回来继续。
+
+装好 Claude Code 之后，除了在终端里用，你还可以在 VS Code 里使用它。这通常是最方便的方式，因为不用离开编辑器，就能查看文件、修改代码、向它求助。
+
+可以把 Claude Code 侧边栏想象成 VS Code 里的一个聊天窗口。你可以在同一个界面里边干活边提问、让它解释代码、请它帮忙。
+
+### 如何打开 Claude Code 侧边栏
+
+- 打开 VS Code
+- 看向窗口最左侧
+- 如果还没看到 Claude Code 面板，点击 **Extensions** 图标
+- 在扩展市场里搜索 `Claude Code`
+- 如果还没安装，点击 **Install**
+- 安装完成后，点击窗口右下角的 **✻ Claude Code** 打开聊天窗口。（左侧边栏里的 Spark 图标打开的则是你的会话列表，可以在那里开始一个新会话。）
+
+如果看不到 Claude Code 图标，可以试试这样做：
+
+- 按 **Ctrl + Shift + P**
+- 输入：`Claude Code: Open in Side Bar`
+- 点击列表中对应的选项
+
+如果还是没有出现，关掉 VS Code 再重新打开。有时扩展需要重启一次，侧边栏才会显示出来。
+
+### 侧边栏能做什么
+
+在 Claude Code 侧边栏里，你可以：
+
+- 询问关于项目的问题
+- 请它帮忙修复错误
+- 让它解释看不懂的代码
+- 创建或修改文件
+- 不离开 VS Code，用更直观的方式工作
+
+这样做的好处是，代码在编辑器里开着，同一个窗口里就能向 Claude 求助。
+
+### 快速测试
+
+侧边栏打开后：
+
+- 输入：Explain this project to me
+- 按 **Enter**
+
+如果 Claude 回复了，就说明可以开始使用了。第一次使用时，侧边栏可能会先要求你登录：按照它的提示操作，或者先完成下面步骤 4 连接账户，然后再试。
+
+> 提示：如果侧边栏还是不见踪影，请确认 Claude Code 扩展已经安装，并且已经重启过 VS Code。
+
+## 步骤 4：连接 Anthropic 账户
+
+### 选项 A. 使用 Claude Pro 或 Max 订阅
+
+- 在 PowerShell 窗口里输入：
+   ```
+   claude
+   ```
+- Claude 会尝试打开浏览器。如果没能自动打开，按 **c** 复制登录链接，然后粘贴到浏览器里打开
+- 登录 Claude.ai 账户（用 Chrome 的话可能会自动登录）
+- 点击 **Authorize**。浏览器应该会显示你已登录，PowerShell 中也会显示成功提示
+- 只有当浏览器显示一长串代码时（在 WSL/Ubuntu 中会出现这种情况），才需要点击 **Copy Code**，回到终端，在 **Paste code here if prompted** 处粘贴（**右键单击**或按 **Ctrl+V**），然后按 **Enter**
+- 按照提示完成后续设置
+
+下面几种基于 API 的方式都在 **PowerShell** 里完成，用到的 `setx` 命令会把设置永久保存。运行 `setx` 之后，记得**先关闭再重新打开 PowerShell** 让设置生效，然后再启动 `claude`。
+
+### 选项 B. 使用 Anthropic API 密钥
+
+如果你用的是 Anthropic API 密钥，而不是 Claude 订阅：
+
+- 先到 [Anthropic Console](https://console.anthropic.com/) 获取 API 密钥
+- 在 PowerShell 里输入（把 `your-api-key-here` 换成你自己的密钥）：
+   ```
+   setx ANTHROPIC_API_KEY "your-api-key-here"
+   ```
+- 关闭并重新打开 PowerShell 让设置生效，然后启动 Claude Code：
+   ```
+   claude
+   ```
+- 第一次启动时，Claude Code 会询问你是否要使用它找到的 API 密钥。选择 **Yes**。（如果不小心选了 **No**，输入 `/config` 并打开 **Use custom API key**。）
+
+### 选项 C. 使用 OpenRouter API（按用量付费）
+
+OpenRouter 是一个统一的 API 网关，用一个密钥就能访问 500 多种大语言模型。它按用量计费，还能在不同价位的模型之间挑选，是一种比较省钱的 Claude Code 使用方式。
+
+- 在 [openrouter.ai](https://openrouter.ai) 注册并登录
+- 点击 **Get API key**，把密钥复制到安全的地方
+- 在 PowerShell 里设置好这些环境变量：
+   ```
+   setx ANTHROPIC_BASE_URL "https://openrouter.ai/api"
+   setx ANTHROPIC_AUTH_TOKEN "your-openrouter-api-key"
+   [Environment]::SetEnvironmentVariable('ANTHROPIC_API_KEY', $null, 'User')
+   setx ANTHROPIC_DEFAULT_SONNET_MODEL "~anthropic/claude-sonnet-latest"
+   setx ANTHROPIC_DEFAULT_OPUS_MODEL "~anthropic/claude-opus-latest"
+   setx ANTHROPIC_DEFAULT_HAIKU_MODEL "~anthropic/claude-haiku-latest"
+   ```
+- 关闭并重新打开 PowerShell，再启动 Claude Code：
+   ```
+   claude
+   ```
+- 在 Claude Code 里输入 `/status`，确认连接是否成功
+
+**注意：**
+- 把 `your-openrouter-api-key` 换成你自己的 OpenRouter API 密钥
+- `ANTHROPIC_API_KEY` 那一行会删除已保存的 Anthropic API 密钥——使用 OpenRouter 时不能设置该密钥
+- 想换用其他模型，它们必须支持**工具调用（tool use）功能**。可以这样覆盖默认模型：
+   ```
+   setx ANTHROPIC_DEFAULT_SONNET_MODEL "model-provider/model-name"
+   ```
+- 可用模型可在 [openrouter.ai/models](https://openrouter.ai/models) 查看
+- 免费（`:free`）模型每天限 50 次请求，一个 Claude Code 任务就可能很快用完
+- 上面列出的都是付费模型——使用前请在 [openrouter.ai/models](https://openrouter.ai/models) 查看价格
+- 通过 OpenRouter 使用时，只有 Anthropic 模型能保证与 Claude Code 正常配合
+- 更多细节见[官方 OpenRouter 指南](https://openrouter.ai/docs/cookbook/coding-agents/claude-code-integration)
+
+### 选项 D. 通过 Microsoft Foundry（Azure）使用 Anthropic API
+
+在 PowerShell 里粘贴下面这段代码，定义相应的环境变量：
+```
+# Enable Microsoft Foundry integration
+setx CLAUDE_CODE_USE_FOUNDRY 1
+# Azure resource name
+setx ANTHROPIC_FOUNDRY_RESOURCE "xxxx-eastus2"
+# Set models to your resource's deployment names
+setx ANTHROPIC_DEFAULT_OPUS_MODEL "claude-opus-4-8"
+setx ANTHROPIC_DEFAULT_SONNET_MODEL "claude-sonnet-5"
+setx ANTHROPIC_DEFAULT_HAIKU_MODEL "claude-haiku-4-5"
+setx ANTHROPIC_FOUNDRY_API_KEY "your_api_key"
+```
+
+**注意：**把 `xxxx-eastus2` 换成你的 Foundry Resource 名称（不要填完整的基础 URL）；把 `your_api_key` 换成你在 Azure 门户里拿到的完整 API 密钥。
+
+然后关闭并重新打开 PowerShell，再启动 Claude Code：
+```
+claude
+```
+
+这样就可以用 Azure 上部署的 Claude 模型来运行 Claude Code 了。
+
+## 步骤 5：测试 Claude Code
+
+全部搞定！在 PowerShell 里输入 `claude`，随便问它点什么，比如"解释一下量子计算"。
+
+## 步骤 6：访问项目
+
+- 如果已经有项目文件夹，在 PowerShell 里切换到该目录：
+   ```
+   cd ~/Documents/test_claude
+   ```
+   把 `test_claude` 换成你实际的项目文件夹名称。提示：输入 `cd `（带一个空格），从文件资源管理器把文件夹拖到 PowerShell 窗口中即可粘贴它的完整路径，然后按 **Enter**。
+- 然后启动 Claude：
+   ```
+   claude
+   ```
+- 可以先让 Claude 帮你讲解整个代码库，也可以让它直接帮你改代码
+- 再用你惯用的 IDE 测试代码
+
+**注意：**Claude 在项目文件夹里运行，并把设置保存在其中——这个文件夹就是它的工作区。
+
+## 步骤 7：（可选）安装 WSL2 以获得完整的 Linux 体验
+
+对大多数人来说，上面的原生设置已经够用了。不过有些功能只能在 Linux 下使用。WSL2 能在 Windows 里运行真正的 Linux 系统，带来 **Bash 工具沙盒**（一项安全特性），也能和各种 Linux 工具链配合得更好。它配置更花时间，还要重启电脑，所以只有在你确实想要完整 Linux 体验时再做这一步。
+
+### a) 检查虚拟化并安装 WSL
+
+**先检查虚拟化是否已启用：**
+
+- **右键单击**任务栏（屏幕最下方的那条栏），在菜单里点击**任务管理器**
+- 如果打开的是精简窗口，点击底部的**详细信息**
+- 点击**性能**（在 Windows 10 上是顶部的选项卡，在 Windows 11 上是左侧菜单中的图标），然后点击左侧的 **CPU**
+- 找到**虚拟化：**那一行，看它是否显示**已启用**
+
+**如果显示"已禁用"：**你需要进入电脑的 BIOS 设置开启虚拟化：
+- 重启电脑，开机过程中按下进入 BIOS 的按键（通常是 **F2**、**F10**、**Del** 或 **Esc**，具体取决于电脑品牌）
+- 找到"Virtualization Technology"、"Intel VT-x"、"AMD-V"或"SVM Mode"等相关选项并开启
+- 保存并退出 BIOS（通常按 **F10**）
+
+**接下来安装 WSL：**
+
+- 点击 **Windows 开始按钮**，输入 `PowerShell`
+- **右键单击 Windows PowerShell**，选择**以管理员身份运行**
+- 系统弹出"你要允许此应用对你的设备进行更改吗？"时，点击**是**
+- 在 PowerShell 窗口里输入：
+   ```
+   wsl --install
+   ```
+- 你可能会看到"Installing: Windows Subsystem for Linux""Installing: Ubuntu"之类的提示
+- 安装完成后重启电脑
+
+**注意：**`wsl --install` 需要 Windows 10 版本 2004 及以上，或 Windows 11。如果系统提示无法识别该命令，可能是你的 Windows 版本太旧了。
+
+### b) 设置 Ubuntu
+
+电脑重启后，一个标题带有"Ubuntu"的终端窗口通常会在 2-5 分钟内自动弹出。如果没有，点击 **Windows 开始按钮**，输入 `Ubuntu`，再点击 **Ubuntu** 应用（橙色圆形图标）即可。
+
+- 等待出现 `Enter new UNIX username:` 提示后，输入一个用户名（只用小写字母和数字，不要有空格），例如 `john`
+- 看到 `New password:` 后，输入一个简单的密码（输入时屏幕不会显示任何字符，这是正常现象）
+- 按提示再输入一次相同的密码
+
+**重要：**记住这个用户名和密码，后面还会用到。
+
+### c) 在 WSL 中安装 Claude Code
+
+- 在 Ubuntu 终端里输入：
+   ```
+   curl -fsSL https://claude.ai/install.sh | bash
+   ```
+- 关闭 Ubuntu 窗口，从开始菜单重新打开 **Ubuntu**，然后输入以下命令验证：
+   ```
+   claude --version
+   ```
+- 如果仍然看到 `command not found`，运行下面这一行，然后再试一次 `claude --version`：
+   ```
+   echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
+   ```
+- 在 Ubuntu 终端里输入 `claude`，按浏览器登录流程连接账户（和步骤 4 的选项 A 一样）。如果改用 API 密钥，则用 `echo 'export ANTHROPIC_API_KEY="your-api-key-here"' >> ~/.bashrc && source ~/.bashrc` 来保存（WSL 里用的是 Linux 命令，而不是 `setx`）
+- 要在 WSL 中打开 Windows 上的项目文件夹（把 `Username` 换成你实际的 Windows 用户名）：
+   ```
+   cd /mnt/c/Users/Username/Documents/test_claude
+   ```
+
+## 下一步
+
+- **配置 VS Code**：先按 [VS Code 入门指南](VS_Code_Getting_Started) 操作，再用 [在 Windows 上为 Claude Code 设置 VS Code](Claude_Code_in_VS_Code_Win) 把它和 Claude Code 连接起来
+- **学习 Git 基础**：用 [Windows 系统上的 Claude Code 本地版本控制](Claude_Code_Git_Windows) 给项目加上版本控制
+- **动手做个项目**：跟着 [使用 Claude Code 撰写研究论文](Writing_Research_Paper_Claude_Code) 走一遍，看看 Claude Code 的实战效果
+
+## 故障排除
+
+### 第一步：运行 Claude Doctor
+
+遇到问题时，先运行下面这条命令试试：
+```
+claude doctor
+```
+这个内置的诊断工具会检查你的安装，并报告常见问题。
+
+### 找不到 Claude 命令（原生 Windows）
+
+- 关闭并重新打开 PowerShell
+- 重新运行一遍安装命令：
+   ```
+   irm https://claude.ai/install.ps1 | iex
+   ```
+- 如果看到 `'claude' is not recognized`，请在 PowerShell 中运行下面两行，然后关闭并重新打开 PowerShell：
+   ```
+   $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
+   [Environment]::SetEnvironmentVariable('PATH', "$currentPath;$env:USERPROFILE\.local\bin", 'User')
+   ```
+
+### "Please enable the Virtual Machine Platform Windows feature and ensure virtualization is enabled in the BIOS"
+这个错误说明虚拟化还没开启：
+- 在任务管理器里查看虚拟化是否已启用（参见上面可选的 WSL 部分）
+- 如果是禁用状态，需要到电脑的 BIOS 里开启
+- 开启后重启电脑，再次运行 `wsl --install`
+
+### "wsl --install" 不起作用
+- 确认是以管理员身份运行的 PowerShell
+- 确认系统是 Windows 10 版本 2004 及以上，或 Windows 11
+- 先运行 `wsl --update`，再重新执行 `wsl --install`
+
+### 重启后 Ubuntu 窗口未打开
+- 点击 **Windows 开始按钮**，输入 `Ubuntu`，再点击 **Ubuntu** 应用手动打开
+
+## 需要帮助？
+
+- WSL 相关问题：[Microsoft WSL Documentation](https://docs.microsoft.com/en-us/windows/wsl/)
+- Claude Code 相关问题：[Claude Code GitHub](https://github.com/anthropics/claude-code)
+
+---
+
+由 [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) 创建于 2025 年 12 月 11 日。2026 年 6 月更新。

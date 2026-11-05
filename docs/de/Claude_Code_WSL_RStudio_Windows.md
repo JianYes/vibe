@@ -1,0 +1,206 @@
+---
+title: "Claude Code mit RStudio unter Windows verwenden"
+lang: "de"
+---
+[Startseite](./)
+
+# Claude Code mit RStudio unter Windows verwenden
+
+Sie haben RStudio unter Windows zum Ausführen von R-Code und Claude Code für KI-gestützte Programmierunterstützung. Dieses Tutorial zeigt Ihnen, wie Sie beide Tools zusammen mit denselben Projektdateien verwenden können. Sie erstellen ein R-Projekt, schreiben etwas Code manuell und verwenden dann Claude Code aus PowerShell, um es mit Visualisierungen und Analysen zu erweitern – während RStudio geöffnet bleibt, um Ihren Code auszuführen und zu testen.
+
+## Wichtige Konzepte
+
+- **PowerShell** - Das integrierte Befehlszeilen-Tool von Windows, mit dem Sie hier Claude Code neben RStudio ausführen
+- **Hybrid-Workflow** - RStudio führt Code aus und zeigt die Ergebnisse an; Claude Code schreibt und verbessert ihn
+- **Geteilte Dateien** - Beide Tools arbeiten mit genau demselben Projektordner, sodass Änderungen des einen Tools im anderen sichtbar werden
+
+## Was Sie benötigen
+
+- Abgeschlossene Anleitung [Claude Code unter Windows installieren](./Install_CLAUDE_Code_Win)
+- RStudio unter Windows installiert
+- 20-30 Minuten
+
+## Schritt 1: RStudio unter Windows öffnen
+
+- Klicken Sie auf die Schaltfläche **Start** (das Windows-Symbol in der Taskleiste)
+- Geben Sie `RStudio` in das Suchfeld ein
+- Klicken Sie auf **RStudio**, um es zu öffnen
+- Das RStudio-Fenster öffnet sich mit mehreren Bereichen
+
+## Schritt 2: Ein neues R-Projekt erstellen
+
+- Klicken Sie in RStudio im oberen Menü auf **File**
+- Klicken Sie auf **New Project...**
+- Wählen Sie **New Directory**
+- Wählen Sie **New Project**
+- Geben Sie als **Directory name** ein: `test_claude`
+- Klicken Sie auf **Browse** neben „Create project as subdirectory of:“
+- Navigieren Sie zu Ihrem **Dokumente**-Ordner
+- Klicken Sie auf **Öffnen** (englisch: **Open**; in manchen RStudio-Versionen heißt diese Schaltfläche **Ordner auswählen** bzw. **Select Folder**)
+- Klicken Sie auf **Create Project**
+- RStudio erstellt das Projekt und wechselt dorthin
+
+## Schritt 3: Ein neues R-Skript erstellen
+
+- Klicken Sie in RStudio auf **File > New File > R Script**
+- Ein neues leeres Skript öffnet sich im oberen linken Bereich
+- Klicken Sie auf **File > Save** (oder auf das Speichern-Symbol)
+- Nennen Sie die Datei: `iris.R`
+- Klicken Sie auf **Speichern** (englisch: **Save**)
+
+## Schritt 4: Ersten Code manuell schreiben
+
+Geben Sie diesen Code in Ihre `iris.R`-Datei ein:
+
+```r
+data(iris)
+str(iris)
+summary(iris)
+```
+
+- Klicken Sie auf **File > Save**, um Ihre Änderungen zu speichern
+- Um den Code auszuführen: Markieren Sie alle Zeilen und klicken Sie auf die **Run**-Schaltfläche (oben rechts im Skriptbereich)
+- Sie sollten die Ausgabe im Console-Bereich sehen, die Datensatzstruktur und Statistiken zeigt
+
+## Schritt 5: PowerShell öffnen
+
+- Klicken Sie auf die Schaltfläche **Start** (das Windows-Symbol in der Taskleiste)
+- Geben Sie `PowerShell` in das Suchfeld ein
+- Klicken Sie auf **Windows PowerShell**, um es zu öffnen
+
+## Schritt 6: Zu Ihrem Projektordner navigieren
+
+- Geben Sie in PowerShell ein:
+  ```
+  cd ~\Documents\test_claude
+  ```
+- Überprüfen Sie, ob Sie am richtigen Ort sind, indem Sie eingeben:
+  ```
+  dir
+  ```
+- Sie sollten `iris.R` und `test_claude.Rproj` aufgelistet sehen
+
+## Schritt 7: Claude Code starten
+
+- Geben Sie in PowerShell ein:
+  ```
+  claude
+  ```
+
+Melden Sie sich mit Ihrem Claude-Abonnement an, wie im [Installations-Tutorial](Install_CLAUDE_Code_Win.md) beschrieben. Nach der Anmeldung sehen Sie eine Willkommensnachricht und die Eingabezeile von Claude Code. Wenn Claude Code fragt, ob Sie den Dateien in diesem Ordner vertrauen, wählen Sie **Yes** und drücken Sie Enter.
+
+## Schritt 8: Claude um ein Streudiagramm bitten
+
+Wenn Claude Code langsam ist oder nicht reagiert, warten Sie einfach, bis es initialisiert ist. Dann geben Sie diese Anfrage ein:
+
+```
+Füge Code zu iris.R hinzu, um ein Streudiagramm der Kelchblattlänge vs. -breite zu erstellen, gefärbt nach Art. Verwende ggplot2.
+```
+- Claude Code liest Ihre `iris.R`-Datei und fügt den Visualisierungscode hinzu
+- Wenn Claude um Erlaubnis bittet, `iris.R` zu bearbeiten, wählen Sie **Yes** (mit den Pfeiltasten, dann Enter drücken)
+- Warten Sie, bis Claude fertig ist (Sie sehen eine Bestätigungsnachricht)
+
+
+## Schritt 9: Den neuen Code in RStudio ausführen
+
+- Wechseln Sie zurück zu RStudio (klicken Sie auf das RStudio-Fenster)
+- Möglicherweise sehen Sie eine Aufforderung, dass die Datei geändert wurde – klicken Sie auf **Yes**, um sie neu zu laden
+- Wenn der neue Code nicht angezeigt wird, klicken Sie auf **File > Reopen with Encoding...**, wählen Sie **UTF-8** und klicken Sie auf **OK**
+- Markieren Sie den gesamten Code und klicken Sie auf **Run**
+- Ein Streudiagramm erscheint im **Plots**-Bereich (unten rechts)
+- Wenn Sie einen Fehler zu ggplot2 erhalten, installieren Sie es durch Eingabe von `install.packages("ggplot2")` im Console-Bereich
+
+## Schritt 10: Das Streudiagramm verfeinern
+
+- Wechseln Sie zu PowerShell
+- Geben Sie diese Anfrage ein:
+  ```
+  Entferne den Titel. Verwende für jede Art eine andere Punktform. Wechsle zum klassischen Theme.
+  ```
+
+## Schritt 11: Das verfeinerte Diagramm ansehen
+
+- Wechseln Sie zu RStudio
+- Laden Sie die Datei neu, wenn Sie dazu aufgefordert werden
+- Markieren Sie den aktualisierten Code und klicken Sie auf **Run**
+- Das Diagramm sollte jetzt ohne Titel angezeigt werden, mit verschiedenen Punktformen für jede Art und mit dem klassischen Theme
+
+
+## Schritt 12: Claude um PCA-Plot bitten
+
+- Wechseln Sie zu PowerShell
+- Geben Sie diese Anfrage ein:
+  ```
+  Füge Code hinzu, um eine PCA für die numerischen Variablen durchzuführen und die Proben mithilfe der ersten beiden Hauptkomponenten zu plotten.
+  ```
+
+## Schritt 13: Die PCA-Analyse ausführen
+
+- Wechseln Sie zu RStudio
+- Laden Sie die Datei neu, wenn Sie dazu aufgefordert werden
+- Markieren Sie den gesamten Code und klicken Sie auf **Run**
+- Ein PCA-Plot erscheint, der Proben auf PC1 und PC2 projiziert zeigt, gefärbt nach Art
+
+## Schritt 14: Claude um Überprüfung und Kommentare bitten
+
+- Wechseln Sie zu PowerShell
+- Geben Sie diese Anfrage ein:
+  ```
+  Überprüfe das gesamte Skript auf Korrektheit. Füge bei Bedarf Kommentare hinzu.
+  ```
+- Claude überprüft den Code und fügt umfassende Kommentare hinzu
+
+## Schritt 15: Claude bitten, R Markdown zu erstellen
+
+- Wechseln Sie zu PowerShell
+- Geben Sie diese Anfrage ein:
+  ```
+  Erstelle eine neue R-Markdown-Datei für diese Analyse. Speichere sie als iris_report.Rmd
+  ```
+- Wenn Claude um Erlaubnis bittet, diese Datei zu erstellen, wählen Sie **Yes**.
+- Claude erstellt eine neue `.Rmd`-Datei in Ihrem Projektordner
+
+
+## Schritt 16: Die R-Markdown-Datei knitten
+
+- Wechseln Sie zu RStudio
+- Klicken Sie auf **File > Open File...**
+- Wählen Sie `iris_report.Rmd` und klicken Sie auf **Öffnen** (englisch: **Open**)
+- Klicken Sie auf die **Knit**-Schaltfläche (mit einem Wollknäuel-Symbol) oben im Skriptbereich
+- Wenn RStudio meldet, dass Pakete wie **rmarkdown** benötigt werden, klicken Sie auf **Install** (oder **Yes**), warten Sie, bis die Installation abgeschlossen ist, und klicken Sie dann erneut auf **Knit**
+- RStudio generiert einen HTML-Bericht
+- Der Bericht öffnet sich in einem neuen Fenster und zeigt Ihre vollständige Analyse mit erzählendem Text
+- Die HTML-Datei wird in Ihrem Projektordner gespeichert
+
+## Fehlerbehebung
+
+- **RStudio zeigt Dateiänderungen nicht an** - Klicken Sie auf **File > Reopen with Encoding...**, wählen Sie **UTF-8** und klicken Sie auf **OK**, um die Datei manuell neu zu laden.
+- **„Die Benennung "claude" wurde nicht als Name eines Cmdlet ... erkannt“** (englisch: „The term 'claude' is not recognized“) - Stellen Sie sicher, dass Sie die Installationsanleitung abgeschlossen haben. Schließen Sie PowerShell, öffnen Sie ein neues Fenster und versuchen Sie es erneut.
+- **Plots erscheinen nicht** - Stellen Sie sicher, dass ggplot2 installiert ist. Führen Sie `install.packages("ggplot2")` in der RStudio-Konsole aus, wenn nötig.
+- **„Der Pfad ... kann nicht gefunden werden, da er nicht vorhanden ist“** (englisch: „Cannot find path ... because it does not exist“) **in Schritt 6** - Ihr Projekt liegt möglicherweise in einem anderen Ordner. In RStudio zeigt der Pfad oben im **Files**-Bereich, wo sich `test_claude` befindet. Wenn Ihr Ordner **Dokumente** (Documents) über OneDrive gesichert wird, versuchen Sie `cd ~\OneDrive\Documents\test_claude`. Auf deutschem Windows heißt dieser Ordner meist `OneDrive\Dokumente`; verwenden Sie dann `cd ~\OneDrive\Dokumente\test_claude`. Wenn der Pfad Leerzeichen enthält, setzen Sie ihn in Anführungszeichen, zum Beispiel: `cd "C:\Users\Ihr Name\OneDrive\Documents\test_claude"`
+- **Claude Code ist bei der ersten Anfrage langsam** - Warten Sie 30-60 Sekunden, bis Claude initialisiert ist. Nachfolgende Anfragen werden schneller sein.
+- **Sie verwenden stattdessen WSL?** - Wenn Sie den optionalen WSL/Ubuntu-Weg eingerichtet haben, öffnen Sie in den Schritten 5-16 statt PowerShell die App **Ubuntu** und navigieren Sie mit `cd /mnt/c/Users/IhrBenutzername/Documents/test_claude` zu Ihrem Projekt
+
+## Nächste Schritte
+
+- Versuchen Sie, Claude zu bitten, statistische Tests (t-Tests, ANOVA) zu Ihrer Analyse hinzuzufügen
+- Bitten Sie Claude, eine **Python-Version** dieses Codes zu erstellen und ein Quarto-Dokument vorzubereiten
+- Bitten Sie Claude, Funktionen für sich wiederholende Aufgaben in Ihren R-Skripten zu erstellen
+- Verwenden Sie Claude, um Fehlermeldungen zu debuggen, wenn Ihr R-Code nicht läuft
+- Erkunden Sie, wie Sie Claude bitten können, langsamen R-Code für bessere Leistung zu optimieren
+
+## Workflow-Zusammenfassung
+
+Diese Hybrid-Einrichtung kombiniert das Beste aus beiden Welten:
+
+- **RStudio** - Interaktive R-Konsole, sofortige Plot-Anzeige, vertraute GUI zum Ausführen von Code
+- **Claude Code (PowerShell)** - KI-gestützte Codegenerierung, Überprüfung und Verbesserung
+- **Geteilte Dateien** - Beide Tools arbeiten direkt mit demselben Projektordner
+- **Iterative Verfeinerung** - Beginnen Sie mit manuellem Code, verbessern Sie mit Claude, testen Sie in RStudio, dann verfeinern Sie weiter
+- **Dokumentation** - Claude kann umfassende Berichte und Kommentare für Ihre Analyse generieren
+
+Der Workflow ist einfach: Schreiben oder bearbeiten Sie Code mit Claude in PowerShell, dann testen und führen Sie ihn sofort in RStudio aus. Kein Dateikopieren oder manuelles Synchronisieren nötig – beide Tools teilen dieselben Dateien.
+
+---
+
+Erstellt von [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) am 11. Dezember 2025.

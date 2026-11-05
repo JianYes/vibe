@@ -1,0 +1,238 @@
+---
+title: "Claude Code: Basic Operations"
+---
+[Home](./)
+
+# Claude Code: Basic Operations
+
+Learning to code with AI assistance can feel overwhelming at first. Think of Claude Code as a knowledgeable colleague sitting next to you—you describe what you want in plain English, and it helps you get there. This tutorial teaches you the essential operations you'll use daily, from starting conversations to managing your workspace.
+
+## Key Concepts
+
+- **Workspace** - The folder you start Claude Code from; Claude reads and edits files within it for that session
+- **REPL (Read-Eval-Print Loop)** - An interactive session where you type commands, Claude responds, and the conversation continues until you exit
+- **Context** - The amount of code and conversation history Claude remembers; like working memory that fills up over time
+- **Slash Commands** - Built-in shortcuts starting with `/` that perform specific actions like clearing history or showing help
+
+## What You'll Need
+
+- Claude Code installed from the [Windows](Install_CLAUDE_Code_Win.md) or [Mac](Install_Claude_Code_MacOS.md) tutorial
+- Basic familiarity with using a terminal or command prompt
+- 15-20 minutes
+
+## Step 1: Open Your Terminal
+
+- **Windows**: Press the Windows key, type `PowerShell`, and press Enter to open PowerShell
+- **Mac**: Press `Cmd+Space`, type `Terminal`, and press Enter
+
+**Note:** If you set up the optional WSL/Ubuntu path in the Windows install tutorial instead of the native install, open the **Ubuntu** app instead and use Linux-style paths (e.g. `/mnt/c/Users/YourName/...`) in the steps below.
+
+A text window will open where you can type commands.
+
+## Step 2: Get the Demo Project files
+
+We'll use a real data science project to explore Claude Code's features. You can either clone it with Git or download it directly.
+
+**Option A: Clone with Git (if you have Git installed):**
+
+```
+git clone https://github.com/gexijin/data_projects
+cd data_projects
+```
+
+**Option B: Download without Git:**
+
+- Visit [https://github.com/gexijin/data_projects](https://github.com/gexijin/data_projects) in your web browser
+- Click the green **Code** button near the top right
+- Click **Download ZIP**
+- Extract the ZIP file under your Downloads folder. GitHub names the extracted folder **data_projects-main** — rename it to **data_projects** so it matches the rest of this tutorial. On Windows, **Extract All** may create a folder inside a folder (data_projects-main → data_projects-main). Open it: if you see only another **data_projects-main** folder, move that inner folder into Downloads and rename it to **data_projects**.
+- In your terminal, navigate to the extracted folder:
+  ```
+  cd ~/Downloads/data_projects
+  ```
+
+Adjust the path if you extracted it elsewhere.
+
+## Step 3: Start Claude Code from the folder
+
+In your terminal (make sure you're inside the data_projects folder), type:
+
+```bash
+claude
+```
+
+Log in with your Claude subscription following the installation tutorial ([Windows](Install_CLAUDE_Code_Win.md) | [Mac](Install_Claude_Code_MacOS.md)). After logging in, you'll see a welcome message and the Claude Code prompt.
+
+## Step 4: Ask Questions About Your Project
+
+Claude Code automatically reads your files when needed. Try these questions to understand your project:
+
+**Ask about the folder structure:**
+
+```
+What is the folder structure of this project?
+```
+
+**Ask about technologies:**
+
+```
+What technologies and libraries does this project use?
+```
+
+**Ask about recent changes:**
+
+```
+What was the last change made to this project?
+```
+
+Claude will check the Git history (if available) and tell you about recent commits.
+
+You can ask Claude anything about your code in natural language. It reads files as needed to answer your questions.
+
+## Step 5: Essential Slash Commands
+
+Type `/` to see all available commands. Here are the most important ones:
+
+**View all commands:**
+
+```
+/
+```
+
+This displays a menu of all slash commands. Use arrow keys to browse, press Enter to select, or press Esc to cancel.
+
+**Get help:**
+
+```
+/help
+```
+Shows documentation about using Claude Code.
+
+
+
+**Check context usage:**
+It is important to manage the context, Claude's "working memory". 
+
+```
+/context
+```
+
+**Clear conversation history:**
+
+When context fills up, start a new conversation with `/clear`.
+```
+/clear
+```
+Wipes the current conversation and starts fresh. Use this when you want to change topics or when your conversation gets too long. It is essential to manage context.
+
+
+**Exit Claude Code:**
+
+```
+/exit
+```
+
+Ends your session and returns to your normal terminal prompt. You can also hit **Ctrl + C** twice.
+
+## Step 6: Approve Changes and Use Shortcuts
+
+New sessions usually start in **Auto** mode, where Claude handles routine edits and commands without asking. If Claude asks for permission, it shows a small menu with options like **Yes** and **No**. Use the arrow keys to highlight your choice and press **Enter**. If you want to approve every change yourself, press **Shift+Tab** until the mode below the prompt shows **Manual**.
+
+A few keyboard shortcuts also make working with Claude Code faster:
+
+- **Shift+Tab** - Cycle through modes (Auto, Manual, Accept Edits, Plan); the current mode is shown just below the prompt. Plan mode is useful for reviewing a complex task before Claude makes any changes
+- **Ctrl+C** - Cancel the current operation or Claude's response
+- **Esc** - Stop Claude mid-response, or close a menu
+- **`\` then Enter** (or **Ctrl+J**) - Add a new line in your message without sending it
+
+## Step 7: Always Create a CLAUDE.md File
+
+The CLAUDE.md file is your project's instruction manual for Claude. It persists across sessions, so Claude remembers important context about your project.
+
+**Create the file:**
+
+```
+/init
+```
+
+Claude will create the file with a summary of your project. This file stays in your project root and Claude reads it automatically every time you start a new session.
+
+You can edit CLAUDE.md in the project folder anytime to add project-specific instructions, coding conventions, or important context such as purpose of files, etc.
+
+## Step 8: Referring to files or lines of code
+
+You can use `@` to refer to a specific file:
+
+```
+Explain the code in @Visualization/Matplotlib/Nested_Pie_Chart.ipynb
+```
+
+Claude will read the notebook and explain what it does, how it works, and what the code accomplishes. This effectively brings the file to the context. 
+
+If you're working with Claude Code from VS Code and have the Claude Code extension installed, you can add the file to context simply by opening it. You will see `Nested_Pie_Chart.ipynb` at the bottom of the Claude Code prompt box. Then Claude knows you are talking about this file.
+
+Furthermore, you can select a few lines of code and Claude will show **3 lines selected**. You can ask Claude to make quick changes to these lines or ask questions. Therefore, I highly recommend using Claude Code from VS Code. 
+
+
+## Step 9: Take Actions with Terminal Commands
+
+Claude can take actions by running terminal commands (Bash on Mac/Linux, Git Bash or PowerShell on Windows) in many forms. 
+
+- Install software
+  ```
+  Install the pandas library
+  ```
+
+- Start version control
+  ```
+  Start tracking changes using Git. My name is James Bond and my email is bond@earth.com
+  ```
+- Commit changes
+  ```
+  Commit these changes.
+  ```
+- Find and download data
+  ```
+  Download the wine quality dataset from UCI. Put it in a new folder called wine.
+  ```
+
+- Execute code
+  ```
+  Rewrite the nested pie chart code as a regular Python script.
+  Run it and save the new code and plots in the same folder.
+  ```
+
+Claude installs software, troubleshoots errors, and manages environments—all on its own.
+
+
+
+You essentially have an expert in terminal commands at your disposal. As long as you manage permissions and approve actions, you can be very productive. 
+
+## Next Steps
+
+Now that you know the basics, try these on your own:
+
+- Ask Claude to explain a machine learning algorithm in one of the project folders
+- Request modifications to an existing notebook (like changing chart colors or adding new features)
+- Create a new Python script that uses data from the project
+- Ask Claude to compare two different approaches in the codebase
+
+## Troubleshooting
+
+- **"Command not found" error** - Claude Code isn't installed or not in your PATH. Follow the [Windows](Install_CLAUDE_Code_Win.md) or [Mac](Install_Claude_Code_MacOS.md) installation tutorial again, or rerun the installer directly: `irm https://claude.ai/install.ps1 | iex` (Windows PowerShell) or `curl -fsSL https://claude.ai/install.sh | bash` (Mac/WSL).
+- **Claude gives outdated information** - Clear the context with `/clear` and ask again. Long conversations can fill up Claude's memory.
+- **File changes not working** - Make sure you have write permissions in your project folder. If Claude asks for approval, select **Yes** from the menu that appears.
+- **Context filling up quickly** - Use `/context` to check usage. When it's nearly full, use `/clear` to start a fresh conversation with a clean slate.
+
+## Workflow Overview
+
+Working with Claude Code follows this pattern:
+
+- Start Claude in your project folder with `claude`
+- Ask questions in natural language
+- Claude reads files as needed and responds
+- Request code changes—if Claude asks for permission, choose **Yes**
+- Use `/clear` when changing topics or context gets full
+- Use `/exit` when you're done
+
+Created by [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) on December 14, 2025.

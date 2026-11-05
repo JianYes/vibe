@@ -1,0 +1,172 @@
+---
+title: "Utiliser Claude Code pour Python dans VS Code sur Mac"
+lang: "fr"
+---
+[Accueil](./)
+
+# Utiliser Claude Code pour Python dans VS Code sur Mac
+
+Vous avez configuré Python dans VS Code et pouvez écrire du code manuellement. Maintenant, vous souhaitez que l'IA vous aide à écrire, améliorer et déboguer votre code Python pendant que vous vous concentrez sur l'analyse. Considérez Claude Code comme un partenaire de codage qui vit à l'intérieur de VS Code - vous décrivez ce que vous voulez, et il écrit ou améliore le code pendant que vous restez dans la même fenêtre.
+
+## Concepts Clés
+
+- **[Extension Claude Code](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)** - Extension VS Code qui intègre l'assistant IA Claude directement dans votre éditeur, avec des modifications proposées directement dans votre code
+- **Panneau de Chat** - Panneau latéral dans VS Code où vous conversez avec Claude à propos de votre code
+- **Modifications en Ligne** - Les modifications de code suggérées par Claude apparaissent directement dans vos fichiers avec des différences que vous pouvez accepter ou rejeter
+
+## Ce Dont Vous Aurez Besoin
+
+- Avoir terminé le tutoriel [Programmation Python dans VS Code](./Python_Coding_VS_Code_Guide) - Python doit fonctionner dans VS Code
+- Avoir terminé le tutoriel [Installer Claude Code sur Mac](./Install_Claude_Code_MacOS) - Claude Code CLI doit être installé
+- Un forfait Claude payant (comme Pro ou Max) ou un compte Anthropic Console — le forfait gratuit n'inclut pas Claude Code
+- 20-30 minutes
+
+## Étape 1 : Ouvrir VS Code et Créer un Projet Python
+
+- Ouvrez **Visual Studio Code**
+- Cliquez sur **File** dans la barre de menu, puis sur **Open Folder**
+- Naviguez vers votre dossier **Documents**
+- Cliquez sur **Nouveau dossier** en bas de la boîte de dialogue
+- Nommez le dossier `claude_python_test`
+- Cliquez sur **Open** pour ouvrir le nouveau dossier
+- Si on vous demande "Do you trust the authors?", cliquez sur **Yes, I trust the authors**
+
+## Étape 2 : Installer et Se Connecter à l'Extension Claude Code
+
+- Cliquez sur l'icône **Extensions** dans la barre latérale gauche (icône de quatre carrés)
+- Dans la zone de recherche, tapez `Claude Code`
+- Trouvez **Claude Code for VS Code** par Anthropic et cliquez sur **Install**
+- Après l'installation, cliquez sur **✻ Claude Code** dans le coin inférieur droit de la fenêtre VS Code (la barre d'état) pour ouvrir le panneau Claude
+- La première fois, un écran de connexion apparaît : cliquez sur **Sign in**, approuvez l'accès dans votre navigateur, puis revenez à VS Code
+- Pour les étapes d'authentification détaillées, consultez le guide [Installer Claude Code sur Mac](./Install_Claude_Code_MacOS) (Étape 3)
+- Une fois connecté, vous verrez une liste de contrôle **Learn Claude Code** et une zone de saisie en bas du panneau
+
+## Étape 3 : Créer un Script Python Initial Manuellement
+
+- Cliquez sur **File > New File...** dans la barre de menu
+- Dans la liste qui apparaît en haut de la fenêtre, choisissez **Python File**
+- Enregistrez le fichier en cliquant sur **File > Save**, nommez-le `iris_analysis.py`
+- Tapez ce code :
+
+```python
+from sklearn import datasets
+import pandas as pd
+
+# Load iris dataset
+iris = datasets.load_iris()
+iris_df = pd.DataFrame(iris.data, columns=iris.feature_names)
+iris_df['species'] = iris.target_names[iris.target]
+
+# Display structure
+iris_df.info()
+print("\nSummary statistics:")
+print(iris_df.describe())
+```
+
+- Enregistrez le fichier en cliquant sur **File > Save**
+- Créez un environnement virtuel, comme à l'Étape 5 de [Programmation Python dans VS Code](./Python_Coding_VS_Code_Guide) : cliquez sur **View > Command Palette**, tapez `Python: Create Environment`, choisissez **Venv**, puis sélectionnez votre version de Python
+- Attendez que le dossier `.venv` apparaisse dans l'Explorer
+- Ouvrez un terminal : cliquez sur **View** dans la barre de menu, puis sur **Terminal**. Vous devriez voir `(.venv)` au début de l'invite
+- Installez les packages dont ce script a besoin :
+  ```
+  pip install scikit-learn pandas
+  ```
+- Dans le terminal, exécutez : `python iris_analysis.py`
+- Vous devriez voir la structure du jeu de données et les statistiques récapitulatives dans le terminal
+
+## Étape 4 : Demander à Claude d'Ajouter un Nuage de Points
+
+- Ouvrez le panneau Claude (icône Spark en haut à droite du fichier ouvert, ou **✻ Claude Code** dans le coin inférieur droit)
+- Dans la zone de chat en bas, tapez :
+
+```
+Ajoute du code à iris_analysis.py pour créer un nuage de points de la longueur vs. largeur des sépales, coloré par espèce. Utilise seaborn.
+```
+
+- Appuyez sur Entrée pour envoyer
+- Claude lit votre fichier et le modifie - le nouveau code apparaît dans `iris_analysis.py`
+- Si Claude affiche un aperçu des modifications (diff) et demande une autorisation, acceptez la modification
+- Le code seaborn/matplotlib apparaît dans votre fichier
+- Installez les packages de graphiques utilisés par le code de Claude (ils n'ont pas été installés à l'Étape 3). Dans le terminal (avec `(.venv)` affiché), exécutez :
+  ```
+  pip install seaborn matplotlib
+  ```
+
+## Étape 5 : Exécuter le Code Mis à Jour
+
+- Dans le terminal, exécutez : `python iris_analysis.py`
+- Une fenêtre avec le nuage de points apparaît
+- Vous devriez voir des points colorés par espèce (setosa, versicolor, virginica)
+- Fermez la fenêtre du graphique pour continuer
+
+## Étape 6 : Demander à Claude d'Affiner le Graphique
+
+- Dans le panneau de chat Claude, tapez :
+
+```
+Supprime le titre. Change le type de marqueur par espèce. Passe au style whitegrid.
+```
+
+- Appuyez sur Entrée
+- Claude met à jour le code
+- Si on vous le demande, acceptez la modification
+- Exécutez à nouveau le code mis à jour : `python iris_analysis.py` dans le terminal
+- Le graphique s'affiche maintenant avec différentes formes de marqueurs par espèce, sans titre, et dans le style whitegrid
+- Fermez la fenêtre du graphique pour continuer
+
+## Étape 7 : Demander à Claude une Analyse en Composantes Principales (ACP)
+
+- Dans le panneau de chat Claude, tapez :
+
+```
+Ajoute du code pour effectuer une ACP sur les variables numériques et tracer les échantillons en utilisant les deux premières composantes principales.
+```
+
+- Appuyez sur Entrée
+- Claude ajoute le code de l'ACP à votre script
+- Si on vous le demande, acceptez la modification
+- Exécutez le code : `python iris_analysis.py` dans le terminal
+- Un graphique d'ACP apparaît montrant les échantillons projetés sur PC1 et PC2, colorés par espèce (si la fenêtre du nuage de points de l'Étape 6 s'ouvre d'abord, fermez-la et le graphique d'ACP apparaît ensuite)
+- Fermez la fenêtre du graphique lorsque vous avez terminé
+
+## Étape 8 : Demander à Claude de Réviser et Commenter
+
+- Dans le panneau de chat Claude, tapez :
+
+```
+Révise le script entier pour vérifier qu'il est correct. Ajoute des commentaires si nécessaire.
+```
+
+- Appuyez sur Entrée
+- Claude révise le code et ajoute des commentaires expliquant chaque section
+- Si on vous le demande, acceptez la modification
+- Votre script contient maintenant des commentaires clairs expliquant le chargement des données, la visualisation et l'ACP
+
+## Prochaines Étapes
+
+- Demandez à Claude de créer un notebook Jupyter : « Convertis ceci en notebook Jupyter »
+- Utilisez Claude pour déboguer les erreurs : « Ce code donne l'erreur X, peux-tu la corriger ? »
+- Demandez des tests statistiques : « Ajoute un test t comparant la longueur des sépales entre setosa et versicolor »
+- Demandez à Claude d'optimiser le code : « Rends ce code plus efficace en utilisant la vectorisation numpy »
+- Obtenez de l'aide sur les fonctions inconnues : « Explique ce que fait pandas.groupby »
+
+## Dépannage
+
+- **L'extension Claude ne s'affiche pas** - Redémarrez VS Code après l'installation. Cliquez sur **View > Extensions** pour vérifier qu'elle est installée.
+- **Erreur "Cannot read Python file"** - Assurez-vous d'avoir enregistré le fichier avec l'extension `.py`. Claude a besoin de fichiers enregistrés pour les lire.
+- **L'authentification a échoué** - Vérifiez que votre forfait Claude payant ou votre compte Anthropic Console est actif. Consultez [Installer Claude Code sur Mac](./Install_Claude_Code_MacOS) pour le dépannage de l'authentification.
+- **Erreurs de package introuvable** ou **`command not found: python`** - Assurez-vous que le terminal affiche `(.venv)` (sinon, fermez-le et ouvrez-en un nouveau avec **View > Terminal**), puis installez les packages requis : `pip install seaborn matplotlib scikit-learn pandas`. Attendez que l'installation soit terminée avant d'exécuter le code.
+- **Les modifications de code ne s'appliquent pas** - Si Claude a demandé une autorisation, assurez-vous d'avoir accepté la modification. Si cela ne fonctionne pas, essayez de copier manuellement le code suggéré par Claude.
+- **Le graphique ne s'affiche pas** - Assurez-vous d'avoir un affichage. Sur certains systèmes, vous devrez peut-être ajouter `plt.show()` à la fin ou utiliser `%matplotlib inline` dans Jupyter.
+
+## Résumé du Flux de Travail
+
+- **L'extension Claude Code** fournit un assistant IA directement dans VS Code avec un panneau de chat et des modifications affichées directement dans vos fichiers
+- **Raffinement itératif** - Commencez avec du code de base, demandez à Claude d'améliorer, testez immédiatement, puis affinez davantage
+- **Compréhension du contexte** - Claude lit vos fichiers Python et comprend la structure de votre projet
+- **Édition dans le fichier** - Les modifications proposées apparaissent directement dans vos fichiers réels, pas dans des réponses de chat séparées
+- **Restez dans le flux** - Pas de basculement entre le navigateur et l'éditeur - tout se passe dans VS Code
+
+---
+
+Créé par [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) le 11 décembre 2025.

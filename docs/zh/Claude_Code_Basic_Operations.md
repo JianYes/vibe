@@ -1,0 +1,235 @@
+---
+title: "Claude Code：基本操作"
+lang: "zh"
+---
+[首页](./)
+
+# Claude Code：基本操作
+
+学习AI辅助编程一开始可能让人不知所措。把Claude Code想象成坐在你身边的专家同事——用简单中文描述你的需求，它就能帮你实现。本教程将教你日常使用的基本操作，从开始对话到管理工作空间。
+
+## 关键概念
+
+- **Workspace（工作空间）** - 你启动Claude Code时所在的文件夹；在该会话中，Claude会读取和编辑其中的文件
+- **REPL（读取-求值-打印循环）** - 交互式会话，你输入命令，Claude回应，对话持续进行直到退出
+- **Context（上下文）** - Claude记住的代码和对话历史数量；类似工作记忆，会随时间填满
+- **Slash Commands（斜杠命令）** - 以`/`开头的内置快捷命令，用于执行特定操作，如清除历史或显示帮助
+
+## 你需要准备什么
+
+- 已从[Windows](Install_CLAUDE_Code_Win.md)或[Mac](Install_Claude_Code_MacOS.md)教程安装Claude Code
+- 基本熟悉Terminal或命令提示符
+- 15-20分钟
+
+## 步骤1：打开你的Terminal
+
+- **Windows**：按Windows键，输入`PowerShell`，然后按Enter打开PowerShell
+- **Mac**：按`Cmd+Space`，输入`终端`（或`Terminal`），然后按Enter
+
+**注意：** 如果你在Windows安装教程中选择了可选的WSL/Ubuntu方式，而不是原生安装，请改为打开**Ubuntu**应用，并在下面的步骤中使用Linux风格的路径（例如`/mnt/c/Users/YourName/...`）。
+
+将打开一个文本窗口，你可以在其中输入命令。
+
+## 步骤2：获取演示项目
+
+我们将使用一个真实的数据科学项目来探索Claude Code功能。你可以用Git克隆，也可以直接下载。
+
+**选项A：使用Git克隆（如果已安装Git）：**
+
+```
+git clone https://github.com/gexijin/data_projects
+cd data_projects
+```
+
+**选项B：直接下载（不使用Git）：**
+
+- 在浏览器访问[https://github.com/gexijin/data_projects](https://github.com/gexijin/data_projects)
+- 点击右上方的绿色**Code**按钮
+- 点击**Download ZIP**
+- 将ZIP文件解压到你的“下载”（Downloads）文件夹中。GitHub会把解压后的文件夹命名为**data_projects-main**——请将其重命名为**data_projects**，以便与本教程其余部分保持一致。在Windows上，**Extract All**（全部解压缩）可能会生成“文件夹套文件夹”的结构（data_projects-main → data_projects-main）。打开它：如果里面只看到另一个**data_projects-main**文件夹，请把这个内层文件夹移到“下载”文件夹中，并将其重命名为**data_projects**。
+- 在Terminal中导航到解压后的文件夹：
+  ```
+  cd ~/Downloads/data_projects
+  ```
+
+如果解压到其他位置，请相应调整路径。
+
+## 步骤3：从文件夹启动Claude Code
+
+在Terminal中（确保你在data_projects文件夹内），输入：
+
+```bash
+claude
+```
+
+按照安装教程（[Windows](Install_CLAUDE_Code_Win.md) | [Mac](Install_Claude_Code_MacOS.md)）使用你的Claude订阅登录。登录后，你将看到欢迎消息和Claude Code提示符。
+
+## 步骤4：询问关于项目的问题
+
+Claude Code会在需要时自动读取文件。尝试这些问题来了解项目：
+
+**询问文件夹结构：**
+
+```
+这个项目的文件夹结构是什么？
+```
+
+**询问技术栈：**
+
+```
+这个项目使用了哪些技术和库？
+```
+
+**询问最近的更改：**
+
+```
+这个项目最后一次更改是什么？
+```
+
+Claude会检查Git历史（如果可用）并告诉你最近的提交。
+
+你可以用自然语言询问Claude关于代码的任何问题，它会根据需要读取文件来回答。
+
+## 步骤5：基本斜杠命令
+
+输入`/`即可查看所有可用命令。以下是最重要的几个：
+
+**查看所有命令：**
+
+```
+/
+```
+
+显示所有斜杠命令菜单。使用方向键浏览，按Enter选择，或按Esc取消。
+
+**获取帮助：**
+
+```
+/help
+```
+显示Claude Code使用文档。
+
+**检查上下文使用情况：**
+
+管理上下文（Claude的"工作记忆"）非常重要。
+
+```
+/context
+```
+
+**清除对话历史：**
+
+当上下文填满时，使用`/clear`开始新对话。
+```
+/clear
+```
+清除当前对话并重新开始。当你想更换话题或对话过长时使用此命令。管理上下文至关重要。
+
+**退出Claude Code：**
+
+```
+/exit
+```
+
+结束会话并返回正常Terminal提示符。你也可以按两次**Ctrl + C**。
+
+## 步骤6：批准更改并使用快捷键
+
+新会话通常以**Auto**模式启动，在此模式下Claude会直接处理常规的编辑和命令，无需询问。如果Claude请求权限，会显示一个小菜单，其中有**Yes**和**No**等选项。用方向键选中你的选择，然后按**Enter**。如果你想亲自批准每一项更改，请按**Shift+Tab**，直到提示框下方的模式显示为**Manual**。
+
+另外，一些键盘快捷键能让使用Claude Code更快：
+
+- **Shift+Tab** - 在不同模式之间循环切换（Auto、Manual、Accept Edits、Plan）；当前模式显示在提示框正下方。处理复杂任务时，Plan模式可以让你在Claude做任何修改之前先审查计划
+- **Ctrl+C** - 取消当前操作或Claude的响应
+- **Esc** - 中途停止Claude的响应，或关闭菜单
+- **`\`然后按Enter**（或**Ctrl+J**）- 在消息中添加新行而不发送
+
+## 步骤7：始终创建CLAUDE.md文件
+
+CLAUDE.md文件是项目的Claude使用说明手册。它在会话之间持久保存，Claude能记住关于项目的重要上下文。
+
+**创建文件：**
+
+```
+/init
+```
+
+Claude将创建包含项目摘要的文件。该文件保存在项目根目录，每次启动新会话时Claude都会自动读取。
+
+你可以随时编辑项目文件夹中的CLAUDE.md，添加项目特定的说明、编码规范或重要上下文，如文件用途等。
+
+## 步骤8：引用文件或代码行
+
+使用`@`引用特定文件：
+
+```
+解释 @Visualization/Matplotlib/Nested_Pie_Chart.ipynb 中的代码
+```
+
+Claude将读取该笔记本并解释它的作用、工作原理以及代码实现。这会将文件带入上下文。
+
+如果你在VS Code中使用Claude Code并已安装Claude Code扩展，只需打开文件即可将其添加到上下文。你会在Claude Code提示框底部看到`Nested_Pie_Chart.ipynb`。此时Claude就知道你在谈论这个文件。
+
+此外，你可以选择几行代码，Claude会显示**3 lines selected**（已选择3行）。你可以要求Claude快速修改这些行或提出问题。因此，强烈建议在VS Code中使用Claude Code。
+
+
+## 步骤9：使用终端命令执行操作
+
+Claude可以运行终端命令（Mac/Linux上为Bash，Windows上为Git Bash或PowerShell）来执行各种操作。
+
+- 安装软件
+  ```
+  安装pandas库
+  ```
+
+- 启动版本控制
+  ```
+  使用Git开始跟踪更改。我的名字是James Bond，电子邮件是bond@earth.com
+  ```
+- 提交更改
+  ```
+  提交这些更改
+  ```
+- 查找并下载数据
+  ```
+  从UCI下载葡萄酒质量数据集，放在一个名为wine的新文件夹中
+  ```
+
+- 执行代码
+  ```
+  将嵌套饼图代码重写为常规Python脚本
+  运行它并将新代码和图表保存在同一文件夹中
+  ```
+
+Claude会安装软件、排查错误、管理环境——都是自动完成。
+
+你基本拥有了一个终端命令专家。只要管理好权限并批准操作，就能非常高效。
+
+## 下一步
+
+现在你已了解基础知识，可以自己尝试：
+
+- 要求Claude解释项目文件夹中的机器学习算法
+- 请求修改现有笔记本（如更改图表颜色或添加新功能）
+- 创建使用项目数据的新Python脚本
+- 要求Claude比较代码库中的两种不同方法
+
+## 故障排除
+
+- **"Command not found"（命令未找到）错误** - Claude Code未安装或不在PATH中。重新按照[Windows](Install_CLAUDE_Code_Win.md)或[Mac](Install_Claude_Code_MacOS.md)安装教程操作，或直接重新运行安装程序：`irm https://claude.ai/install.ps1 | iex`（Windows PowerShell）或`curl -fsSL https://claude.ai/install.sh | bash`（Mac/WSL）
+- **Claude给出过时信息** - 使用`/clear`清除上下文并重新询问。长对话会填满Claude的内存
+- **文件更改不起作用** - 确保在项目文件夹中有写权限。如果Claude请求批准，在弹出的菜单中选择**Yes**
+- **上下文快速填满** - 使用`/context`检查使用情况。接近满时，使用`/clear`开始全新对话
+
+## 工作流程概述
+
+使用Claude Code遵循以下模式：
+
+- 在项目文件夹中使用`claude`启动
+- 用自然语言提问
+- Claude根据需要读取文件并响应
+- 请求代码更改——如果Claude请求权限，选择**Yes**
+- 更换话题或上下文满时使用`/clear`
+- 完成后使用`/exit`
+
+创建者：[Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/)，2025年12月14日。

@@ -1,10 +1,16 @@
 {
   "name": "R in Docker (AMD64)",
+
   "build": {
     "dockerfile": "Dockerfile"
   },
-# This file must exist; otherwise, remove this line
-  "envFile": ".devcontainer/api.env",
+
+  // Pass API keys and other environment variables to the container
+  // "runArgs": [
+  //   "--env-file",
+  //   ".devcontainer/api.env"
+  // ],
+
   "customizations": {
     "vscode": {
       "extensions": [
@@ -22,10 +28,15 @@
       }
     }
   },
-  
+
   "remoteUser": "shiny",
+
   "forwardPorts": [3838],
+
   "portsAttributes": {
-    "3838": { "label": "Shiny app", "onAutoForward": "openBrowser" }
+    "3838": {
+      "label": "Shiny app",
+      "onAutoForward": "openBrowser"
+    }
   }
 }

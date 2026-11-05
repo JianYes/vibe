@@ -1,0 +1,193 @@
+---
+title: "在Claude Code中创建Subagent"
+lang: "zh"
+---
+[首页](./)
+
+# 在Claude Code中创建Subagent
+
+你想比较投资机会，但研究多家公司并对它们进行评分需要花费数小时。可以把subagent想象成雇佣一位金融分析师，他确切地知道如何使用你的研究工具——给他们公司名称，他们就会收集报告，在关键指标上为每家公司评分，并推荐最佳投资。一旦你学会构建subagent，就可以在工作中自动化任何重复性的多步骤工作流程。本教程将展示如何构建这样一个分析师。
+
+## 关键概念
+
+- **Subagent** - 专门的AI工作者，拥有自己的目标、系统提示词和工具，能够自主完成任务
+- **Isolated Context（隔离上下文）** - subagent在自己独立的工作空间中运行，因此它的研究过程不会让你的主对话变得杂乱——只有最终结果会返回给你
+- **Skill** - 可重用的能力（如生成股票报告），subagent可以调用它来完成目标
+- **System Prompt（系统提示词）** - 定义subagent做什么、如何为公司评分以及返回什么格式的指令
+- **关注点分离** - Skill收集数据；subagent使用这些数据做出决策
+
+## 你需要准备什么
+
+- 完成[创建你的第一个Claude Skill](./Create_Your_First_Claude_Skill.md)教程
+- 已通过该教程安装好的`stock-report` Skill（在`.claude/skills/stock-report/`中）
+- VS Code或其他文本编辑器
+- 20-25分钟
+
+## 步骤1：打开项目文件夹并启动Claude Code
+
+你的`stock-report` Skill位于你在Skill教程中使用的同一个项目文件夹中——请重新打开那个文件夹，而不是新建一个。
+
+**Windows (PowerShell)：**
+- 点击 **Windows 开始按钮**，输入 `PowerShell` 并打开它
+- 输入此命令：
+  ```powershell
+  cd ~/Documents/test_claude
+  ```
+- 启动Claude Code：
+  ```
+  claude
+  ```
+
+**Mac：**
+- 打开**终端**（Terminal，在"应用程序 > 实用工具"中找到它）
+- 输入以下命令：
+  ```bash
+  cd ~/Documents/test_claude
+  ```
+- 启动Claude Code：
+  ```
+  claude
+  ```
+
+按照安装教程登录你的Claude订阅（[Windows](Install_CLAUDE_Code_Win.md) | [Mac](Install_Claude_Code_MacOS.md)）。登录后，你将看到欢迎消息和Claude Code提示符。
+
+## 步骤2：验证股票报告Skill是否存在
+
+在构建subagent之前，确认skill可用。输入：
+
+```
+列出所有可用的 skill
+```
+
+应该在输出中看到`stock-report`。这个skill研究公司并生成涵盖产品新闻、管理层更新、财务绩效和分析师见解的报告。
+
+如果没有看到它，skill文件应该在`.claude/skills/stock-report/`（项目级别）中。如果这个文件夹完全不存在，请先回到同一个项目文件夹中完成[创建你的第一个Claude Skill](./Create_Your_First_Claude_Skill.md)教程。
+
+## 步骤3：理解Subagent与Skill架构
+
+以下是subagent和skill如何协同工作：
+
+| 组件 | 目的 | 示例 |
+|-----------|---------|---------|
+| **Skill** | 收集有关一家公司的原始数据 | "生成Apple的报告：产品、财务、管理层、分析师" |
+| **Subagent** | 使用skill数据来完成目标 | "获取Apple和Microsoft的报告，为两者评分，推荐应该投资哪家" |
+
+**关键区别：**
+- **Skill = 工具**，用于做研究
+- **Subagent = 决策者**，使用工具并应用逻辑
+
+你的股票选择器subagent将：
+1. 为每家公司调用股票报告skill（2次或更多）
+2. 在各个类别中为公司评分（财务、增长、管理层、情绪）
+3. 比较分数并推荐最佳投资
+
+## 步骤4：创建股票选择器Subagent
+
+让Claude为你编写subagent文件。复制并粘贴以下提示词：
+
+```
+在 .claude/agents/ 中创建一个名为 stock-picker 的项目 subagent：
+- 它接受两只或更多股票
+- 使用 stock-report skill 进行研究
+- 根据收集的数据类别创建评分卡
+- 给出最终推荐。
+使用 Sonnet 模型。
+```
+
+Claude会创建文件`.claude/agents/stock-picker.md`。如果Claude请求创建该文件的权限，选择**Yes**。
+
+**注意：**在旧版本的Claude Code中，输入`/agents`会打开一个用于创建subagent的菜单。在当前版本中，`/agents`只会提醒你直接让Claude创建，也就是我们刚才的做法。
+
+**工具：**subagent可以被限制为只使用它需要的工具——例如，一个只做研究的agent只需要网络搜索。如果文件中没有`tools:`这一行，subagent就可以使用所有工具，而stock-picker正需要在线研究和写入文件。
+
+## 步骤5：查看你构建的内容（反思检查点）
+
+要在VS Code中打开文件，点击**File > Open File...**并导航到`.claude/agents/stock-picker.md`。
+
+或者让Claude：
+```
+给我看 stock-picker subagent 文件。
+```
+Claude将显示位于`.claude/agents/stock-picker.md`的subagent文件。会看到：
+
+顶部有一个**YAML frontmatter**：
+```
+---
+name: stock-picker
+description: Compares multiple companies for investment decisions...
+skills:
+  - stock-report
+model: sonnet
+---
+```
+
+这个frontmatter（`---`标记之间的部分）告诉Claude Code何时使用这个subagent（`description`）、从一开始就为它加载哪些skill（`skills`），以及它运行在哪个Claude模型上（`model`）。
+
+frontmatter下方有一个**系统提示词**，包含你的评分方法。
+
+**确认这些关键要素：**
+- Subagent可以访问`stock-report` skill
+- 系统提示词解释了评分细分
+- Subagent的目标很明确：比较公司并推荐一个
+
+可以直接编辑文件或让Claude更新它。
+
+## 步骤6：测试Subagent
+
+首先按两次**Ctrl+C** **退出**Claude Code，然后输入`claude`重新启动。Claude Code只有在重启后才会识别新建的`.claude/agents/`文件夹。
+
+现在用真实的比较来测试subagent。输入：
+
+```
+哪个是更好的投资：苹果还是谷歌？
+```
+
+subagent将根据描述自动激活。
+
+## 步骤7：观察Subagent工作
+
+subagent在后台运行，所以你会在提示符下方的一个小面板中看到它的名字，而不会看到它的每一个步骤。要观察它，输入`/tasks`，用方向键选择**stock-picker**，然后按**Enter**。在后台，它会：
+1. **调用skill两次** - 为Apple调用一次stock-report skill，然后为Google调用一次
+2. **收集数据** - 每次skill调用都会搜索网络并生成公司报告
+3. **为公司评分** - 为每个类别打分，再合并成一个总分
+4. **生成输出** - 创建比较表和推荐
+
+这可能需要2-3分钟，因为涉及网络研究。
+
+注意，你的主对话并没有被大量搜索结果和中间步骤填满——这就是隔离上下文在发挥作用。subagent在自己独立的工作空间中完成研究，只把你在这里看到的内容汇报回来。
+
+## 步骤8：查看输出
+
+subagent返回详细的分析，包括：
+- **单个公司报告** - 每只股票的产品更新、财务指标、管理层变化、分析师情绪
+- **比较评分卡** - 各类别的数值分数（财务健康、增长潜力、管理层质量、市场情绪）
+- **最终推荐** - 应该投资哪只股票以及原因
+
+subagent可能会在终端中显示这些内容，或生成一个包含完整报告的markdown文件。可以编辑subagent文件来自定义评分权重或输出格式。
+
+## 下一步
+
+现在你有了一个可用的股票选择器subagent，尝试这些扩展：
+
+- **比较3只或更多股票**："比较 AAPL、MSFT 和 GOOGL"，看看subagent如何处理更多选项
+- **调整评分权重**：编辑subagent文件以更改每个类别所占的比重（例如，如果偏好成长股，可以将增长设为40%）
+- **创建其他subagent**：为不同任务构建"code-reviewer" subagent、"bug-hunter" subagent或"document-writer" subagent
+
+## 故障排除
+
+- **Subagent未激活**：确保请求提到了比较公司或投资决策。尝试："使用 stock-picker subagent 比较..."
+- **找不到Skill**：验证`.claude/skills/stock-report/SKILL.md`是否存在。如果刚添加，请重启Claude Code。
+- **评分不完整**：让subagent "继续"或"更详细地解释每个类别的分数"
+- **创建后找不到subagent**：检查`.claude/agents/stock-picker.md`是否存在。如果存在，退出Claude Code（按两次Ctrl+C），然后用`claude`重新启动。新建的`.claude/agents/`文件夹只有在重启后才会被识别。
+
+## 工作流程概述
+
+- **Subagent自动化多步骤工作流程** - 它们编排skill、应用逻辑并提供决策
+- **Skill是可重用工具** - 一个skill可以被多个subagent用于不同目标
+- **系统提示词定义行为** - 清晰的指令和评分标准使subagent可靠
+- **Subagent保持专注** - 每个subagent都有一个单一、明确的目的（股票选择、代码审查等）
+- **组合可扩展** - 构建一个skill和subagent库，它们可以协同工作
+
+---
+
+由[Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/)于2025年12月14日创建。

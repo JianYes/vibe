@@ -1,0 +1,206 @@
+---
+title: "在Windows上使用Claude Code与RStudio"
+lang: "zh"
+---
+[首页](./)
+
+# 在Windows上使用Claude Code与RStudio
+
+你在Windows上安装了RStudio用于运行R代码，并安装了Claude Code用于AI辅助编程。本教程将展示如何在同一个项目文件上同时使用这两个工具。你将创建R项目，手动编写一些代码，然后从PowerShell使用Claude Code来增强代码，添加可视化和分析功能——同时保持RStudio打开以运行和测试代码。
+
+## 核心概念
+
+- **PowerShell** - Windows内置的命令行工具，本教程用它在RStudio旁边运行Claude Code
+- **混合工作流** - RStudio运行代码并显示结果；Claude Code编写和改进代码
+- **共享文件** - 两个工具在完全相同的项目文件夹上工作，一方的更改会在另一方中显示
+
+## 所需准备
+
+- 已完成[在 Windows 上安装 Claude Code](./Install_CLAUDE_Code_Win)指南
+- 在Windows上安装了RStudio
+- 20-30分钟
+
+## 步骤1：在Windows上打开RStudio
+
+- 点击**Windows开始按钮**
+- 在搜索框中输入`RStudio`
+- 点击**RStudio**打开它
+- RStudio窗口打开，显示多个面板
+
+## 步骤2：创建新的R项目
+
+- 在RStudio中，点击顶部菜单的**File**
+- 点击**New Project...**
+- 选择**New Directory**
+- 选择**New Project**
+- 在**Directory name**中输入：`test_claude`
+- 点击"Create project as subdirectory of:"旁边的**Browse**
+- 导航到**文档**（Documents）文件夹
+- 点击**打开**（Open）；在某些版本的RStudio中，这个按钮显示为**选择文件夹**（Select Folder）
+- 点击**Create Project**
+- RStudio创建项目并切换到该项目
+
+## 步骤3：创建新的R脚本
+
+- 在RStudio中，点击**File > New File > R Script**
+- 左上角面板中打开一个新的空白脚本
+- 点击**File > Save**（或保存图标）
+- 将文件命名为：`iris.R`
+- 点击**Save**
+
+## 步骤4：手动编写初始代码
+
+在`iris.R`文件中输入以下代码：
+
+```r
+data(iris)
+str(iris)
+summary(iris)
+```
+
+- 点击**File > Save**保存更改
+- 要运行代码：选中所有行，然后点击**Run**按钮（脚本面板右上角）
+- 应该在Console面板中看到输出，显示数据集结构和统计信息
+
+## 步骤5：打开PowerShell
+
+- 点击**Windows开始按钮**
+- 在搜索框中输入`PowerShell`
+- 点击**Windows PowerShell**打开它
+
+## 步骤6：导航到项目文件夹
+
+- 在PowerShell中，输入：
+  ```
+  cd ~\Documents\test_claude
+  ```
+- 通过输入以下命令验证位置是否正确：
+  ```
+  dir
+  ```
+- 应该看到列出了`iris.R`和`test_claude.Rproj`
+
+## 步骤7：启动Claude Code
+
+- 在PowerShell中，输入：
+  ```
+  claude
+  ```
+
+按照[安装教程](Install_CLAUDE_Code_Win.md)使用你的Claude订阅登录。登录后，你将看到欢迎消息和Claude Code提示符。如果Claude Code询问你是否信任此文件夹中的文件，选择**Yes**并按Enter。
+
+## 步骤8：请求Claude创建散点图
+
+如果Claude Code运行缓慢或无响应，只需等待它初始化。然后，输入以下请求：
+
+```
+在 iris.R 中添加代码，创建萼片长度与宽度的散点图，按物种着色。使用 ggplot2。
+```
+- Claude Code将读取`iris.R`文件并添加可视化代码
+- 如果Claude请求编辑`iris.R`的权限，选择**Yes**（使用方向键，然后按Enter）
+- 等待Claude完成（将看到确认消息）
+
+
+## 步骤9：在RStudio中运行新代码
+
+- 切换回RStudio（点击RStudio窗口）
+- 可能会看到提示说文件已更改——点击**Yes**重新加载
+- 如果新代码没有显示，点击**File > Reopen with Encoding...**，选择**UTF-8**，然后点击**OK**
+- 选中所有代码并点击**Run**
+- 散点图出现在**Plots**面板（右下角）
+- 如果出现关于ggplot2的错误，在Console面板中输入`install.packages("ggplot2")`来安装它
+
+## 步骤10：优化散点图
+
+- 切换到PowerShell
+- 输入以下请求：
+  ```
+  移除标题。按物种更改标记类型。更改为 classic 主题。
+  ```
+
+## 步骤11：查看优化后的图表
+
+- 切换到RStudio
+- 如果出现提示，重新加载文件
+- 选中更新后的代码并点击**Run**
+- 图表现在应该显示为没有标题，每个物种使用不同的标记形状，并使用经典主题
+
+
+## 步骤12：请求Claude创建PCA图
+
+- 切换到PowerShell
+- 输入以下请求：
+  ```
+  添加代码对数值变量进行 PCA 分析，并使用前两个主成分绘制样本图。
+  ```
+
+## 步骤13：运行PCA分析
+
+- 切换到RStudio
+- 如果出现提示，重新加载文件
+- 选中所有代码并点击**Run**
+- 出现PCA图，显示样本投影到PC1和PC2上，按物种着色
+
+## 步骤14：请求Claude审查并添加注释
+
+- 切换到PowerShell
+- 输入以下请求：
+  ```
+  检查整个脚本的正确性。必要时添加注释。
+  ```
+- Claude将审查代码并添加全面的注释
+
+## 步骤15：请求Claude创建R Markdown
+
+- 切换到PowerShell
+- 输入以下请求：
+  ```
+  为这个分析创建一个新的 R Markdown 文件。保存为 iris_report.Rmd
+  ```
+- 如果Claude请求创建此文件的权限，选择**Yes**
+- Claude将在项目文件夹中创建一个新的`.Rmd`文件
+
+
+## 步骤16：编织R Markdown文件
+
+- 切换到RStudio
+- 点击**File > Open File...**
+- 选择`iris_report.Rmd`并点击**Open**
+- 点击脚本面板顶部的**Knit**按钮（带有毛线球图标）
+- 如果RStudio提示需要**rmarkdown**等包，点击**Install**（或**Yes**）并等待安装完成，然后再次点击**Knit**
+- RStudio将生成HTML报告
+- 报告在新窗口中打开，显示完整分析和叙述文本
+- HTML文件保存在项目文件夹中
+
+## 故障排除
+
+- **RStudio不显示文件更改** - 点击**File > Reopen with Encoding...**，选择**UTF-8**，然后点击**OK**手动重新加载文件。
+- **"The term 'claude' is not recognized"** - 确保已完成安装指南。关闭PowerShell并打开一个新窗口，然后重试。
+- **图表未显示** - 确保已安装ggplot2。如需要，在RStudio Console中运行`install.packages("ggplot2")`。
+- **步骤6中出现"Cannot find path ... because it does not exist"** - 你的项目可能位于其他文件夹中。在RStudio中，**Files**面板顶部的路径会显示`test_claude`所在的位置。如果你的“文档”文件夹由OneDrive备份，请尝试`cd ~\OneDrive\Documents\test_claude`。如果路径包含空格，请将其用引号括起来，例如：`cd "C:\Users\Your Name\OneDrive\Documents\test_claude"`
+- **Claude Code首次请求时很慢** - 等待30-60秒让Claude初始化。后续请求会更快。
+- **改用WSL？** - 如果你选择了可选的WSL/Ubuntu方式，请在步骤5-16中打开**Ubuntu**应用而不是PowerShell，并使用`cd /mnt/c/Users/YourUsername/Documents/test_claude`导航到你的项目
+
+## 下一步
+
+- 尝试请求Claude向分析添加统计检验（t检验、ANOVA）
+- 请求Claude编写此代码的**Python版本**并准备一个Quarto文档
+- 请求Claude为R脚本中的重复性任务创建函数
+- 使用Claude在R代码无法运行时调试错误消息
+- 探索请求Claude优化运行缓慢的R代码以获得更好的性能
+
+## 工作流总结
+
+这种混合设置兼具两者之长：
+
+- **RStudio** - 交互式R控制台、即时图表查看、用于运行代码的熟悉GUI
+- **Claude Code (PowerShell)** - AI驱动的代码生成、审查和改进
+- **共享文件** - 两个工具直接在同一个项目文件夹上工作
+- **迭代优化** - 从手动代码开始，用Claude增强，在RStudio中测试，然后进一步优化
+- **文档** - Claude可以为分析生成全面的报告和注释
+
+工作流程很简单：在PowerShell中使用Claude编写或编辑代码，然后立即在RStudio中测试和运行。无需文件复制或手动同步——两个工具共享同一文件。
+
+---
+
+由[Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/)创建于2025年12月11日。

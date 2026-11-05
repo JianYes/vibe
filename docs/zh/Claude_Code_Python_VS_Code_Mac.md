@@ -1,0 +1,172 @@
+---
+title: "在 Mac 的 VS Code 中使用 Claude Code 进行 Python 开发"
+lang: "zh"
+---
+[首页](./)
+
+# 在 Mac 的 VS Code 中使用 Claude Code 进行 Python 开发
+
+你已在 VS Code 中设置好 Python 环境，可以手动编写代码。现在你想让 AI 帮助编写、改进和调试 Python 代码，以便专注于分析工作。可以把 Claude Code 想象成住在 VS Code 里的编程伙伴——你描述需求，它编写或改进代码，而你始终在同一窗口中工作。
+
+## 核心概念
+
+- **[Claude Code Extension](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)** - VS Code 扩展，将 Claude AI 助手直接集成到编辑器，提供内联代码编辑
+- **Chat Panel（聊天面板）** - VS Code 侧边面板，可在此与 Claude 讨论代码
+- **Inline Edits（内联编辑）** - Claude 建议的代码更改以差异对比形式直接显示在文件中，可接受或拒绝
+
+## 准备工作
+
+- 完成 [在 VS Code 中进行 Python 编程](./Python_Coding_VS_Code_Guide) 教程 - Python 应该已在 VS Code 中正常工作
+- 完成 [在 Mac 上安装 Claude Code](./Install_Claude_Code_MacOS) 教程 - Claude Code CLI 应该已安装
+- 付费 Claude 套餐（如 Pro 或 Max）或 Anthropic Console 账户——免费套餐不包含 Claude Code
+- 20-30 分钟
+
+## 步骤 1：打开 VS Code 并创建 Python 项目
+
+- 打开 **Visual Studio Code**
+- 点击菜单栏中的 **File**，然后点击 **Open Folder**
+- 导航到你的 **文稿**（Documents）文件夹
+- 点击对话框底部的 **新建文件夹**（New Folder）
+- 将文件夹命名为 `claude_python_test`
+- 点击 **Open** 打开新文件夹
+- 如果提示"Do you trust the authors?"，点击 **Yes, I trust the authors**
+
+## 步骤 2：安装并登录 Claude Code Extension
+
+- 点击左侧边栏的 **Extensions** 图标（四个方块）
+- 在搜索框中输入 `Claude Code`
+- 找到 Anthropic 的 **Claude Code for VS Code**，点击 **Install**
+- 安装完成后，点击 VS Code 窗口右下角（状态栏）的 **✻ Claude Code** 打开 Claude 面板
+- 首次使用时会出现登录界面：点击 **Sign in**，在浏览器中批准访问，然后返回 VS Code
+- 详细身份验证步骤请参阅 [在 Mac 上安装 Claude Code](./Install_Claude_Code_MacOS) 指南（步骤 3）
+- 登录成功后，你会在面板中看到 **Learn Claude Code** 清单，面板底部有一个提示输入框
+
+## 步骤 3：手动创建初始 Python 脚本
+
+- 点击菜单栏的 **File > New File...**
+- 在窗口顶部出现的列表中，选择 **Python File**
+- 点击 **File > Save** 保存文件，命名为 `iris_analysis.py`
+- 输入以下代码：
+
+```python
+from sklearn import datasets
+import pandas as pd
+
+# Load iris dataset
+iris = datasets.load_iris()
+iris_df = pd.DataFrame(iris.data, columns=iris.feature_names)
+iris_df['species'] = iris.target_names[iris.target]
+
+# Display structure
+iris_df.info()
+print("\nSummary statistics:")
+print(iris_df.describe())
+```
+
+- 点击 **File > Save** 保存文件
+- 按照 [在 VS Code 中进行 Python 编程](./Python_Coding_VS_Code_Guide) 步骤 5 的方法创建虚拟环境：点击 **View > Command Palette**，输入 `Python: Create Environment`，选择 **Venv**，然后选择你的 Python 版本
+- 等待 `.venv` 文件夹出现在资源管理器（Explorer）中
+- 打开 Terminal：点击菜单栏的 **View**，然后点击 **Terminal**。提示符开头应显示 `(.venv)`
+- 安装此脚本所需的包：
+  ```
+  pip install scikit-learn pandas
+  ```
+- 在 Terminal 中运行：`python iris_analysis.py`
+- 你应在 Terminal 中看到数据集结构和汇总统计信息
+
+## 步骤 4：让 Claude 添加散点图
+
+- 打开 Claude 面板（点击已打开文件右上角的 Spark 图标，或右下角的 **✻ Claude Code**）
+- 在底部聊天框中输入：
+
+```
+在 iris_analysis.py 中添加代码，创建萼片长度与宽度的散点图，按物种着色。使用 seaborn。
+```
+
+- 按 Enter 发送
+- Claude 读取并编辑文件——新代码会出现在 `iris_analysis.py` 中
+- 如果 Claude 显示差异对比并请求权限，请接受更改
+- seaborn/matplotlib 代码出现在文件中
+- 安装 Claude 代码用到的绘图包（步骤 3 中没有安装它们）。在 Terminal 中（确认显示 `(.venv)`）运行：
+  ```
+  pip install seaborn matplotlib
+  ```
+
+## 步骤 5：运行更新后的代码
+
+- 在 Terminal 中运行：`python iris_analysis.py`
+- 出现散点图窗口
+- 你应看到按物种（setosa、versicolor、virginica）着色的点
+- 关闭图表窗口继续
+
+## 步骤 6：让 Claude 优化图表
+
+- 在 Claude 聊天面板中，输入：
+
+```
+移除标题。按物种更改标记类型。更改为 whitegrid 样式。
+```
+
+- 按 Enter
+- Claude 更新代码
+- 如有询问，接受更改
+- 再次运行：在 Terminal 中输入 `python iris_analysis.py`
+- 图表现在显示每个物种使用不同标记形状，无标题，使用 whitegrid 样式
+- 关闭图表窗口继续
+
+## 步骤 7：让 Claude 进行 PCA 分析
+
+- 在 Claude 聊天面板中，输入：
+
+```
+添加代码对数值变量进行 PCA 分析，并使用前两个主成分绘制样本图。
+```
+
+- 按 Enter
+- Claude 向脚本添加 PCA 代码
+- 如有询问，接受更改
+- 运行代码：在 Terminal 中输入 `python iris_analysis.py`
+- 出现 PCA 图表，显示投影到 PC1 和 PC2 上的样本，按物种着色（如果步骤 6 的散点图窗口先打开，关闭它，PCA 图表就会随后出现）
+- 完成后关闭图表窗口
+
+## 步骤 8：让 Claude 审查并添加注释
+
+- 在 Claude 聊天面板中，输入：
+
+```
+检查整个脚本的正确性。必要时添加注释。
+```
+
+- 按 Enter
+- Claude 审查代码并添加解释各部分的注释
+- 如有询问，接受更改
+- 脚本现在有清晰注释，解释数据加载、可视化和 PCA 分析
+
+## 下一步
+
+- 让 Claude 创建 Jupyter notebook："将这个转换为 Jupyter notebook"
+- 用 Claude 调试错误："这段代码报错 X，你能修复吗？"
+- 请求统计检验："添加 t 检验比较 setosa 和 versicolor 的萼片长度"
+- 让 Claude 优化代码："使用 numpy 向量化使这段代码更高效"
+- 获取函数帮助："解释 pandas.groupby 的作用"
+
+## 故障排除
+
+- **Claude Extension 未显示** - 安装后重启 VS Code，点击 **View > Extensions** 验证是否已安装
+- **"Cannot read Python file" 错误** - 确保保存的文件使用 `.py` 扩展名，Claude 需读取已保存的文件
+- **身份验证失败** - 验证你的付费 Claude 套餐或 Anthropic Console 账户是否有效，故障排除参阅 [在 Mac 上安装 Claude Code](./Install_Claude_Code_MacOS)
+- **找不到包错误**或 **`command not found: python`** - 确保 Terminal 显示 `(.venv)`（如果没有，关闭它并通过 **View > Terminal** 打开一个新的），然后安装所需包：`pip install seaborn matplotlib scikit-learn pandas`，等待安装完成后再运行代码
+- **代码更改未应用** - 如果 Claude 请求了权限，确保你已接受更改，如不起作用可手动复制 Claude 建议的代码
+- **图表未显示** - 确保有显示器，某些系统可能需要在末尾添加 `plt.show()` 或在 Jupyter 中使用 `%matplotlib inline`
+
+## 工作流程总结
+
+- **Claude Code Extension** 直接在 VS Code 中提供 AI 助手，包含聊天面板和内联差异对比
+- **迭代优化** - 从基础代码开始，让 Claude 增强，立即测试，进一步优化
+- **上下文感知** - Claude 读取 Python 文件并理解项目结构
+- **内联编辑** - 建议的更改以差异对比形式显示在实际文件中，非单独聊天响应
+- **保持流畅** - 无需在浏览器和编辑器间切换，所有操作都在 VS Code 中完成
+
+---
+
+由 [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) 创建于 2025 年 12 月 11 日。

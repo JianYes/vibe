@@ -1,18 +1,22 @@
+---
+title: "WindowsでClaude CodeとRStudioを使用する"
+lang: "ja"
+---
 [ホーム](./)
 
-# WindowsでWSL版Claude CodeとRStudioを併用する
+# WindowsでClaude CodeとRStudioを使用する
 
-WindowsではRStudioでRコードを実行し、WSLのUbuntu内にインストールしたClaude CodeでAI支援を受けられます。このチュートリアルでは、同じ`Documents`フォルダを共有しながら両者を切り替えて使う方法を解説します。RStudioでRプロジェクトを作成→基礎コードを手書き→UbuntuターミナルのClaudeに可視化やPCA解析を生成させ→R Markdownレポートまで仕上げる流れです。
+WindowsのRStudioでRコードを実行しながら、Claude CodeでAI支援を受ける方法を学びます。このチュートリアルでは、同じプロジェクトファイルを共有しながら両者を切り替えて使用します。Rプロジェクトを作成し、基本的なコードを記述した後、PowerShellのClaude Codeに可視化やPCA解析を生成させ、R Markdownレポートまで仕上げます。その間、RStudioは開いたままでコードの実行とテストができます。
 
 ## 主要コンセプト
 
-- **WSL（Windows Subsystem for Linux）**：Windows上でUbuntuを動かし、Claude Codeを実行する環境
-- **パスの変換**：`C:\Users\YourName\Documents` がWSLでは `/mnt/c/Users/YourName/Documents` になる
-- **ハイブリッドワークフロー**：RStudio（Windows）でコードを実行し、Claude Code（WSL）でコードを生成・改良
+- **PowerShell**：Windowsに標準搭載されているコマンドラインツール。ここではRStudioと並行してClaude Codeを実行するために使用します
+- **ハイブリッドワークフロー**：RStudioでコードを実行・表示し、Claude Codeでコードを生成・改良
+- **共有ファイル**：両ツールがまったく同じプロジェクトフォルダを操作するため、一方での変更がもう一方にも反映される
 
 ## 必要なもの
 
-- [WSL経由でClaude Codeをインストール](./Install_CLAUDE_Code_Win)済み
+- [WindowsにClaude Codeをインストール](./Install_CLAUDE_Code_Win)ガイドを完了済み
 - Windows版RStudio
 - 所要時間：20〜30分
 
@@ -33,8 +37,8 @@ WindowsではRStudioでRコードを実行し、WSLのUbuntu内にインスト�
 - **New Project**を選択
 - **Directory name**に：`test_claude`と入力
 - "Create project as subdirectory of:"の横にある**Browse**をクリック
-- **Documents**フォルダに移動
-- **Select Folder**をクリック
+- **ドキュメント**（Documents）フォルダに移動
+- **開く**（Open）をクリック（RStudioのバージョンによっては、このボタンは**フォルダーの選択**（Select Folder）と表示されます）
 - **Create Project**をクリック
 - RStudioがプロジェクトを作成し、そのプロジェクトに切り替わります
 
@@ -60,45 +64,42 @@ summary(iris)
 - コードを実行するには：すべての行を選択し、**Run**ボタン（スクリプトペインの右上）をクリック
 - Consoleペインに、データセットの構造と統計量が表示されるはずです
 
-## ステップ5：Ubuntuターミナルを開く
+## ステップ5：PowerShellを開く
 
 - **Windowsスタートボタン**をクリック
-- 検索ボックスに`Ubuntu`と入力
-- **Ubuntu**（オレンジ色の円形アイコン）をクリック
-- Ubuntuターミナルが開きます
+- 検索ボックスに`PowerShell`と入力
+- **Windows PowerShell**をクリックして開く
 
 ## ステップ6：プロジェクトフォルダへ移動
 
-- Ubuntuターミナルで以下のコマンドを入力します（`YourUsername`を実際のWindowsユーザー名に置き換えてください）：
+- PowerShellで以下を入力：
   ```
-  cd /mnt/c/Users/YourUsername/Documents/test_claude
+  cd ~\Documents\test_claude
   ```
-- ユーザー名を確認するには：`ls /mnt/c/Users/`と入力してフォルダ名を確認できます
 - 正しい場所にいることを確認するため、以下を入力：
   ```
-  ls
+  dir
   ```
 - `iris.R`と`test_claude.Rproj`が表示されるはずです
 
 ## ステップ7：Claude Codeを起動
 
-- Ubuntuターミナルで以下を入力：
+- PowerShellで以下を入力：
   ```
   claude
   ```
-- Claude Codeが起動し、ウェルカムメッセージが表示されます
-- 再度サインインが必要な場合があります - 認証手順については[WSL経由でClaude Codeをインストール](./Install_CLAUDE_Code_Win)ガイドを参照してください
-- これでRプロジェクトに対してAI支援を使用する準備ができました
+
+[インストールチュートリアル](Install_CLAUDE_Code_Win.md)に従って、Claudeサブスクリプションでログインしてください。ログイン後、ウェルカムメッセージとClaude Codeのプロンプトが表示されます。Claude Codeがこのフォルダ内のファイルを信頼するかどうか尋ねてきた場合は、**Yes**を選んでEnterを押してください。
 
 ## ステップ8：散布図コードを追加
 
 Claude Codeの起動が遅い場合は、初期化が完了するまで待ちましょう。その後、以下のリクエストを入力します：
 
 ```
-Add code to iris.R to create a scatter plot of sepal length vs. width, colored by species. Use ggplot2.
+iris.Rに、がく片の長さと幅の散布図を種ごとに色分けして作成するコードを追加してください。ggplot2を使用してください。
 ```
 - Claude Codeが`iris.R`ファイルを読み込み、可視化コードを追加します
-- 確認を求められたら、適切な選択肢を選んでiris.Rファイルの編集を許可します
+- Claudeが`iris.R`の編集許可を求めてきた場合は、**Yes**を選択します（矢印キーを使い、Enterを押します）
 - Claudeが完了するまで待ちます（完了メッセージが表示されます）
 
 
@@ -106,17 +107,17 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 
 - RStudioウィンドウに戻ります（RStudioウィンドウをクリック）
 - ファイルが変更されたというプロンプトが表示される場合があります - **Yes**をクリックして再読み込みします
-- プロンプトが表示されない場合は、**File > Reopen with Encoding > UTF-8**をクリックします
+- 新しいコードが表示されない場合は、**File > Reopen with Encoding...**をクリックし、**UTF-8**を選んで**OK**をクリックします
 - すべてのコードを選択して**Run**をクリック
 - **Plots**ペイン（右下）に散布図が表示されます
 - ggplot2に関するエラーが出た場合は、Consoleペインで`install.packages("ggplot2")`と入力してインストールします
 
 ## ステップ10：散布図を改良
 
-- Ubuntuターミナルに切り替えます
+- PowerShellに切り替えます
 - 以下のリクエストを入力：
   ```
-  Remove title. Change marker type by species. Change to the classic theme.
+  タイトルを削除してください。種ごとにマーカーの形を変更してください。クラシックテーマに変更してください。
   ```
 
 ## ステップ11：改良されたプロットを表示
@@ -129,10 +130,10 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 
 ## ステップ12：PCAプロットを追加
 
-- Ubuntuターミナルに切り替えます
+- PowerShellに切り替えます
 - 以下のリクエストを入力：
   ```
-  Add code to perform PCA on the numeric variables and plot the samples using the first two principal components.
+  数値変数にPCAを実行し、第1・第2主成分を使ってサンプルをプロットするコードを追加してください。
   ```
 
 ## ステップ13：PCA解析を実行
@@ -144,21 +145,21 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 
 ## ステップ14：レビューとコメント追加をClaudeに依頼
 
-- Ubuntuターミナルに切り替えます
+- PowerShellに切り替えます
 - 以下のリクエストを入力：
   ```
-  Review the entire script for correctness. Add comments when necessary.
+  スクリプト全体の正確性をレビューしてください。必要に応じてコメントを追加してください。
   ```
 - Claudeがコードをレビューし、包括的なコメントを追加します
 
 ## ステップ15：R Markdownを作成
 
-- Ubuntuターミナルに切り替えます
+- PowerShellに切り替えます
 - 以下のリクエストを入力：
   ```
-  Create a new R Markdown file for this analysis. Save as iris_report.Rmd
+  この分析のための新しいR Markdownファイルを作成してください。iris_report.Rmdとして保存してください。
   ```
-- Claudeがこのファイルの作成許可を求めます
+- Claudeがこのファイルの作成許可を求めてきた場合は、**Yes**を選択します
 - Claudeがプロジェクトフォルダに新しい`.Rmd`ファイルを作成します
 
 
@@ -168,8 +169,9 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 - **File > Open File...**をクリック
 - `iris_report.Rmd`を選択して**Open**をクリック
 - スクリプトペインの上部にある**Knit**ボタン（毛糸玉アイコン）をクリック
+- **rmarkdown**などのパッケージが必要だとRStudioに表示された場合は、**Install**（または**Yes**）をクリックして完了を待ち、もう一度**Knit**をクリック
 - RStudioがHTMLレポートを生成します
-- 完全な解析とナラティブテキストを含むレポートが新しいウィンドウで開きます
+- 完全な解析と説明文を含むレポートが新しいウィンドウで開きます
 - HTMLファイルはプロジェクトフォルダに保存されます
 
 ---
@@ -178,33 +180,33 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 
 | 症状 | 対処 |
 | --- | --- |
-| WSLで `Permission denied` | `C:/` ではなく `/mnt/c/` パスを使用。ユーザー名の綴りを確認 |
-| RStudioが更新を検知しない | **File > Reopen with Encoding > UTF-8** で手動リロード |
-| `claude: command not found` | インストールガイドを再確認。Ubuntuターミナルを開き直す |
+| RStudioが更新を検知しない | **File > Reopen with Encoding...** をクリックし、**UTF-8** を選んで **OK** をクリックして手動リロード |
+| `The term 'claude' is not recognized` | インストールガイドを再確認。PowerShellを閉じて新しいウィンドウを開き、もう一度試す |
 | プロットが表示されない | RStudio Consoleで `install.packages("ggplot2")` を実行 |
-| `cannot change working directory` | Windowsのユーザー名にスペースがある場合、`cd "/mnt/c/Users/Your Name/Documents/..."` のように引用符で囲む |
+| ステップ6で `Cannot find path ... because it does not exist` | プロジェクトが別のフォルダにある可能性があります。RStudioの **Files** ペインの上部に表示されるパスで `test_claude` の場所を確認できます。ドキュメントフォルダがOneDriveでバックアップされている場合は `cd ~\OneDrive\Documents\test_claude` を試してください。パスにスペースが含まれる場合は引用符で囲みます（例：`cd "C:\Users\Your Name\OneDrive\Documents\test_claude"`） |
 | 初回リクエストが遅い | 30〜60秒待てば初期化され、その後は高速化します |
+| WSLを使っている場合 | オプションのWSL/Ubuntuの方法を設定した場合は、ステップ5〜16でPowerShellの代わりに **Ubuntu** アプリを開き、`cd /mnt/c/Users/YourUsername/Documents/test_claude` でプロジェクトへ移動 |
 
 ## 次のステップ
 
-- 統計検定（t検定、ANOVA）を解析に追加するようClaudeに依頼
-- このコードの**Python版**を取得し、Quartoドキュメントを準備するようClaudeに依頼
-- Rスクリプトの繰り返し作業のための関数を作成するようClaudeに依頼
-- Rコードが実行されないときのエラーメッセージのデバッグにClaudeを使用
-- より良いパフォーマンスのために遅いRコードを最適化するようClaudeに依頼
+- 統計検定（t検定、ANOVA）を分析に追加するようClaudeに依頼
+- このコードのPython版を作成し、Quartoドキュメントを準備するようClaudeに依頼
+- Rスクリプトの繰り返し処理のための関数を作成するようClaudeに依頼
+- Rコード実行時のエラーメッセージのデバッグにClaudeを活用
+- パフォーマンス向上のため、低速なRコードの最適化をClaudeに依頼
 
 ## ワークフローまとめ
 
-このハイブリッドセットアップは、両方の長所を組み合わせています：
+このハイブリッドセットアップは両方のツールの長所を組み合わせます：
 
-- **RStudio（Windows）** - インタラクティブなRコンソール、即座のプロット表示、コード実行のための使い慣れたGUI
-- **Claude Code（WSL）** - AI駆動のコード生成、レビュー、改善
-- **共有ファイル** - WSLの`/mnt/c/`マウントポイントを通じて、両ツールが同じファイルを操作
-- **反復的な改善** - 手動コードから始め、Claudeで強化、RStudioでテスト、そしてさらに改善
-- **ドキュメント化** - Claudeが解析のための包括的なレポートとコメントを生成できます
+- **RStudio** - インタラクティブなRコンソール、即座のプロット表示、使い慣れたGUIでコードを実行
+- **Claude Code（PowerShell）** - AIによるコード生成、レビュー、改善
+- **共有ファイル** - 両ツールが同じプロジェクトフォルダを直接操作
+- **反復的な改善** - 手動でコードを記述し、Claudeで強化し、RStudioでテストして、さらに改善
+- **ドキュメント化** - Claudeが分析の包括的なレポートとコメントを生成
 
-ワークフローはシンプルです：UbuntuターミナルでClaudeを使ってコードを書くか編集し、すぐにRStudioでテストして実行します。ファイルのコピーや手動同期は不要です—WSLとWindowsは同じファイルをシームレスに共有します。
+ワークフローはシンプルです。PowerShellのClaudeでコードを記述・編集し、すぐにRStudioでテストして実行します。ファイルのコピーや手動同期は不要で、両ツールが同じファイルを共有します。
 
 ---
 
-Created by [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) on December 11, 2025.
+[Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/)が2025年12月11日に作成。

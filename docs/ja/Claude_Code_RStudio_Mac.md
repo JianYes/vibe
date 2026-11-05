@@ -1,18 +1,22 @@
+---
+title: "MacでRStudioとClaude Codeを使用する"
+lang: "ja"
+---
 [ホーム](./)
 
 # MacでRStudioとClaude Codeを使用する
 
-MacでRコードを実行するためのRStudioと、AIによるコーディング支援のためのClaude Codeがあります。このチュートリアルでは、同じプロジェクトファイルで両方のツールを一緒に使用する方法を紹介します。Rプロジェクトを作成し、手動でコードを書き、その後ターミナルからClaude Codeを使用して可視化と分析で強化します。RStudioは開いたままでコードを実行してテストできます。
+MacでRコードを実行するRStudioと、AIによるコーディング支援を行うClaude Codeを組み合わせて使う方法を学びます。このチュートリアルでは、Rプロジェクトを作成し、基本的なコードを手動で記述した後、ターミナルからClaude Codeを使って可視化や分析を強化します。RStudioを開いたまま、コードを実行してテストできます。
 
 ## 主要コンセプト
 
 - **ターミナル**：Claude Codeが実行されるMacのコマンドラインインターフェース
-- **共有ファイル**：RStudioとClaude Codeの両方がDocumentsフォルダ内の同じファイルを操作
+- **共有ファイル**：RStudioとClaude Codeの両方が書類（Documents）フォルダ内の同じファイルを操作
 - **ハイブリッドワークフロー**：RStudioがコードを実行し、Claude Codeがコードを書いて改善
 
 ## 必要なもの
 
-- [MacでClaude Codeをインストール](./Install_Claude_Code_MacOS)ガイドを完了していること
+- [MacにClaude Codeをインストール](./Install_Claude_Code_MacOS.md)ガイドを完了していること
 - MacにインストールされたRStudio
 - 20〜30分
 
@@ -20,9 +24,9 @@ MacでRコードを実行するためのRStudioと、AIによるコーディン�
 
 ## ステップ1：MacでRStudioを開く
 
-- Dockの**Launchpad**をクリック（グリッド状のドットアイコン）
-- 検索ボックスに`RStudio`と入力
-- **RStudio**をクリックして開く
+- **Command (⌘) + Space**を押してSpotlight検索を開く
+- `RStudio`と入力
+- **Return**を押して開く
 - RStudioウィンドウが複数のペインで開きます
 
 ## ステップ2：新規Rプロジェクトを作成
@@ -33,7 +37,7 @@ MacでRコードを実行するためのRStudioと、AIによるコーディン�
 - **New Project**を選択
 - **Directory name**に`test_claude`と入力
 - "Create project as subdirectory of:"の横の**Browse**をクリック
-- **Documents**フォルダに移動
+- **書類**（Documents）フォルダに移動
 - **Open**をクリック
 - **Create Project**をクリック
 - RStudioがプロジェクトを作成し、それに切り替えます
@@ -62,9 +66,9 @@ summary(iris)
 
 ## ステップ5：ターミナルを開く
 
-- **Finder**を開き、左サイドバーの**Applications**をクリック
-- **Utilities**フォルダを開く
-- **Terminal**をダブルクリック
+- **Finder**を開き、左サイドバーの**アプリケーション**（Applications）をクリック
+- **ユーティリティ**（Utilities）フォルダを開く
+- **ターミナル**（Terminal）をダブルクリック
 - ターミナルウィンドウが開きます
 
 ## ステップ6：プロジェクトフォルダに移動
@@ -87,26 +91,25 @@ summary(iris)
   ```
   claude
   ```
-- Claude Codeが起動し、ウェルカムメッセージが表示されます
-- 初回セッションの場合、認証が必要な場合があります
-- これでRプロジェクトのAI支援を使用する準備が整いました
+
+[インストールチュートリアル](Install_Claude_Code_MacOS.md)に従って、Claudeサブスクリプションでログインしてください。ログイン後、ウェルカムメッセージとClaude Codeのプロンプトが表示されます。Claude Codeがこのフォルダ内のファイルを信頼するかどうか尋ねてきた場合は、**Yes**を選んでEnterを押してください。
 
 ## ステップ8：散布図をClaudeに依頼
 
 Claude Codeが遅い、または反応しない場合は、初期化されるまで待ちます。その後、次のリクエストを入力：
 
 ```
-Add code to iris.R to create a scatter plot of sepal length vs. width, colored by species. Use ggplot2.
+iris.Rに、がく片の長さと幅の散布図を種ごとに色分けして作成するコードを追加してください。ggplot2を使用してください。
 ```
 - Claude Codeが`iris.R`ファイルを読み込み、可視化コードを追加します
-- 求められたら、適切なオプションを選択してiris.Rファイルの編集をClaudeに許可します
+- Claudeが`iris.R`の編集許可を求めてきた場合は、**Yes**を選択します（矢印キーを使い、Enterを押します）
 - Claudeが完了するまで待ちます（確認メッセージが表示されます）
 
 ## ステップ9：RStudioで新しいコードを実行
 
 - RStudioに戻る（RStudioウィンドウをクリックするか、**Command (⌘) + Tab**を押す）
 - ファイルが変更されたというプロンプトが表示される場合があります - **Yes**をクリックして再読み込み
-- プロンプトが表示されない場合は、**File > Reopen with Encoding > UTF-8**をクリック
+- 新しいコードが表示されない場合は、**File > Reopen with Encoding...**をクリックし、**UTF-8**を選んで**OK**をクリック
 - すべてのコードをハイライトして**Run**をクリック
 - 散布図が**Plots**ペイン（右下）に表示されます
 - ggplot2に関するエラーが表示される場合は、Consoleペインに`install.packages("ggplot2")`と入力してインストール
@@ -116,7 +119,7 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 - ターミナルに切り替え（**Command (⌘) + Tab**を押すか、ターミナルウィンドウをクリック）
 - 次のリクエストを入力：
   ```
-  Remove title. Change marker type by species. Change to the classic theme.
+  タイトルを削除してください。種ごとにマーカーの形を変更してください。クラシックテーマに変更してください。
   ```
 
 ## ステップ11：改良されたプロットを表示
@@ -132,7 +135,7 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 - ターミナルに切り替え
 - 次のリクエストを入力：
   ```
-  Add code to perform PCA on the numeric variables and plot the samples using the first two principal components.
+  数値変数にPCAを実行し、第1・第2主成分を使ってサンプルをプロットするコードを追加してください。
   ```
 
 ## ステップ13：PCA分析を実行
@@ -147,7 +150,7 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 - ターミナルに切り替え
 - 次のリクエストを入力：
   ```
-  Review the entire script for correctness. Add comments when necessary.
+  スクリプト全体の正確性をレビューしてください。必要に応じてコメントを追加してください。
   ```
 - Claudeがコードをレビューし、包括的なコメントを追加します
 
@@ -156,28 +159,29 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 - ターミナルに切り替え
 - 次のリクエストを入力：
   ```
-  Create a new R Markdown file for this analysis. Save as iris_report.Rmd
+  この分析のための新しいR Markdownファイルを作成してください。iris_report.Rmdとして保存してください。
   ```
-- Claudeがファイル作成の許可を求めます
+- Claudeがこのファイルの作成許可を求めてきた場合は、**Yes**を選択します
 - Claudeがプロジェクトフォルダに新しい`.Rmd`ファイルを作成します
 
 
-## ステップ16：R Markdownファイルをニット
+## ステップ16：R Markdownファイルをニット（Knit）
 
 - RStudioに切り替え
 - **File > Open File...**をクリック
 - `iris_report.Rmd`を選択して**Open**をクリック
 - スクリプトペインの上部にある**Knit**ボタン（毛糸玉のアイコン）をクリック
+- **rmarkdown**などのパッケージが必要だとRStudioに表示された場合は、**Install**（または**Yes**）をクリックして完了を待ち、もう一度**Knit**をクリック
 - RStudioがHTMLレポートを生成します
-- 説明文を含む完全な分析を示すレポートが新しいウィンドウで開きます
+- 完全な分析と説明文を含むレポートが新しいウィンドウで開きます
 - HTMLファイルがプロジェクトフォルダに保存されます
 
 ## トラブルシューティング
 
-- **RStudioがファイル変更を表示しない** - **File > Reopen with Encoding > UTF-8**をクリックして手動でファイルを再読み込みするか、ファイルを閉じて再度開きます。
-- **"claude: command not found"** - [インストールガイド](./Install_Claude_Code_MacOS)を完了していることを確認してください。新しいターミナルウィンドウを開くか、ターミナルを完全に閉じて（**Command (⌘) + Q**）再度開きます。
+- **RStudioがファイル変更を表示しない** - **File > Reopen with Encoding...**をクリックし、**UTF-8**を選んで**OK**をクリックして手動でファイルを再読み込みするか、ファイルを閉じて再度開きます。
+- **"claude: command not found"** - [インストールガイド](./Install_Claude_Code_MacOS.md)を完了していることを確認してください。新しいターミナルウィンドウを開くか、ターミナルを完全に閉じて（**Command (⌘) + Q**）再度開きます。
 - **プロットが表示されない** - ggplot2がインストールされていることを確認してください。必要に応じてRStudio Consoleで`install.packages("ggplot2")`を実行します。
-- **"No such file or directory"** - ステップ6でパスを正しく入力したか確認してください。ドラッグアンドドロップのコツを試してください：Finderから`cd `（スペース付き）と入力した後にtest_claudeフォルダをターミナルにドラッグします。
+- **"No such file or directory"** - ステップ6でパスを正しく入力したか確認してください。ドラッグアンドドロップのコツを試してください：ターミナルで`cd `（スペース付き）と入力した後、Finderからtest_claudeフォルダをターミナルにドラッグします。
 - **Claude Codeの最初のリクエストが遅い** - Claudeが初期化されるまで30〜60秒待ちます。その後のリクエストは高速になります。
 
 ## Macのキーボードショートカット
@@ -190,24 +194,24 @@ Add code to iris.R to create a scatter plot of sepal length vs. width, colored b
 
 ## 次のステップ
 
-- Claudeに統計検定（t検定、ANOVA）を分析に追加するよう依頼する
-- Claudeにこのコードの**Python版**を取得し、Quartoドキュメントを準備するよう依頼する
-- Rスクリプトの反復タスクのための関数を作成するようClaudeに依頼する
-- Rコードが実行されないときにエラーメッセージのデバッグにClaudeを使用する
-- パフォーマンス向上のため、遅いRコードを最適化するようClaudeに依頼する
+- 統計検定（t検定、ANOVA）を分析に追加するようClaudeに依頼
+- このコードのPython版を作成し、Quartoドキュメントを準備するようClaudeに依頼
+- Rスクリプトの繰り返し処理のための関数を作成するようClaudeに依頼
+- Rコード実行時のエラーメッセージのデバッグにClaudeを活用
+- パフォーマンス向上のため、低速なRコードの最適化をClaudeに依頼
 
 ## ワークフローまとめ
 
-このハイブリッドセットアップは両方の長所を組み合わせます：
+このハイブリッドセットアップは両方のツールの長所を組み合わせます：
 
-- **RStudio（Mac）**：インタラクティブなRコンソール、即座のプロット表示、コード実行のための使い慣れたGUI
-- **Claude Code（ターミナル）**：AIによるコード生成、レビュー、改善
-- **共有ファイル**：Documentsフォルダ内の同じファイルを両方のツールが操作
-- **反復的な改善**：手動でコードを書き始め、Claudeで強化し、RStudioでテストし、さらに改善
-- **ドキュメント化**：Claudeが分析の包括的なレポートとコメントを生成
+- **RStudio（Mac）** - インタラクティブなRコンソール、即座のプロット表示、使い慣れたGUIでコードを実行
+- **Claude Code（ターミナル）** - AIによるコード生成、レビュー、改善
+- **共有ファイル** - 書類フォルダ内の同じファイルを両ツールが操作
+- **反復的な改善** - 手動でコードを記述し、Claudeで強化し、RStudioでテストして、さらに改善
+- **ドキュメント化** - Claudeが分析の包括的なレポートとコメントを生成
 
-ワークフローはシンプルです：ターミナルのClaudeでコードを書いたり編集したりし、すぐにRStudioでテストして実行します。ファイルのコピーや手動同期は不要で、両方のアプリケーションがMac上の同じファイルにシームレスにアクセスします。
+ワークフローはシンプルです。ターミナルのClaudeでコードを記述・編集し、すぐにRStudioでテストして実行します。ファイルのコピーや手動同期は不要で、両アプリケーションがMac上の同じファイルにシームレスにアクセスします。
 
 ---
 
-[Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) 作成（2024年12月11日）
+[Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) 作成（2025年12月11日）

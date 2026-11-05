@@ -1,0 +1,104 @@
+---
+title: "Claude Code aus VS Code auf dem Mac verwenden"
+lang: "de"
+---
+[Startseite](./)
+
+# Claude Code aus VS Code auf dem Mac verwenden
+
+Sie haben Claude Code auf Ihrem Mac installiert – jetzt möchten Sie einen visuellen Editor, um mit Ihrem Code zu arbeiten. VS Code ermöglicht es Ihnen, Dateien visuell zu bearbeiten, während Sie Claude Code im integrierten Terminal ausführen. Stellen Sie es sich vor, als hätten Sie Ihren Code-Editor und KI-Assistenten Seite an Seite in einem Fenster.
+
+## Wichtige Konzepte
+
+- **VS Code** - Ein kostenloser Code-Editor von Microsoft, der auf dem Mac läuft
+- **Integriertes Terminal** - Ein Terminal-Panel innerhalb von VS Code, in dem Sie Claude Code ausführen
+- **Explorer-Panel** - Der Dateibrowser auf der linken Seite von VS Code
+
+## Was Sie benötigen
+
+- Abgeschlossenes Tutorial [Claude Code auf dem Mac installieren](./Install_Claude_Code_MacOS)
+- Abgeschlossenes Tutorial [Erste Schritte mit VS Code](./VS_Code_Getting_Started)
+- 10-15 Minuten
+
+## Schritt 1: VS Code starten
+
+- Öffnen Sie den **Finder** und gehen Sie zu **Programme**
+- Finden Sie **Visual Studio Code** und doppelklicken Sie darauf
+- Wenn Sie eine Warnung sehen „‚Visual Studio Code‘ ist eine aus dem Internet geladene App“, klicken Sie auf **Öffnen**
+- VS Code öffnet sich mit einem **Welcome**-Tab – Sie können diesen Tab schließen
+
+**Tipp:** Klicken Sie mit der rechten Maustaste auf VS Code im Dock und wählen Sie **Optionen > Im Dock behalten** für späteren schnellen Zugriff.
+
+## Schritt 2: Einen Projektordner erstellen
+
+- Öffnen Sie den **Finder**
+- Klicken Sie in der linken Seitenleiste auf **Dokumente**
+- Klicken Sie in der Finder-Menüleiste auf **Ablage**, dann auf **Neuer Ordner**
+- Nennen Sie den Ordner `test_claude`
+
+## Schritt 3: Den Ordner in VS Code öffnen
+
+- Klicken Sie in VS Code in der Menüleiste auf **File**, dann auf **Open Folder**
+- Navigieren Sie zu **Dokumente** und wählen Sie den Ordner `test_claude`, den Sie erstellt haben
+- Klicken Sie auf **Öffnen** (englisch: **Open**)
+- Wenn Sie gefragt werden „Do you trust the authors of the files in this folder?“, klicken Sie auf **Yes, I trust the authors**
+
+Sie sollten nun `TEST_CLAUDE` im Explorer-Panel auf der linken Seite sehen.
+
+## Schritt 4: Claude Code starten und anmelden
+
+- Öffnen Sie ein neues Terminal: Klicken Sie in der Menüleiste auf **Terminal**, dann auf **New Terminal**
+- Ein Terminal-Panel erscheint am unteren Rand von VS Code
+- Geben Sie im Terminal ein:
+  ```
+  claude
+  ```
+- Wenn Claude Code Sie auffordert, sich anzumelden, folgen Sie den Anmeldeschritten im [Installations-Tutorial](./Install_Claude_Code_MacOS). Claude Code erfordert einen kostenpflichtigen Claude-Plan (z. B. Pro oder Max) oder ein Anthropic Console-Konto – der kostenlose Plan enthält Claude Code nicht.
+- Sie sehen eine Willkommensnachricht und die Eingabezeile von Claude Code
+- Jetzt können Sie Claude Code verwenden, während Sie Dateien in VS Code bearbeiten
+
+**Hinweis:** Sie müssen sich nur einmal anmelden – bei späteren Sitzungen sehen Sie direkt die Willkommensnachricht.
+
+## Schritt 5: Den Workflow testen
+
+- Geben Sie in Claude Code ein:
+```
+Schreibe einen kurzen Artikel, der erklärt, warum LLMs gerne das Markdown-Format verwenden. Speichere ihn als article.md
+```
+- Claude Code erstellt die Datei – Sie sehen `article.md` im Explorer-Panel auf der linken Seite erscheinen
+- Klicken Sie auf `article.md` im Explorer, um sie im Editor anzuzeigen
+- Um den formatierten Artikel in der Vorschau anzuzeigen: Klicken Sie mit der rechten Maustaste in den Editorbereich von `article.md` und wählen Sie **Markdown Preview Enhanced: Open Preview to the Side** (die Erweiterung aus [Erste Schritte mit VS Code](./VS_Code_Getting_Started)). Falls Sie diese Erweiterung nicht haben, klicken Sie stattdessen mit der rechten Maustaste auf den Tab `article.md` und wählen Sie **Open Preview**
+- Sie sehen das Markdown mit korrekten Überschriften, Aufzählungspunkten und Formatierung gerendert
+
+## Claude später in VS Code wieder öffnen
+
+Nachdem Sie VS Code geschlossen haben, so kommen Sie zurück zu Ihrem Projekt:
+
+- **Option A:** Öffnen Sie VS Code, klicken Sie auf **File > Open Recent** und wählen Sie `test_claude`
+- **Option B:** Öffnen Sie die App **Terminal**, navigieren Sie mit `cd ~/Documents/test_claude` zu Ihrem Projekt und geben Sie `code .` ein
+
+VS Code merkt sich Ihre letzten Ordner, daher ist Option A mit Open Recent normalerweise am schnellsten.
+
+## Nächste Schritte
+
+- Bitten Sie Claude Code, eine bestehende Codebasis zu erklären: „Erkläre, was dieses Projekt macht“
+- Lassen Sie Claude Code Ihnen beim Schreiben neuer Funktionen helfen: „Füge eine Funktion hinzu, die den Durchschnitt einer Liste berechnet“
+- Verwenden Sie Claude Code, um Fehler zu beheben: „Dieser Code gibt einen Fehler aus, kannst du ihn beheben?“
+- Probieren Sie die Claude Code-Erweiterung für ein visuelles Chat-Panel mit Inline-Diffs aus. Wenn Sie `claude` im Terminal von VS Code ausführen, wird sie meist automatisch installiert (falls nicht, suchen Sie in Extensions nach „Claude Code“). Öffnen Sie eine beliebige Datei und klicken Sie dann auf das Spark-Symbol oben rechts im Editor
+
+## Fehlerbehebung
+
+- **Terminal zeigt „zsh“, aber Claude Code startet nicht** - Stellen Sie sicher, dass Claude Code korrekt installiert ist; führen Sie `claude --version` aus, um es zu überprüfen
+- **Befehl „code“ wird im Terminal nicht gefunden** - Klicken Sie in VS Code in der Menüleiste auf **View**, dann auf **Command Palette**, geben Sie „shell command“ ein und wählen Sie **Shell Command: Install 'code' command in PATH**
+- **VS Code öffnet sich nicht, weil es von einem nicht identifizierten Entwickler stammt** - Gehen Sie zu **Systemeinstellungen > Datenschutz & Sicherheit** und klicken Sie auf **Dennoch öffnen**
+
+## Workflow-Überblick
+
+- **VS Code** bietet die visuelle Editor-Oberfläche
+- **Integriertes Terminal** führt Claude Code innerhalb von VS Code aus
+- Ihre Dateien bleiben in Ihrem Dokumente-Ordner (oder wo auch immer Sie wählen)
+- Bearbeiten Sie Dateien im Editor, chatten Sie mit Claude Code im Terminal – das Beste aus beiden Welten
+
+---
+
+Erstellt von [Steven Ge](https://www.linkedin.com/in/steven-ge-ab016947/) am 10. Dezember 2025.
